@@ -1,0 +1,27 @@
+
+
+on:
+  push:
+    branches:
+      - main  # Only trigger on the `main` branch
+      - dev # for the dev branch
+
+jobs:
+  deploy-main:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deployment
+        run: |
+          curl -X POST ${{ secrets.MY_DEPLOY_MAIN }}
+
+
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deployment
+        run: |
+          curl -X POST ${{ secrets.MY_DEPLOY_DEV }}
+

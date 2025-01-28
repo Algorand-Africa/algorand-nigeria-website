@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@font-face {
+  font-family: 'Trap-300';
+  src: url('./fonts/Trap/Trap-Light.otf') format('otf');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap';
+  src: url('./fonts/Trap/Trap-Regular.otf') format('otf');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap-500';
+  src: url('./fonts/Trap/Trap-Medium.otf') format('otf');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap-600';
+  src: url('./fonts/Trap/Trap-SemiBold.otf') format('otf');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap-700';
+  src: url('./fonts/Trap/Trap-Bold.otf') format('otf');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap-800';
+  src: url('./fonts/Trap/Trap-ExtraBold.otf') format('otf');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trap-900';
+  src: url('./fonts/Trap/Trap-Black.otf') format('otf');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}

@@ -1,0 +1,153 @@
+@import '/src/styles/index.scss';
+
+.input {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    color: #344054;
+    padding-bottom: 6px;
+
+    @include tablet {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .warning {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ea7f01;
+    padding-top: 6px;
+  }
+
+  .error {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #f04438;
+    padding-top: 6px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  .success {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #00822b;
+    padding-top: 6px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+
+    @include tablet {
+      // min-width: 321.11px;
+    }
+
+    &.disabled {
+      background-color: #f9fafb;
+    }
+
+    &.errorBorder {
+      border-color: #f04438;
+    }
+
+    .prefix {
+      padding: 8px 12px 8px 14px;
+      color: #667085;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      width: fit-content;
+
+      &.disabled {
+        background-color: #f9fafb;
+      }
+
+      @include tablet {
+        padding: 10px 12px 10px 14px;
+      }
+    }
+
+    .innerInputWrapper {
+      padding: 8px 14px;
+      border-left: 1px solid #d0d5dd;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      overflow-x: hidden;
+
+      &.errorBorder {
+        border-color: #f04438;
+      }
+
+      &.disabled {
+        background-color: #f9fafb;
+      }
+
+      @include tablet {
+        padding: 10px 14px;
+      }
+
+      input {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #101828;
+        width: 100%;
+        outline: none;
+        border: none;
+
+        @include tablet {
+          color: #001620;
+          background-color: #ffffff;
+        }
+
+        &::placeholder {
+          color: #667085;
+        }
+
+        &:disabled {
+          background-color: #f9fafb;
+        }
+      }
+
+      .errorIcon {
+        color: #f04438;
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+@import '/src/styles/index.scss';
+
+//error
+.error {
+  background: #fffafa;
+  color: #bd101b;
+  border: 0.5px solid #bd101b;
+}
+
+//info
+.info {
+  background: #f9fbff;
+  color: #0d3ddc;
+  border: 0.5px solid #0d3ddc;
+}
+
+//plain
+.plain {
+  background: #ffffff;
+  color: #002a3e;
+  border: 0.5px solid #c3ccd3;
+}
+
+//warning
+.warning {
+  background: #fffef5;
+  color: #ba5700;
+  border: 0.5px solid #ba5700;
+}
+
+//success
+.success {
+  background: #f0fff4;
+  color: #00822b;
+  border: 0.5px solid #00822b;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 8px;
+  width: 324px;
+  min-height: 174px;
+  border-radius: 12px;
+  font-family: 'Inter';
+  padding: 17.25px;
+  animation-name: fade-in-and-slide-down;
+  animation-duration: 100ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  @include tablet {
+    width: 932px;
+    min-height: 102px;
+  }
+}
+
+.fade-out {
+  animation-name: fade-in-and-slide-down;
+  animation-duration: 100ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+
+  @include tablet {
+    flex-direction: row;
+  }
+
+  .leftIcon {
+    width: 21.5px;
+    height: 21.5px;
+
+    @include tablet {
+      margin-top: 1em;
+      margin-right: 9.25px;
+    }
+  }
+
+  .messageInfo {
+    h3 {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: 0.02em;
+
+      @include tablet {
+        font-size: 14px;
+      }
+    }
+
+    .lowerInfo {
+      display: flex;
+      justify-content: flex-start;
+      font-weight: 600;
+      font-size: 12px;
+      // line-height: 20px;
+      // letter-spacing: 0.02em;
+
+      h5:first-of-type {
+        padding-right: 16px;
+      }
+
+      h5 {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.close {
+  width: 21.73px;
+  height: 21.73px;
+  cursor: pointer;
+}
+
+@keyframes fade-in-and-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

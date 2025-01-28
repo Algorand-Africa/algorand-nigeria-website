@@ -1,0 +1,44 @@
+@import '/src/styles/index.scss';
+
+.container {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &.full_page_width {
+    width: 100vw;
+    margin-left: calc((100vw - 100%) / 2 * -1);
+    padding-left: calc((100vw - 100%) / 2);
+    padding-right: calc((100vw - 100%) / 2);
+  }
+}
+
+.blog_card {
+  width: 340px;
+  max-width: calc(100vw - 48px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  border-radius: 20px;
+  background: #001324;
+  gap: 16px;
+
+  @include tablet {
+    width: 416px;
+    max-width: calc(100vw - 48px);
+    gap: 40px;
+    padding: 40px 32px;
+  }
+}

@@ -1,0 +1,16 @@
+@import '/src/styles/index.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #001324;
+  margin-bottom: 0;
+}
+
+.spinOnHover {
+  transition: all 0.3s;
+
+  &:hover {
+    transform: rotate(360deg) scale(1.1);
+  }
+}

@@ -1,0 +1,262 @@
+@import '/src/styles/index.scss';
+
+.input {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    color: #344054;
+    padding-bottom: 6px;
+
+    @include tablet {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .warning {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ea7f01;
+    padding-top: 6px;
+  }
+
+  .error {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #f04438;
+    padding-top: 6px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  .success {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #00822b;
+    padding-top: 6px;
+
+    @include tablet {
+      font-size: 14px;
+    }
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+
+    &.errorBorder {
+      border-color: #f04438;
+    }
+
+    .prefix {
+      padding: 8px 12px 8px 14px;
+      color: #667085;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      min-width: 74px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      cursor: pointer;
+
+      svg {
+        font-size: 20px;
+      }
+
+      @include tablet {
+        padding: 10px 12px 10px 14px;
+      }
+    }
+
+    .innerInputWrapper {
+      padding: 8px 14px 8px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      overflow-x: hidden;
+
+      &.errorBorder {
+        border-color: #f04438;
+      }
+
+      @include tablet {
+        padding: 10px 14px 10px 0;
+      }
+
+      input {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #101828;
+        width: 100%;
+        outline: none;
+        border: none;
+
+        @include tablet {
+          color: #001620;
+        }
+
+        &::placeholder {
+          color: #667085;
+        }
+      }
+
+      .errorIcon {
+        color: #f04438;
+      }
+    }
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #f2f4f7;
+    border-radius: 8px;
+    margin-top: 8px;
+    height: 0px;
+    opacity: 0;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #101828;
+
+    /* Works on Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f2f4f7;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #858585;
+      border-radius: 20px;
+      border: 3px solid #f2f4f7;
+    }
+
+    .row {
+      padding: 6px 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+
+      @include tablet {
+        padding: 10px 14px;
+      }
+
+      .text {
+        flex: 1;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        color: #101828;
+        max-height: 24px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+
+        @include tablet {
+          max-height: 24px;
+          font-size: 16px;
+        }
+      }
+
+      &.selected {
+        background: #f9fafb;
+      }
+
+      &:hover {
+        background: #f9fafb;
+      }
+    }
+  }
+}
+
+.closeAnimation {
+  animation-name: slide-up;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+.openAnimation {
+  animation-name: slide-down;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    height: 230px;
+    opacity: 1;
+
+    @include tablet {
+      height: 228px;
+    }
+  }
+
+  99% {
+    height: 0px;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    height: 0px;
+    opacity: 1;
+  }
+
+  100% {
+    height: 230px;
+    opacity: 1;
+
+    @include tablet {
+      height: 228px;
+    }
+  }
+}

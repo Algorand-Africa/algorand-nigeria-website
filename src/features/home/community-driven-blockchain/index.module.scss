@@ -1,0 +1,43 @@
+@import '/src/styles/index.scss';
+
+.picture1 {
+  flex: 1;
+  display: flex;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background-image: url(https://res.cloudinary.com/dy7olyvi0/image/upload/v1737629700/f125eff9506ca7fcdbaa86f83965f794_rizawi.jpg);
+  background-position: -380px -100px;
+
+  @include tablet {
+    border-radius: 25px;
+    background-position: -350px 0px;
+  }
+}
+
+.picture2 {
+  flex: 1;
+  display: flex;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background-image: url(https://res.cloudinary.com/dy7olyvi0/image/upload/v1737629699/57ec589c575560dcc3e40bf10b17f6e6_vseimo.jpg);
+  background-position: -100px -50px;
+
+  @include tablet {
+    border-radius: 25px;
+    background-position: -100px 0px;
+  }
+}
+
+.picture3 {
+  flex: 1;
+  display: flex;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background-image: url(https://res.cloudinary.com/dy7olyvi0/image/upload/v1737629699/964c308a3abad697824ecf27a59f2508_uibvue.jpg);
+  background-position: -100px -80px;
+
+  @include tablet {
+    border-radius: 25px;
+    background-position: -100px 0px;
+  }
+}
