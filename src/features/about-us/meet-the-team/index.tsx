@@ -5,12 +5,14 @@ import classNames from 'classnames';
 import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2';
 import { TeamItem } from './team-item';
 import { useEffect, useRef, useState } from 'react';
+import { TEAM_MEMBERS } from '@/constants/team-members.constant';
 
 export const MeetTheTeam = () => {
   const carouselRef: any = useRef();
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [activeMember, setActiveMember] = useState(1);
 
   const scrollCarousel = (direction: number) => {
     const scrollAmount = carouselRef.current.offsetWidth; // Scroll by one full container width
@@ -59,7 +61,7 @@ export const MeetTheTeam = () => {
         Meet The Team
       </div>
 
-      <div className={classNames('hidden md:flex justify-center gap-[16px] mb-[100px]')}>
+      {/* <div className={classNames('hidden md:flex justify-center gap-[16px] mb-[100px]')}>
         <img
           src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657115/Team_card_v1ctd3.png"
           alt="Benjamin Onuoha"
@@ -76,6 +78,54 @@ export const MeetTheTeam = () => {
           src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657115/Team_card_3_oeixz8.png"
           alt="Paul Ogwulumba"
         />
+      </div> */}
+
+      <div className="hidden md:flex justify-center gap-[16px] mb-[100px] relative">
+        {TEAM_MEMBERS.map((member) => (
+          <div
+            key={member.id}
+            className="relative cursor-pointer flex items-center"
+            onMouseEnter={() => setActiveMember(member.id)}
+          >
+            <div
+              className={classNames(
+                'transition-all duration-200 overflow-hidden h-[500px] max-h-[500px] overflow-hidden',
+                activeMember === member.id
+                  ? 'w-[300px] opacity-100 scale-100'
+                  : 'w-0 opacity-0 scale-0',
+              )}
+            >
+              <h3 className="mt-12 font-Inter font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
+                {member.name}
+              </h3>
+              <p
+                className={classNames(
+                  'text-[#001324] font-normal font-Inter text-[18px] leading-[25.2px] mb-[16px]',
+                  'tracking-[1%]',
+                )}
+              >
+                {member.title}
+              </p>
+              <p
+                className={classNames(
+                  'font-Inter text-[#6D6D6D] font-normal md:font-light tracking-[1%]',
+                  'md:text-[18px] md:leading-[25.2px] text-[16px] leading-[22.4px]',
+                )}
+              >
+                {member.info}
+              </p>
+            </div>
+
+            <img
+              src={member.image}
+              alt={member.name}
+              className={classNames(
+                'w-[200px] h-[500px] object-cover border-[2px] border-[#FFF] rounded-[16px]',
+                activeMember === member.id ? 'scale-110' : '',
+              )}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="md:hidden flex flex-col gap-[45px] mb-[45px]">
@@ -117,33 +167,15 @@ export const MeetTheTeam = () => {
           className="flex gap-[20px] overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none' }}
         >
-          <TeamItem
-            name="Ben Onuoha"
-            title="Country Manager, Nigeria"
-            info="Ben has been a consultant and advisor to multiple blockchain projects in Africa and globally. His areas of interest are emerging technology, youth leadership and entrepreneurship ecosystems development."
-            image="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657708/3eb9029833009af220bea7cb465f27ce_mhlak4.png"
-          />
-
-          <TeamItem
-            name="Ben Onuoha"
-            title="Country Manager, Nigeria"
-            info="Ben has been a consultant and advisor to multiple blockchain projects in Africa and globally. His areas of interest are emerging technology, youth leadership and entrepreneurship ecosystems development."
-            image="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657714/30386013ab96f544385d66cb68e845cd_tlzqbw.jpg"
-          />
-
-          <TeamItem
-            name="Ben Onuoha"
-            title="Country Manager, Nigeria"
-            info="Ben has been a consultant and advisor to multiple blockchain projects in Africa and globally. His areas of interest are emerging technology, youth leadership and entrepreneurship ecosystems development."
-            image="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657707/fe843d82b2a514abfd7a12051bb2eccc_vhekgz.jpg"
-          />
-
-          <TeamItem
-            name="Ben Onuoha"
-            title="Country Manager, Nigeria"
-            info="Ben has been a consultant and advisor to multiple blockchain projects in Africa and globally. His areas of interest are emerging technology, youth leadership and entrepreneurship ecosystems development."
-            image="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657707/a14da1ab01cdd7e788a230228bccb984_v5uxuj.jpg"
-          />
+          {TEAM_MEMBERS.map((item) => (
+            <TeamItem
+              key={item.name}
+              image={item.imageMobile}
+              name={item.name}
+              title={item.title}
+              info={item.info}
+            />
+          ))}
         </div>
       </div>
     </PageMaxWidth>

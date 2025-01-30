@@ -12,7 +12,9 @@ export const Navbar = () => {
   return (
     <PageMaxWidth className="relative">
       <nav className="flex flex-row items-center justify-between py-[30px]">
-        <AlgorandNigeriaIcon className="w-[125px] h-[42px] md:w-[178px] md:h-[60px]" />
+        <Link href={'/'}>
+          <AlgorandNigeriaIcon className="w-[125px] h-[42px] md:w-[178px] md:h-[60px]" />
+        </Link>
 
         <div className="hidden md:flex flex-row items-center gap-8">
           {links.map((link) => (
