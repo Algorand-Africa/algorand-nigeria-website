@@ -7,6 +7,7 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import styles from './index.module.scss';
 import { UIEvent, useEffect, useRef, useState } from 'react';
 import { EventCard } from './event-card';
+import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
 
 export const Discover = () => {
   const [buttonState, setButtonState] = useState({
@@ -158,8 +159,8 @@ export const Discover = () => {
           className={classNames(styles.container, styles.full_page_width)}
         >
           <div className="flex flex-row gap-12">
-            {Array.from({ length: 30 }).map((_, idx) => (
-              <EventCard key={idx} />
+            {REAL_UPCOMING_EVENTS.map((item, idx) => (
+              <EventCard key={idx} {...item} />
             ))}
           </div>
         </div>

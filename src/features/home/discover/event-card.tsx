@@ -6,11 +6,20 @@ import { CalendarIcon } from '@/assets/icons/calendar.icon';
 import { LocationIcon } from '@/assets/icons/location.icon';
 import { ArrowIcon } from '@/assets/icons/arrow.icon';
 
-export const EventCard = () => {
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  image: string;
+  rsvp: string;
+}
+
+export const EventCard = ({ title, description, date, location, image, rsvp }: Props) => {
   return (
     <div className={classNames(styles.event_card)}>
       <img
-        src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737629700/f125eff9506ca7fcdbaa86f83965f794_rizawi.jpg"
+        src={image}
         alt="Event image"
         className={classNames(
           'h-[200px] md:h-[500px] md:w-[500px] object-cover rounded-lg',
@@ -24,7 +33,7 @@ export const EventCard = () => {
             'leading-[28.8px] md:text-[42px] md:leading-[46.2px]',
           )}
         >
-          Algorand 2025 Bootcamp
+          {title}
         </h2>
         <p
           className={classNames(
@@ -32,9 +41,7 @@ export const EventCard = () => {
             'leading-[25.2px] md:text-[24px] md:leading-[28.8px]',
           )}
         >
-          Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in
-          the blockchain space. We connect enthusiasts, developers, and businesses with the power of
-          Algorand’s technology.
+          {description}
         </p>
 
         <div className="flex flex-col pt-2 md:pt-4 gap-2">
@@ -43,7 +50,7 @@ export const EventCard = () => {
             <p
               className={classNames('font-Inter font-[400] text-sm text-[#4C5965]', 'md:text-base')}
             >
-              Jan 20th, 2024
+              {date}
             </p>
           </div>
           <div className="flex flex-row items-center gap-2">
@@ -51,21 +58,24 @@ export const EventCard = () => {
             <p
               className={classNames('font-Inter font-[400] text-sm text-[#4C5965]', 'md:text-base')}
             >
-              Pioneer’s Park, Gwarimpa - Abuja.
+              {location}
             </p>
           </div>
         </div>
 
-        <Link
-          className={classNames(
-            'pt-5 flex flex-row items-center font-Inter font-[700] text-sm',
-            'text-[#6D6D6D] gap-2 md:text-[24px] md:leading-[28.8px]',
-          )}
-          href="#"
-        >
-          <span className="underline">Register Now</span>
-          <ArrowIcon className="md:text-[37.2px] text-[24px]" />
-        </Link>
+        {rsvp && (
+          <Link
+            className={classNames(
+              'pt-5 flex flex-row items-center font-Inter font-[700] text-sm',
+              'text-[#6D6D6D] gap-2 md:text-[24px] md:leading-[28.8px]',
+            )}
+            href={rsvp}
+            target="_blank"
+          >
+            <span className="underline">Register Now</span>
+            <ArrowIcon className="md:text-[37.2px] text-[24px]" />
+          </Link>
+        )}
       </div>
     </div>
   );
