@@ -7,7 +7,7 @@ export const UpcomingEvents = () => {
   return (
     <PageMaxWidth>
       <TopSection />
-      <Filters />
+      {/* <Filters /> */}
       <UpcomingEventsList />
     </PageMaxWidth>
   );

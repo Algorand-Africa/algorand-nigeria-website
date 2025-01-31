@@ -1,5 +1,6 @@
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 export const EmpoweringInnovators = () => {
   return (
@@ -34,26 +35,31 @@ export const EmpoweringInnovators = () => {
               'md:w-full md:flex-row md:gap-8 md:justify-center',
             )}
           >
-            <button
-              className={classNames(
-                'flex px-[10px] py-[18.5px] text-[#FFFFFF]',
-                'font-Inter text-[18px] leading-[25.2px] font-[700]',
-                'rounded-[50px] border-[0.75px] border-[#5CC2BF] bg-[#279795]',
-                'hover:bg-[#28817f] items-center justify-center md:w-[220px]',
-              )}
-            >
-              Join our Community
-            </button>
-            <button
-              className={classNames(
-                'flex px-[10px] py-[18.5px] text-[#001324]',
-                'font-Inter text-[18px] leading-[25.2px] font-[700]',
-                'rounded-[50px] border-[0.75px] border-[#001324] bg-[#FFF]',
-                'hover:bg-[#001324] hover:text-[#FFF] items-center justify-center md:w-[220px]',
-              )}
-            >
-              Explore Events
-            </button>
+            <Link href="https://discord.gg/algorand" target="_blank">
+              <button
+                className={classNames(
+                  'flex px-[10px] py-[18.5px] text-[#FFFFFF]',
+                  'font-Inter text-[18px] leading-[25.2px] font-[700]',
+                  'rounded-[50px] border-[0.75px] border-[#5CC2BF] bg-[#279795]',
+                  'hover:bg-[#28817f] items-center justify-center md:w-[220px]',
+                )}
+              >
+                Join our Community
+              </button>
+            </Link>
+
+            <Link href={'/events'} target="_blank">
+              <button
+                className={classNames(
+                  'flex px-[10px] py-[18.5px] text-[#001324]',
+                  'font-Inter text-[18px] leading-[25.2px] font-[700]',
+                  'rounded-[50px] border-[0.75px] border-[#001324] bg-[#FFF]',
+                  'hover:bg-[#001324] hover:text-[#FFF] items-center justify-center md:w-[220px]',
+                )}
+              >
+                Explore Events
+              </button>
+            </Link>
           </div>
         </div>
 

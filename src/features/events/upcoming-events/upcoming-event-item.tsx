@@ -1,6 +1,7 @@
 import { TbCalendarMonth } from 'react-icons/tb';
 import { SlLocationPin } from 'react-icons/sl';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 interface Props {
   title: string;
@@ -8,14 +9,15 @@ interface Props {
   date: string;
   location: string;
   image: string;
+  rsvp: string;
 }
 
-export const UpcomingEventItem = ({ title, description, date, location, image }: Props) => {
+export const UpcomingEventItem = ({ title, description, date, location, image, rsvp }: Props) => {
   return (
     <div
       className={classNames(
         'bg-[#F9F9F9] rounded-[16px] p-4 md:p-[25px]',
-        'md:h-[708px] font-Inter',
+        'font-Inter',
         'flex flex-col',
       )}
     >
@@ -30,8 +32,8 @@ export const UpcomingEventItem = ({ title, description, date, location, image }:
       <h4
         className={classNames(
           'text-[#001324] font-bold tracking-[-0.01em] mb-4 md:mb-5',
-          'text-[24px] leading-[28.8px] md:text-[32px] md:leading-[35.2px]',
-          'md:line-clamp-2 md:h-[70px]',
+          'text-[24px] leading-[28.8px] md:text-[32px] md:leading-[35.2px] md:line-clamp-2 ',
+          // 'md:h-[70px]',
         )}
       >
         {title}
@@ -39,13 +41,13 @@ export const UpcomingEventItem = ({ title, description, date, location, image }:
       <p
         className={classNames(
           'text-[#4C5965] font-normal tracking-[0.01em] mb-3 md:mb-4',
-          'text-[14px] leading-[19.6px] md:text-[18px] md:leading-[25.2px]',
-          'line-clamp-3 md:h-[75px] h-[60px]',
+          'text-[14px] leading-[19.6px] md:text-[18px] md:leading-[25.2px] line-clamp-3',
+          ' md:h-[75px] h-[60px]',
         )}
       >
         {description}
       </p>
-      <div className="flex gap-[10.5px] md:gap-2 items-center mb-[9px]">
+      <div className="flex gap-[10.5px] md:gap-2 items-center mb-[9px] md:mt-auto">
         <TbCalendarMonth color="#4C5965" size={18} />
         <p className="text-[#4C5965] font-normal text-[16px] leading-[22.4px] tracking-[0.01em]">
           {date}
@@ -57,15 +59,33 @@ export const UpcomingEventItem = ({ title, description, date, location, image }:
           {location}
         </p>
       </div>
-      <button
-        className={classNames(
-          'mt-auto self-start w-full h-[60px] bg-[#001324] rounded-[8px]',
-          'text-[#FFFFFF] text-[20px] leading-[24px] font-Inter font-medium',
-          'hover:shadow-lg hover:scale-105 transition-transform duration-300',
-        )}
-      >
-        RSVP
-      </button>
+      {rsvp ? (
+        <Link target="_blank" href={rsvp}>
+          <button
+            className={classNames(
+              'mt-auto self-start w-full h-[60px] bg-[#001324] rounded-[8px]',
+              'text-[#FFFFFF] text-[20px] leading-[24px] font-Inter font-medium',
+              'hover:shadow-lg hover:scale-105 transition-transform duration-300',
+            )}
+          >
+            RSVP
+          </button>
+        </Link>
+      ) : (
+        <button
+          className={classNames(
+            'mt-auto self-start w-full h-[60px] bg-[#001324] rounded-[8px]',
+            'text-[#FFFFFF] text-[20px] leading-[24px] font-Inter font-medium',
+            'hover:shadow-lg hover:scale-105 transition-transform duration-300',
+            'opacity-0',
+          )}
+          style={{
+            cursor: 'default',
+          }}
+        >
+          RSVP
+        </button>
+      )}
     </div>
   );
 };

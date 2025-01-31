@@ -61,7 +61,7 @@ export const Faq = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-[50px] md:mt-[97px]">
+        {/* <div className="flex justify-center mt-[50px] md:mt-[97px]">
           <Link
             className={classNames(
               'md:flex hidden border-[1px] border-[#001324] rounded-[100px] px-[46.5px]',
@@ -73,7 +73,7 @@ export const Faq = () => {
           >
             Show all questions
           </Link>
-        </div>
+        </div> */}
       </PageMaxWidth>
     </section>
   );

@@ -9,7 +9,13 @@ import { TelegramIcon } from '@/assets/icons/telegram.icon';
 import { DiscordIcon } from '@/assets/icons/discord.icon';
 
 export const Footer = () => {
-  const links = ['Events', 'About Us', 'Contact Us', 'Blog', 'Forum'];
+  const links = [
+    'About Us',
+    'Events',
+    // 'Contact Us',
+    // 'Blog',
+    //  'Forum'
+  ];
   const thisYear = new Date().getFullYear();
 
   return (
@@ -37,7 +43,7 @@ export const Footer = () => {
             />
 
             <div className="flex flex-row items-center gap-1 md:hidden">
-              <Link
+              {/* <Link
                 href="https://instagram"
                 target="_blank"
                 className={classNames(
@@ -46,9 +52,9 @@ export const Footer = () => {
                 )}
               >
                 <InstagramIcon className="w-4 h-4" />
-              </Link>
+              </Link> */}
               <Link
-                href="https://x.com"
+                href="https://x.com/algorand_ng?s=11"
                 target="_blank"
                 className={classNames(
                   'flex items-center justify-center rounded-full w-[30px] h-[30px]',
@@ -58,7 +64,7 @@ export const Footer = () => {
                 <XIcon className="w-4 h-4" />
               </Link>
               <Link
-                href="https://telegram.com"
+                href="https://t.me/algorandnigeriaofficial"
                 target="_blank"
                 className={classNames(
                   'flex items-center justify-center rounded-full w-[30px] h-[30px]',
@@ -68,7 +74,7 @@ export const Footer = () => {
                 <TelegramIcon className="w-4 h-4" />
               </Link>
               <Link
-                href="https://telegram.com"
+                href="https://discord.gg/algorand"
                 target="_blank"
                 className={classNames(
                   'flex items-center justify-center rounded-full w-[30px] h-[30px]',
@@ -105,22 +111,24 @@ export const Footer = () => {
               ))}
             </div>
 
-            <button
-              className={classNames(
-                'flex px-4 py-4 bg-white rounded-[100px]',
-                'font-Inter font-[500] text-sm md:py-[11px]',
-                'md:font-[700] md:text-xl text-[#001324]',
-              )}
-            >
-              Join our community
-            </button>
+            <Link href="https://discord.gg/algorand" target="_blank">
+              <button
+                className={classNames(
+                  'flex px-4 py-4 bg-white rounded-[100px]',
+                  'font-Inter font-[500] text-sm md:py-[11px]',
+                  'md:font-[700] md:text-xl text-[#001324]',
+                )}
+              >
+                Join our community
+              </button>
+            </Link>
           </div>
         </div>
 
         <div className="md:flex flex-col mt-[49px] gap-[37px] hidden">
           <div className="w-full h-[1px] bg-[#6D6D6D]"></div>
           <div className="flex flex-row items-center self-end gap-[6px]">
-            <Link
+            {/* <Link
               href="https://instagram"
               target="_blank"
               className={classNames(
@@ -130,9 +138,9 @@ export const Footer = () => {
               )}
             >
               <InstagramIcon />
-            </Link>
+            </Link> */}
             <Link
-              href="https://x.com"
+              href="https://x.com/algorand_ng?s=11"
               target="_blank"
               className={classNames(
                 'flex items-center justify-center rounded-full w-[45px] h-[45px]',
@@ -143,7 +151,7 @@ export const Footer = () => {
               <XIcon />
             </Link>
             <Link
-              href="https://telegram.com"
+              href="https://t.me/algorandnigeriaofficial"
               target="_blank"
               className={classNames(
                 'flex items-center justify-center rounded-full w-[45px] h-[45px]',
@@ -154,7 +162,7 @@ export const Footer = () => {
               <TelegramIcon />
             </Link>
             <Link
-              href="https://telegram.com"
+              href="https://discord.gg/algorand"
               target="_blank"
               className={classNames(
                 'flex items-center justify-center rounded-full w-[45px] h-[45px]',

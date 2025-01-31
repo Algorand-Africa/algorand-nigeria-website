@@ -49,7 +49,7 @@ export const MeetTheTeam = () => {
           'mb-[23.4px] md:mb-[80px]',
         )}
       >
-        <span className="font-Trap-900">.</span> <span className="text-[#070D17]">Our</span> Leader
+        <span className="font-Trap-900">.</span> <span className="text-[#070D17]">Our</span> Team
       </div>
 
       <div
