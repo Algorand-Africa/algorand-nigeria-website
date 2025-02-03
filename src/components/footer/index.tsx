@@ -111,7 +111,7 @@ export const Footer = () => {
               ))}
             </div>
 
-            <Link href="https://discord.gg/algorand" target="_blank">
+            <Link href="https://t.me/algorandnigeriaofficial" target="_blank">
               <button
                 className={classNames(
                   'flex px-4 py-4 bg-white rounded-[100px]',

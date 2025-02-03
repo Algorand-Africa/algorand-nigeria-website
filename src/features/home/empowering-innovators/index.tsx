@@ -35,7 +35,7 @@ export const EmpoweringInnovators = () => {
               'md:w-full md:flex-row md:gap-8 md:justify-center',
             )}
           >
-            <Link href="https://discord.gg/algorand" target="_blank">
+            <Link href="https://t.me/algorandnigeriaofficial" target="_blank">
               <button
                 className={classNames(
                   'flex px-[10px] py-[18.5px] text-[#FFFFFF]',
