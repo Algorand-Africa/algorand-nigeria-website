@@ -95,7 +95,7 @@ export const REAL_UPCOMING_EVENTS: {
       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
     location: 'SEC Towers, Abuja',
     date: 'Feb 4, 2025',
-    rsvp: '',
+    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Nigeria%20Blockchain%20Partnership%20for%20Real%20World%20Impact%20with%20SEC%20Meeting',
   },
   {
     title: 'Algorand Nigeria Fintech Dinner',
@@ -105,14 +105,14 @@ export const REAL_UPCOMING_EVENTS: {
       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581040/Fintech_Dinner_xufcll.png',
     location: 'Eko Hotel and Towers, Victoria Island',
     date: 'Feb 6, 2025',
-    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20ALgorand%20Nigeria%20Fintech%20Dinner',
+    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Algorand%20Nigeria%20Fintech%20Dinner',
   },
   {
     title: 'Staking On Algorand',
     description:
       'Join our Algorand Nigeria Webinar to learn how to stake on Algorand effortlessly—no matter your ALGO balance!',
     image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738317450/Staking_on_Algorand_oawraz.png',
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/Staking_on_Algorand_Final_xqdtt3.png',
     location: 'Virtual',
     date: 'Feb 11, 2025',
     rsvp: 'https://bit.ly/Algorandstaking',
@@ -122,7 +122,7 @@ export const REAL_UPCOMING_EVENTS: {
     description:
       'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
     image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738319594/Dev_Refresher_Bootcamp_rwxmeu.png',
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581948/Dev_Refresher_Bootcamp_Final_clu9du.png',
     location: 'Virtual',
     date: 'Feb 18th, 2025',
     rsvp: 'https://bit.ly/algongdevcamp',
@@ -131,9 +131,10 @@ export const REAL_UPCOMING_EVENTS: {
     title: 'Building DiD for Africa',
     description:
       'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
-    image: 'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738319273/Did_sqaerk.png',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/DiD_Africa_Final_wufjs2.png',
     location: 'Twitter Space',
     date: 'Feb 20th, 2025',
-    rsvp: '',
+    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Twitter%20Space%20on%20Building%20DiD%20for%20Africa',
   },
 ];
