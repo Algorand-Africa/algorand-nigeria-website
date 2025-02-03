@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import { FaXTwitter } from 'react-icons/fa6';
 import { LuInstagram } from 'react-icons/lu';
 import { TbBrandLinkedin } from 'react-icons/tb';
@@ -8,6 +9,8 @@ interface Props {
   title: string;
   info: string;
   image?: string;
+  twitter: string;
+  linkedin: string;
 }
 
 export const TeamItem = ({
@@ -15,6 +18,8 @@ export const TeamItem = ({
   title,
   info,
   image = 'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737661102/istockphoto-1316947194-612x612_nwtxtj.jpg',
+  twitter,
+  linkedin,
 }: Props) => {
   return (
     <div
@@ -36,7 +41,7 @@ export const TeamItem = ({
       >
         <div className="flex justify-between mb-[10px]">
           <div>
-            <h4 className="text-[#FFFEF8] text-[24px] font-Inter font-bold leading-[28.8px]">
+            <h4 className="text-[#FFFEF8] text-[24px] font-Inter font-bold leading-[28.8px] drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
               {name}
             </h4>
             <p className="text-[#001324] font-Inter font-normal leading-[19.6px] text-[14px]">
@@ -45,7 +50,7 @@ export const TeamItem = ({
           </div>
 
           <div className="flex self-end gap-[4px]">
-            <div
+            {/* <div
               className={classNames(
                 'h-[32px] w-[32px] border-[1.07px] rounded-[100%]',
                 'flex items-center justify-center',
@@ -53,28 +58,32 @@ export const TeamItem = ({
               )}
             >
               <LuInstagram size={18} color="#FFF" />
-            </div>
-            <div
-              className={classNames(
-                'h-[32px] w-[32px] border-[1.07px] rounded-[100%]',
-                'flex items-center justify-center',
-                '',
-              )}
-            >
-              <FaXTwitter size={18} color="#001324" />
-            </div>
-            <div
-              className={classNames(
-                'h-[32px] w-[32px] border-[1.07px] rounded-[100%]',
-                'flex items-center justify-center',
-                '',
-              )}
-            >
-              <TbBrandLinkedin size={18} color="#001324" />
-            </div>
+            </div> */}
+            <Link target="_blank" href={twitter}>
+              <div
+                className={classNames(
+                  'h-[32px] w-[32px] border-[1.07px] rounded-[100%]',
+                  'flex items-center justify-center',
+                  '',
+                )}
+              >
+                <FaXTwitter size={18} color="#001324" />
+              </div>
+            </Link>
+            <Link target="_blank" href={linkedin}>
+              <div
+                className={classNames(
+                  'h-[32px] w-[32px] border-[1.07px] rounded-[100%]',
+                  'flex items-center justify-center',
+                  '',
+                )}
+              >
+                <TbBrandLinkedin size={18} color="#001324" />
+              </div>
+            </Link>
           </div>
         </div>
-        <div className="text-[14px] text-[#001324] font-Inter font-normal leading-[19.6px]">
+        <div className="text-[14px] text-[#001324] font-Inter font-normal leading-[19.6px] max-h-[120px] overflow-y-auto">
           {info}
         </div>
       </div>

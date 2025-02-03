@@ -8,11 +8,17 @@ export const TheJourney = () => {
     title: string;
     description: string;
   }[] = [
+    // {
+    //   period: '2022',
+    //   title: 'Launch and Early Engagements',
+    //   description:
+    //     'The Nigerian government signed a three-year exclusive intellectual property rights (IPR) agreement with Developing Africa Group to launch a nationwide wallet on the Algorand blockchain. This initiative aimed to enable the international commercialization of various IP forms created and registered within Nigeria, including trademarks, patents, and copyrights.',
+    // },
     {
-      period: '2022',
-      title: 'Launch and Early Engagements',
+      period: '2021 - 2022',
+      title: 'Decentralized Umoja Bounty Hacks',
       description:
-        'The Nigerian government signed a three-year exclusive intellectual property rights (IPR) agreement with Developing Africa Group to launch a nationwide wallet on the Algorand blockchain. This initiative aimed to enable the international commercialization of various IP forms created and registered within Nigeria, including trademarks, patents, and copyrights.',
+        'Algorand Foundation   and  Reach   in partnership with  Africa Blockchain Alliance   launched the series of hackathons tagged Decentralized Umoja Algorand Bounty Hack. In line with the foundation’s commitment to foster blockchain education on the African continent, Algorand Foundation partnered with the Alliance and Reach to organize this agile and fast paced program for African web developers to get into blockchain development.',
     },
     {
       period: 'December, 2023',

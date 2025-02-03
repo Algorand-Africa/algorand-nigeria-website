@@ -81,7 +81,7 @@ export const MeetTheTeam = () => {
       </div> */}
 
       <div className="hidden md:flex justify-center gap-[16px] mb-[100px] relative">
-        {TEAM_MEMBERS.map((member) => (
+        {TEAM_MEMBERS.map((member, index) => (
           <div
             key={member.id}
             className="relative cursor-pointer flex items-center"
@@ -91,7 +91,9 @@ export const MeetTheTeam = () => {
               className={classNames(
                 'transition-all duration-200 overflow-hidden h-[500px] max-h-[500px] overflow-hidden',
                 activeMember === member.id
-                  ? 'w-[300px] opacity-100 scale-100'
+                  ? index === 0
+                    ? 'w-[500px] opacity-100 scale-100'
+                    : 'w-[300px] opacity-100 scale-100'
                   : 'w-0 opacity-0 scale-0',
               )}
             >
@@ -110,6 +112,7 @@ export const MeetTheTeam = () => {
                 className={classNames(
                   'font-Inter text-[#6D6D6D] font-normal md:font-light tracking-[1%]',
                   'md:text-[18px] md:leading-[25.2px] text-[16px] leading-[22.4px]',
+                  'overflow-y-auto justify max-h-[400px]',
                 )}
               >
                 {member.info}
@@ -174,6 +177,8 @@ export const MeetTheTeam = () => {
               name={item.name}
               title={item.title}
               info={item.info}
+              linkedin={item.linkedin}
+              twitter={item.twitter}
             />
           ))}
         </div>

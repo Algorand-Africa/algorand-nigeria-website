@@ -1,3 +1,6 @@
+'use client';
+
+import { Tooltip } from '@/components/tooltip';
 import classNames from 'classnames';
 
 interface Props {
@@ -25,14 +28,16 @@ export const JourneyItem = ({ period, title, description }: Props) => {
       <h4 className="font-Inter font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
         {title}
       </h4>
-      <p
-        className={classNames(
-          'font-Inter text-[#6D6D6D] font-normal md:font-light tracking-[1%]',
-          'md:text-[18px] md:leading-[25.2px] text-[16px] leading-[22.4px]',
-        )}
-      >
-        {description}
-      </p>
+      <Tooltip text={description} position="top">
+        <p
+          className={classNames(
+            'font-Inter text-[#6D6D6D] font-normal md:font-light tracking-[1%]',
+            'md:text-[18px] md:leading-[25.2px] text-[16px] leading-[22.4px] md:line-clamp-[11]',
+          )}
+        >
+          {description}
+        </p>
+      </Tooltip>
     </div>
   );
 };
