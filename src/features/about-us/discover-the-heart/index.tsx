@@ -24,14 +24,13 @@ export const DiscoverTheHeart = () => {
         </p>
 
         <img
-          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737535811/algorand-banner-desktop_mzh33g.png"
+          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738583795/_GT16031_xnoly8.jpg"
           alt="Algorand Nigeria Bootcamp"
-          className="hidden md:flex mt-[48px]"
-        />
-        <img
-          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737558064/Frame_1000003596_qvpwnk.png"
-          alt="Algorand Nigeria Bootcamp"
-          className="flex md:hidden mt-[34px]"
+          className={classNames(
+            'w-full h-[350px] md:h-[500px] object-cover',
+            'rounded-[25px] md:rounded-[50px]',
+            'border-[5px] md:border-[10px] before:absolute before:inset-0 before:rounded-lg before:border-[5px] before:border-transparent before:bg-gradient-to-r before:from-[#E3F7FF] before:to-[#BEDEE8] before:-z-10',
+          )}
         />
       </div>
     </PageMaxWidth>
