@@ -88,6 +88,26 @@ export const REAL_UPCOMING_EVENTS: {
   rsvp: string;
 }[] = [
   {
+    title: 'Nigeria Blockchain Partnership for Real World Impact with SEC Nigeria',
+    description:
+      'The engagement with the SEC seeks to gather critical stakeholders within the SEC, Capital markets, and broader public sector to understand their challenges and explore areas where blockchain can solve some of those challenges.',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+    location: 'SEC Towers, Abuja',
+    date: 'Feb 4, 2025',
+    rsvp: '',
+  },
+  {
+    title: 'Algorand Nigeria Fintech Dinner',
+    description:
+      'The Algorand Nigeria Fintech dinner in Lagos is an informal networking gathering of blockchain industry players in Lagos and financial services entrepreneurs, startups and established companies to showcase Algorand cutting edge technology and its potential use cases in financial services. ',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+    location: 'Eko Hotel and Towers, Victoria Island',
+    date: 'Feb 6, 2025',
+    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20ALgorand%20Nigeria%20Fintech%20Dinner',
+  },
+  {
     title: 'Staking On Algorand',
     description:
       'Join our Algorand Nigeria Webinar to learn how to stake on Algorand effortlessly—no matter your ALGO balance!',
@@ -108,7 +128,7 @@ export const REAL_UPCOMING_EVENTS: {
     rsvp: 'https://bit.ly/algongdevcamp',
   },
   {
-    title: 'Building DID for Africa',
+    title: 'Building DiD for Africa',
     description:
       'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
     image: 'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738319273/Did_sqaerk.png',

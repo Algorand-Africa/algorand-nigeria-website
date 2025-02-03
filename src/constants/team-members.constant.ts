@@ -21,7 +21,7 @@ export const TEAM_MEMBERS = [
   {
     id: 3,
     name: 'Timothy Ogwulumba',
-    title: 'Developer Champion',
+    title: 'Technical Champion, Nigeria',
     info: 'A seasoned blockchain developer with a track record of building and deploying impactful projects on the Algorand blockchain, many of which are live on mainnet. With a deep understanding of smart contracts and decentralized systems, he focuses on creating scalable solutions while empowering developers through education and community initiatives.',
     image: 'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657115/Team_card_2_w4wgv3.png',
     imageMobile:
@@ -30,8 +30,8 @@ export const TEAM_MEMBERS = [
   {
     id: 4,
     name: 'Paul Ogwulumba',
-    title: 'Marketing Strategist',
-    info: 'Ben has been a consultant and advisor to multiple blockchain projects in Africa and globally. His areas of interest are emerging technology, youth leadership and entrepreneurship ecosystems development.',
+    title: 'Technical Champion, Nigeria',
+    info: 'Paul Ogwulumba, an experienced blockchain developer with a history of delivering impactful projects on the Algorand blockchain. With strong expertise in smart contracts and decentralized systems, he is dedicated to building scalable solutions while also supporting developers through education and community engagement.',
     image: 'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657115/Team_card_3_oeixz8.png',
     imageMobile:
       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657707/a14da1ab01cdd7e788a230228bccb984_v5uxuj.jpg',

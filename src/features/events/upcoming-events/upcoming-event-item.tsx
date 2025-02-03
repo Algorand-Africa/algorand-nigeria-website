@@ -2,6 +2,7 @@ import { TbCalendarMonth } from 'react-icons/tb';
 import { SlLocationPin } from 'react-icons/sl';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { Tooltip } from '@/components/tooltip';
 
 interface Props {
   title: string;
@@ -29,24 +30,28 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
         src={image}
         alt={title}
       />
-      <h4
-        className={classNames(
-          'text-[#001324] font-bold tracking-[-0.01em] mb-4 md:mb-5',
-          'text-[24px] leading-[28.8px] md:text-[32px] md:leading-[35.2px] md:line-clamp-2 ',
-          // 'md:h-[70px]',
-        )}
-      >
-        {title}
-      </h4>
-      <p
-        className={classNames(
-          'text-[#4C5965] font-normal tracking-[0.01em] mb-3 md:mb-4',
-          'text-[14px] leading-[19.6px] md:text-[18px] md:leading-[25.2px] line-clamp-3',
-          ' md:h-[75px] h-[60px]',
-        )}
-      >
-        {description}
-      </p>
+      <Tooltip text={title} position="top">
+        <h4
+          className={classNames(
+            'text-[#001324] font-bold tracking-[-0.01em] mb-4 md:mb-5',
+            'text-[24px] leading-[28.8px] md:text-[32px] md:leading-[35.2px] md:line-clamp-2 ',
+            // 'md:h-[70px]',
+          )}
+        >
+          {title}
+        </h4>
+      </Tooltip>
+      <Tooltip text={description} position="top">
+        <p
+          className={classNames(
+            'text-[#4C5965] font-normal tracking-[0.01em] mb-3 md:mb-4',
+            'text-[14px] leading-[19.6px] md:text-[18px] md:leading-[25.2px] line-clamp-3',
+            ' md:h-[75px] h-[60px]',
+          )}
+        >
+          {description}
+        </p>
+      </Tooltip>
       <div className="flex gap-[10.5px] md:gap-2 items-center mb-[9px] md:mt-auto">
         <TbCalendarMonth color="#4C5965" size={18} />
         <p className="text-[#4C5965] font-normal text-[16px] leading-[22.4px] tracking-[0.01em]">
