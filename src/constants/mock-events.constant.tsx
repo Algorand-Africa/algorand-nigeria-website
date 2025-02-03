@@ -102,7 +102,7 @@ export const REAL_UPCOMING_EVENTS: {
     description:
       'The Algorand Nigeria Fintech dinner in Lagos is an informal networking gathering of blockchain industry players in Lagos and financial services entrepreneurs, startups and established companies to showcase Algorand cutting edge technology and its potential use cases in financial services. ',
     image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581040/Fintech_Dinner_xufcll.png',
     location: 'Eko Hotel and Towers, Victoria Island',
     date: 'Feb 6, 2025',
     rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20ALgorand%20Nigeria%20Fintech%20Dinner',
