@@ -31,7 +31,7 @@ export const EmpoweringInnovators = () => {
           </p>
           <div
             className={classNames(
-              'mt-8 md:mt-[50px] flex flex-col gap-3 self-center w-[224px]',
+              'mt-8 md:mt-[50px] flex flex-col gap-3 items-center self-center w-[224px]',
               'md:w-full md:flex-row md:gap-8 md:justify-center',
             )}
           >
@@ -40,8 +40,8 @@ export const EmpoweringInnovators = () => {
                 className={classNames(
                   'flex px-[10px] py-[18.5px] text-[#FFFFFF]',
                   'font-Inter text-[18px] leading-[25.2px] font-[700]',
-                  'rounded-[50px] border-[0.75px] border-[#5CC2BF] bg-[#279795]',
-                  'hover:bg-[#28817f] items-center justify-center md:w-[220px]',
+                  'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+                  'hover:bg-[#2d4af1] items-center justify-center w-[224px] md:w-[220px]',
                 )}
               >
                 Join our Community
@@ -53,7 +53,7 @@ export const EmpoweringInnovators = () => {
                 className={classNames(
                   'flex px-[10px] py-[18.5px] text-[#001324]',
                   'font-Inter text-[18px] leading-[25.2px] font-[700]',
-                  'rounded-[50px] border-[0.75px] border-[#001324] bg-[#FFF]',
+                  'rounded-[50px] border-[0.75px] border-[#001324] bg-[#FFF] w-[224px]',
                   'hover:bg-[#001324] hover:text-[#FFF] items-center justify-center md:w-[220px]',
                 )}
               >
@@ -64,14 +64,14 @@ export const EmpoweringInnovators = () => {
         </div>
 
         <img
-          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737535811/algorand-banner-desktop_mzh33g.png"
+          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738690388/_GT15958_hcorrt.jpg"
           alt="Algorand Nigeria Bootcamp"
-          className="hidden md:flex"
+          className="hidden md:flex border-[#BEDEE8] border-[5px] rounded-[50px] aspect-[2.608] object-cover"
         />
         <img
-          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737535809/algorand-banner-mobile_ya5vyf.png"
+          src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738690388/_GT15958_hcorrt.jpg"
           alt="Algorand Nigeria Bootcamp"
-          className="flex md:hidden"
+          className="flex md:hidden border-[#BEDEE8] border-[5px] rounded-[50px] aspect-[1.09] object-cover"
         />
       </div>
     </PageMaxWidth>

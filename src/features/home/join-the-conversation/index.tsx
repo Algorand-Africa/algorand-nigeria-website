@@ -39,7 +39,7 @@ export const JoinTheConversation = () => {
           />
           <h2
             className={classNames(
-              'max-w-[315px] text-center text-white font-[700] text-[32px] leading-[35.2px]',
+              'max-w-[315px] text-center text-white font-Trap-700 font-[700] text-[32px] leading-[35.2px]',
               'md:max-w-[1016px] md:font-[900] md:text-[96px] md:leading-[105.6px]',
             )}
           >

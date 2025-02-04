@@ -17,7 +17,7 @@ export const OneBlockchain = () => {
           <div className={classNames('flex flex-col gap-4 md:gap-[6px]')}>
             <h1
               className={classNames(
-                'font-Inter font-[700] text-[42px] leading-[46.2px] text-[#17CAC6]',
+                'font-Trap-700 font-[700] text-[42px] leading-[46.2px] text-[#2D2DF1]',
                 'text-center md:text-[48px] md:leading-[52.8px]',
               )}
             >

@@ -96,7 +96,7 @@ export const StayAhead = () => {
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
           <h4
             className={classNames(
-              'text-right font-Trap-700 text-sm text-[#17CAC6]',
+              'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
             )}
           >
@@ -105,7 +105,7 @@ export const StayAhead = () => {
           </h4>
           <h1
             className={classNames(
-              'font-Inter font-[500] text-[42px] leading-[46.2px]',
+              'font-Trap-500 font-[500] text-[42px] leading-[46.2px]',
               'text-[#001324] md:text-[130px] md:leading-[157.33px]',
             )}
           >

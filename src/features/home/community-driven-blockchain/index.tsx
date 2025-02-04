@@ -16,7 +16,7 @@ export const CommunityDrivenBlockchain = () => {
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
           <h4
             className={classNames(
-              'text-right font-Trap-700 text-sm text-[#17CAC6]',
+              'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
             )}
           >
@@ -25,7 +25,7 @@ export const CommunityDrivenBlockchain = () => {
           </h4>
           <h1
             className={classNames(
-              'font-Inter font-[500] text-[42px] leading-[46.2px]',
+              'font-Trap-500 font-[500] text-[42px] leading-[46.2px]',
               'text-[#001324] md:text-[130px] md:leading-[157.33px]',
             )}
           >
@@ -42,7 +42,7 @@ export const CommunityDrivenBlockchain = () => {
               <div className="flex flex-col gap-2 md:gap-5">
                 <h4
                   className={classNames(
-                    'font-Inter font-[700] text-[24px] leading-[28.8px] text-[#FFFFFF]',
+                    'font-Trap-700 font-[700] text-[24px] leading-[28.8px] text-[Black]',
                     'md:text-[48px] md:leading-[52.8px]',
                   )}
                 >
@@ -62,13 +62,13 @@ export const CommunityDrivenBlockchain = () => {
               <Link className="flex flex-row items-center gap-2" href="/about-us">
                 <span
                   className={classNames(
-                    'font-Inter font-[700] text-sm text-[#FFFFFF]',
+                    'font-Inter font-[700] text-sm text-[#000]',
                     'md:text-[24px] md:leading-[28.8px]',
                   )}
                 >
                   Learn More About Us
                 </span>
-                <BsArrowRight className="text-[#fff] text-[24px] md:text-[37.2px]" />
+                <BsArrowRight className="text-[#000] text-[24px] md:text-[37.2px]" />
               </Link>
             </div>
             <div className={classNames('flex flex-row gap-2 h-[300px] md:h-[500px] md:w-[508px]')}>
