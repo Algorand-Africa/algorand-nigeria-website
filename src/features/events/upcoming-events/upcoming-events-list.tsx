@@ -1,4 +1,4 @@
-import { MOCK_UPCOMING_EVENTS, REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
+import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
 import { UpcomingEventItem } from './upcoming-event-item';
 
 export const UpcomingEventsList = () => {

@@ -6,7 +6,7 @@ export const Events = () => {
   return (
     <>
       <UpcomingEvents />
-      {/* <PastEvents /> */}
+      <PastEvents />
       {/* <EventTestimonies /> */}
     </>
   );
