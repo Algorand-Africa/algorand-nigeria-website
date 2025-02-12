@@ -255,8 +255,12 @@
 
 .checkboxContainer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 26px; // Space between checkbox and label
+
+  @media (min-width: 768px) {
+    align-items: center;
+  }
 }
 
 .checkbox {
