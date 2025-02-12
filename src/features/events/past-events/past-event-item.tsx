@@ -39,7 +39,7 @@ export const PastEventItem = ({ title, description, date, location, image }: Pro
         className={classNames(
           'text-[#FFFFFF] font-bold tracking-[-0.01em] mb-3 md:mb-5',
           'text-[28px] leading-[33.6px] md:text-[42px] md:leading-[46.2px]',
-          'md:line-clamp-2 md:h-[70px]',
+          'md:line-clamp-2',
         )}
       >
         {title}

@@ -1,56 +1,52 @@
-export const MOCK_UPCOMING_EVENTS: {
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  image: string;
-}[] = [
-  {
-    title: 'Algorand 2025 Bootcamp',
-    description:
-      'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
-    image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
-    location: 'Pioneer’s Park, Gwarimpa - Abuja.',
-    date: 'Jan 20th, 2024',
-  },
-  {
-    title: 'Algorand 2025 Bootcamp',
-    description:
-      'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
-    image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
-    location: 'Pioneer’s Park, Gwarimpa - Abuja.',
-    date: 'Jan 20th, 2024',
-  },
-  {
-    title: 'Algorand 2025 Bootcamp',
-    description:
-      'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
-    image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
-    location: 'Pioneer’s Park, Gwarimpa - Abuja.',
-    date: 'Jan 20th, 2024',
-  },
-  {
-    title: 'Algorand 2025 Bootcamp',
-    description:
-      'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
-    image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
-    location: 'Pioneer’s Park, Gwarimpa - Abuja.',
-    date: 'Jan 20th, 2024',
-  },
-  {
-    title: 'Algorand 2025 Bootcamp',
-    description:
-      'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
-    image:
-      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
-    location: 'Pioneer’s Park, Gwarimpa - Abuja.',
-    date: 'Jan 20th, 2024',
-  },
-];
+import { IPastEvent, IUpcomingEvent } from '@/interface/event.interface';
+
+// export const MOCK_UPCOMING_EVENTS: IUpcomingEvent[] = [
+//   {
+//     title: 'Algorand 2025 Bootcamp',
+//     description:
+//       'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
+//     image:
+//       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+//     location: 'Pioneer’s Park, Gwarimpa - Abuja.',
+//     date: 'Jan 20th, 2024',
+//   },
+//   {
+//     title: 'Algorand 2025 Bootcamp',
+//     description:
+//       'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
+//     image:
+//       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+//     location: 'Pioneer’s Park, Gwarimpa - Abuja.',
+//     date: 'Jan 20th, 2024',
+//   },
+//   {
+//     title: 'Algorand 2025 Bootcamp',
+//     description:
+//       'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
+//     image:
+//       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+//     location: 'Pioneer’s Park, Gwarimpa - Abuja.',
+//     date: 'Jan 20th, 2024',
+//   },
+//   {
+//     title: 'Algorand 2025 Bootcamp',
+//     description:
+//       'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
+//     image:
+//       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+//     location: 'Pioneer’s Park, Gwarimpa - Abuja.',
+//     date: 'Jan 20th, 2024',
+//   },
+//   {
+//     title: 'Algorand 2025 Bootcamp',
+//     description:
+//       'Algorand Nigeria is a vibrant community dedicated to fostering growth and innovation in the blockchain space. We connect enthusiasts, developers, and businesses with the power of Algorand’s technology.',
+//     image:
+//       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+//     location: 'Pioneer’s Park, Gwarimpa - Abuja.',
+//     date: 'Jan 20th, 2024',
+//   },
+// ];
 
 export const MOCK_PAST_EVENTS: {
   title: string;
@@ -79,14 +75,7 @@ export const MOCK_PAST_EVENTS: {
   },
 ];
 
-export const REAL_UPCOMING_EVENTS: {
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  image: string;
-  rsvp: string;
-}[] = [
+export const REAL_PAST_EVENTS: IPastEvent[] = [
   {
     title: 'Nigeria Blockchain Partnership for Real World Impact with SEC Nigeria',
     description:
@@ -95,8 +84,21 @@ export const REAL_UPCOMING_EVENTS: {
       'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
     location: 'SEC Towers, Abuja',
     date: 'Feb 4, 2025',
-    rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Nigeria%20Blockchain%20Partnership%20for%20Real%20World%20Impact%20with%20SEC%20Meeting',
+    images: [],
   },
+];
+
+export const REAL_UPCOMING_EVENTS: IUpcomingEvent[] = [
+  // {
+  //   title: 'Nigeria Blockchain Partnership for Real World Impact with SEC Nigeria',
+  //   description:
+  //     'The engagement with the SEC seeks to gather critical stakeholders within the SEC, Capital markets, and broader public sector to understand their challenges and explore areas where blockchain can solve some of those challenges.',
+  //   image:
+  //     'https://res.cloudinary.com/dy7olyvi0/image/upload/v1737987628/Frame_1000003553_jb2jld.png',
+  //   location: 'SEC Towers, Abuja',
+  //   date: 'Feb 4, 2025',
+  //   rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Nigeria%20Blockchain%20Partnership%20for%20Real%20World%20Impact%20with%20SEC%20Meeting',
+  // },
   {
     title: 'Algorand Nigeria Fintech Dinner',
     description:
