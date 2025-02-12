@@ -13,8 +13,8 @@ export const Home = () => {
       <OneBlockchain />
       <CommunityDrivenBlockchain />
       <Discover />
-      <StayAhead />
-      <JoinTheConversation />
+      {/* <StayAhead /> */}
+      {/* <JoinTheConversation /> */}
       <Faq />
     </main>
   );

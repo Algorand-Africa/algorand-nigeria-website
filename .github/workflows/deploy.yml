@@ -1,9 +1,7 @@
-
-
 on:
   push:
     branches:
-      - main  # Only trigger on the `main` branch
+      - main # Only trigger on the `main` branch
       - dev # for the dev branch
 
 jobs:
@@ -12,16 +10,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Vercel Deployment
+        env:
+          WEBHOOK_URL: ${{ secrets.MY_DEPLOY_MAIN }}
         run: |
-          curl -X POST ${{ secrets.MY_DEPLOY_MAIN }}
+          # Trigger the webhook and capture the HTTP status code
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" -X POST -d '{}' "$WEBHOOK_URL")
 
-
+          # Check if the request was successful (HTTP status code 200 or 201)
+          if [ "$STATUS_CODE" -eq 200 ] || [ "$STATUS_CODE" -eq 201 ]; then
+            echo "Production Vercel deployment triggered successfully with status code $STATUS_CODE."
+          else
+            echo "Failed to trigger vercel deployment. Status code: $STATUS_CODE."
+            exit 1  # Stop the workflow on failure
+          fi
 
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Vercel Deployment
+        env:
+          WEBHOOK_URL: ${{ secrets.MY_DEPLOY_DEV }}
         run: |
           curl -X POST ${{ secrets.MY_DEPLOY_DEV }}
 
+          # Trigger the webhook and capture the HTTP status code
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" -X POST -d '{}' "$WEBHOOK_URL")
+
+          # Check if the request was successful (HTTP status code 200 or 201)
+          if [ "$STATUS_CODE" -eq 200 ] || [ "$STATUS_CODE" -eq 201 ]; then
+            echo "Staging Vercel deployment triggered successfully with status code $STATUS_CODE."
+          else
+            echo "Failed to trigger vercel deployment. Status code: $STATUS_CODE."
+            exit 1  # Stop the workflow on failure
+          fi

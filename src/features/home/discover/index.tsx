@@ -7,6 +7,7 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import styles from './index.module.scss';
 import { UIEvent, useEffect, useRef, useState } from 'react';
 import { EventCard } from './event-card';
+import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
 
 export const Discover = () => {
   const [buttonState, setButtonState] = useState({
@@ -93,7 +94,7 @@ export const Discover = () => {
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
           <h4
             className={classNames(
-              'text-right font-Trap-700 text-sm text-[#17CAC6]',
+              'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
             )}
           >
@@ -102,7 +103,7 @@ export const Discover = () => {
           </h4>
           <h1
             className={classNames(
-              'font-Inter font-[500] text-[42px] leading-[46.2px]',
+              'font-Trap-500 font-[500] text-[42px] leading-[46.2px]',
               'text-[#001324] md:text-[130px] md:leading-[157.33px]',
             )}
           >
@@ -158,8 +159,8 @@ export const Discover = () => {
           className={classNames(styles.container, styles.full_page_width)}
         >
           <div className="flex flex-row gap-12">
-            {Array.from({ length: 30 }).map((_, idx) => (
-              <EventCard key={idx} />
+            {REAL_UPCOMING_EVENTS.map((item, idx) => (
+              <EventCard key={idx} {...item} />
             ))}
           </div>
         </div>

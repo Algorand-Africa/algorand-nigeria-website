@@ -5,11 +5,11 @@ import { FaqAccordion } from './faq-accordion';
 
 export const Faq = () => {
   const faqs = [
-    {
-      question: 'What is Algorand Nigeria?',
-      answer:
-        'The blockchain is a decentralized digital ledger that records transactions across many computers in such a way that the registered transactions cannot be altered retroactively. This technology enables the secure transfer of digital assets without the need for a central authority.',
-    },
+    // {
+    //   question: 'What is Algorand Nigeria?',
+    //   answer:
+    //     'The blockchain is a decentralized digital ledger that records transactions across many computers in such a way that the registered transactions cannot be altered retroactively. This technology enables the secure transfer of digital assets without the need for a central authority.',
+    // },
     {
       question: 'How can I join the Algorand Nigeria Community?',
       answer:
@@ -37,7 +37,7 @@ export const Faq = () => {
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
           <h4
             className={classNames(
-              'text-right font-Trap-700 text-sm text-[#17CAC6]',
+              'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
             )}
           >
@@ -47,8 +47,8 @@ export const Faq = () => {
         </div>
         <h2
           className={classNames(
-            'pt-[62px] font-Inter font-[700] text-[42px] leading-[46.2px]',
-            'text-black md:font-Trap-600 md:text-[80px] md:leading-[88px]',
+            'pt-[62px] font-[700] text-[42px] leading-[46.2px]',
+            'text-black font-Trap-600 md:text-[80px] md:leading-[88px]',
             'md:pt-[47px] md:pb-[97px] pb-[50px]',
           )}
         >
@@ -61,7 +61,7 @@ export const Faq = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-[50px] md:mt-[97px]">
+        {/* <div className="flex justify-center mt-[50px] md:mt-[97px]">
           <Link
             className={classNames(
               'md:flex hidden border-[1px] border-[#001324] rounded-[100px] px-[46.5px]',
@@ -73,7 +73,7 @@ export const Faq = () => {
           >
             Show all questions
           </Link>
-        </div>
+        </div> */}
       </PageMaxWidth>
     </section>
   );

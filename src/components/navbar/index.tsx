@@ -7,7 +7,13 @@ import classNames from 'classnames';
 import Link from 'next/link';
 
 export const Navbar = () => {
-  const links = ['Events', 'About Us', 'Contact Us', 'Blog', 'Forum'];
+  const links = [
+    'About Us',
+    'Events',
+    // 'Contact Us',
+    // 'Blog',
+    //  'Forum'
+  ];
 
   return (
     <PageMaxWidth className="relative">
@@ -38,10 +44,9 @@ export const Navbar = () => {
           className={classNames(
             'hidden md:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
             'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
-            'rounded-[50px] border-[0.75px] border-[#5CC2BF] bg-[#279795]',
-            'hover:bg-[#28817f]',
+            'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+            'hover:bg-[#2d4af1] opacity-[0]',
           )}
-          style={{ boxShadow: '0px -4px 0px 0px #070D17 inset' }}
         >
           Sign in
         </button>

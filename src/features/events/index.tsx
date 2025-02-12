@@ -7,7 +7,7 @@ export const Events = () => {
     <>
       <UpcomingEvents />
       <PastEvents />
-      <EventTestimonies />
+      {/* <EventTestimonies /> */}
     </>
   );
 };

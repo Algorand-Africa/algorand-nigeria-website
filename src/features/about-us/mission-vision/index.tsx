@@ -24,7 +24,7 @@ export const MissionVision = () => {
           'mb-[24px] md:mb-[80px] md:text-justify',
         )}
       >
-        Our Mission, Vision, and the Values that Drives Us Forward
+        Our Mission and What Drives Us Forward
       </div>
 
       <div
@@ -57,13 +57,13 @@ export const MissionVision = () => {
               'text-center text-[18px] leading-[25.2px]',
             )}
           >
-            To foster innovation, collaboration, and education in the blockchain space across
-            Nigeria.
+            Our mission is in line with Algorand Foundation’s mission to power a world where
+            information has integrity and innovative solutions can scale.
           </p>
         </div>
       </div>
 
-      <div
+      {/* <div
         className={classNames(
           'md:h-[583px] h-[512px] w-full bg-[#279795] md:rounded-[40px]',
           'rounded-[24px] flex flex-col md:justify-between',
@@ -97,9 +97,9 @@ export const MissionVision = () => {
             era.
           </p>
         </div>
-      </div>
+      </div> */}
 
-      <div
+      {/* <div
         className={classNames(
           'md:h-[583px] h-[512px] w-full bg-[#279795] md:rounded-[40px]',
           'rounded-[24px] flex flex-col md:justify-between',
@@ -177,7 +177,7 @@ export const MissionVision = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </PageMaxWidth>
   );
 };

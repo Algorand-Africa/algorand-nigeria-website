@@ -13,9 +13,9 @@ export const CurvyCheckIcon = (props: SVGProps<SVGSVGElement>) => {
       <path
         d="M1 8.5C1 8.5 2.5 8.5 4.5 12C4.5 12 10.0588 2.83333 15 1"
         stroke="#141B34"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

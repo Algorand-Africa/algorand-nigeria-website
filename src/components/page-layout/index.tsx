@@ -17,7 +17,7 @@ export const PageLayout = ({ children }: Props) => {
 
       <Navbar />
       <div className="flex-1 w-full relative">{children}</div>
-      <NewsLetter />
+      {/* <NewsLetter /> */}
       <Footer />
     </div>
   );

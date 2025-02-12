@@ -11,6 +11,10 @@ interface Props {
 }
 
 export const AuthWrapper = async ({ children }: Props) => {
+  /**
+   * This validates the user's session
+   * @returns
+   */
   const validateAuth = async () => {
     const cookiesList = cookies();
     const auth = cookiesList.get('auth');
