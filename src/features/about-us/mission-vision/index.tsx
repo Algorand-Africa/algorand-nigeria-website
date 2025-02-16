@@ -9,7 +9,7 @@ export const MissionVision = () => {
         className={classNames(
           'flex items-center justify-end pt-[40px] ',
           'md:pt-[100px] md:pr-[32px] gap-[4px] md:text-[32px] md:leading-[35.2px] font-[700]',
-          'text-[#279795] font-Inter text-[14px] leading-[19.6px]',
+          'text-[#279795] font-Trap-700 text-[14px] leading-[19.6px]',
           'mb-[23.4px] md:mb-[80px]',
         )}
       >
@@ -19,9 +19,9 @@ export const MissionVision = () => {
 
       <div
         className={classNames(
-          'font-Inter text-[#000000] font-[500] md:text-[130px] text-[42px]',
+          'font-Trap-700 text-[#000000] font-[500] md:text-[130px] text-[42px]',
           'md:leading-[157.33px] leading-[46.2px] tracking-[1%]',
-          'mb-[24px] md:mb-[80px] md:text-justify',
+          'mb-[24px] md:mb-[80px]',
         )}
       >
         Our Mission and What Drives Us Forward
@@ -29,7 +29,7 @@ export const MissionVision = () => {
 
       <div
         className={classNames(
-          'md:h-[583px] h-[512px] w-full bg-[#279795] md:rounded-[40px]',
+          'md:h-[583px] h-[512px] w-full bg-[#9595F5] md:rounded-[40px]',
           'rounded-[24px] flex flex-col md:justify-between',
           'md:flex-row items-center',
           'md:px-[117px] px-[16px] py-[20px] md:py-[unset]',
@@ -45,7 +45,7 @@ export const MissionVision = () => {
         <div className={classNames('md:w-[484px]')}>
           <h4
             className={classNames(
-              'font-Inter text-[#001324] font-[700] md:text-[48px] md:leading-[52.8px] md:text-left',
+              'font-Trap-700 text-[#001324] font-[700] md:text-[48px] md:leading-[52.8px] md:text-left',
               'md:mb-[28px] text-center text-[24px] leading-[28.8px]',
             )}
           >
@@ -53,7 +53,7 @@ export const MissionVision = () => {
           </h4>
           <p
             className={classNames(
-              'font-Inter text-[#FFFFFF] font-[400] md:text-[42px] md:leading-[46.2px] md:text-left',
+              'font-Trap-700 text-[#FFFFFF] font-[400] md:text-[42px] md:leading-[46.2px] md:text-left',
               'text-center text-[18px] leading-[25.2px]',
             )}
           >

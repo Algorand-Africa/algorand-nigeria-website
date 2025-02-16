@@ -2,13 +2,16 @@
 import React from 'react';
 import { PageMaxWidth } from '@/components/page-max-width/index';
 import styles from './index.module.scss';
+import classNames from 'classnames';
 
 export const ContactForm: React.FC = () => {
   return (
     <PageMaxWidth>
       <section className={styles.cfSection}>
         <div className={styles.cfContainer}>
-          <h2 className={styles.cfheaderTitle}>Still Have Worries? Send Us a Message</h2>
+          <h2 className={classNames(styles.cfheaderTitle, 'font-Trap-700')}>
+            Still Have Worries? Send Us a Message
+          </h2>
           <p className={styles.cfheaderSubtitle}>
             For general inquiries or comments, please complete this form.
           </p>
@@ -104,7 +107,7 @@ export const ContactForm: React.FC = () => {
                   <input
                     type="radio"
                     name="inquiry"
-                    className={styles.radioInput}
+                    className={classNames(styles.radioInput, 'cursor-pointer')}
                     required
                     aria-label={item}
                   />

@@ -2,6 +2,7 @@
 import React from 'react';
 import { PageMaxWidth } from '@/components/page-max-width/index';
 import styles from './index.module.scss';
+import classNames from 'classnames';
 
 interface ContactItemProps {
   iconSrc: string;
@@ -16,7 +17,7 @@ const ContactItem: React.FC<ContactItemProps> = ({ iconSrc, altText, href, text,
     <div className={styles.iconContainer}>
       <img src={iconSrc} alt={altText} className={styles.icon} />
     </div>
-    <a href={href} className={styles.contactLink}>
+    <a href={href} className={classNames(styles.contactLink, 'font-Trap-700')}>
       {label} <span className={styles.contactLinkText}>{text}</span>
     </a>
   </div>
@@ -29,7 +30,9 @@ export const ContactDetails: React.FC = () => {
         <div className={styles.container}>
           {/* Left Section */}
           <div className={styles.textContainer}>
-            <h1 className={styles.headerTitle}>Get in Touch with Us</h1>
+            <h1 className={classNames(styles.headerTitle, 'font-Trap-700')}>
+              Get in Touch with Us
+            </h1>
             <p className={styles.headerSubtitle}>
               Have questions, feedback, or partnership ideas? We're here to listen and help.
             </p>

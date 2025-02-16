@@ -13,7 +13,7 @@ export const JourneyItem = ({ period, title, description }: Props) => {
   return (
     <div
       className={classNames(
-        'md:h-[460px] py-[32px] px-[23px]',
+        'md:min-h-[460px] py-[32px] px-[23px]',
         'rounded-[50px] border-[2px] border-[#E5E5E5]',
       )}
     >
@@ -25,7 +25,7 @@ export const JourneyItem = ({ period, title, description }: Props) => {
       >
         {period}
       </p>
-      <h4 className="font-Inter font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
+      <h4 className="font-Trap-700 font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
         {title}
       </h4>
       <Tooltip text={description} position="top">

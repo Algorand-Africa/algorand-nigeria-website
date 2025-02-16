@@ -29,7 +29,7 @@ export const DiscoverTheHeart = () => {
           className={classNames(
             'w-full h-[350px] md:h-[500px] object-cover',
             'rounded-[25px] md:rounded-[50px] md:mt-[64px] mt-[50px]',
-            'border-[5px] md:border-[10px] before:absolute before:inset-0 before:rounded-lg before:border-[5px] before:border-transparent before:bg-gradient-to-r before:from-[#E3F7FF] before:to-[#BEDEE8] before:-z-10',
+            'border-[5px] md:border-[10px] before:absolute before:rounded-lg before:border-[5px] before:border-transparent before:bg-gradient-to-r before:from-[#E3F7FF] before:to-[#BEDEE8] before:-z-10',
           )}
         />
       </div>

@@ -45,7 +45,7 @@ export const MeetTheTeam = () => {
         className={classNames(
           'flex items-center justify-end pt-[40px] ',
           'md:pt-[100px] md:pr-[32px] gap-[4px] md:text-[32px] md:leading-[35.2px] font-[700]',
-          'text-[#279795] font-Inter text-[14px] leading-[19.6px]',
+          'text-[#279795] font-Trap-700 text-[14px] leading-[19.6px]',
           'mb-[23.4px] md:mb-[80px]',
         )}
       >
@@ -54,7 +54,7 @@ export const MeetTheTeam = () => {
 
       <div
         className={classNames(
-          'text-[#001324] font-medium font-Inter mb-[24px] md:mb-[80px]',
+          'text-[#001324] font-medium font-Trap-500 mb-[24px] md:mb-[80px]',
           'text-[42px] leading-[46.2px] md:text-[130px] md:leading-[157.33px]',
         )}
       >
@@ -89,7 +89,7 @@ export const MeetTheTeam = () => {
           >
             <div
               className={classNames(
-                'transition-all duration-200 overflow-hidden h-[500px] max-h-[500px] overflow-hidden',
+                'transition-all duration-200 overflow-hidden h-[500px] max-h-[500px]',
                 activeMember === member.id
                   ? index === 0
                     ? 'w-[500px] opacity-100 scale-100'
@@ -97,12 +97,12 @@ export const MeetTheTeam = () => {
                   : 'w-0 opacity-0 scale-0',
               )}
             >
-              <h3 className="mt-12 font-Inter font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
+              <h3 className="mt-12 font-Trap-600 font-bold text-[#001324] text-[20px] leading-[24px] md:text-[24px] md:leading-28px mb-[16px] tracking-[1%]">
                 {member.name}
               </h3>
               <p
                 className={classNames(
-                  'text-[#001324] font-normal font-Inter text-[18px] leading-[25.2px] mb-[16px]',
+                  'text-[#001324] font-normal font-Trap-500 text-[18px] leading-[25.2px] mb-[16px]',
                   'tracking-[1%]',
                 )}
               >
