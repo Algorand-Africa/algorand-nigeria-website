@@ -78,8 +78,6 @@ export const Input = ({
           disabled ? styles.disabled : '',
         )}
       >
-        {type === 'email' && <FiMail className={styles.emailIcon} size={20} />}
-
         {type === 'tel' && <FiPhone className={styles.emailIcon} size={20} />}
 
         {type === 'card' && (

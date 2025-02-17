@@ -7,7 +7,7 @@
   align-items: center;
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   border: none;
   transition: 0.3s linear;
@@ -64,19 +64,7 @@ span.loader-text {
 button.large {
   height: 48px;
   gap: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 18px;
-
-  svg {
-    font-size: 28px;
-  }
-}
-
-button.medium {
-  height: 40px;
-  gap: 8px;
-  padding: 8px;
+  padding: 16px;
   border-radius: 6px;
   font-size: 16px;
 
@@ -85,10 +73,10 @@ button.medium {
   }
 }
 
-button.small {
-  height: 32px;
-  gap: 6px;
-  padding: 6px;
+button.medium {
+  height: 40px;
+  gap: 8px;
+  padding: 14px;
   border-radius: 6px;
   font-size: 14px;
 
@@ -97,25 +85,37 @@ button.small {
   }
 }
 
+button.small {
+  height: 32px;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+
+  svg {
+    font-size: 18px;
+  }
+}
+
 button.xtra-small {
   height: 24px;
   gap: 4px;
-  padding: 4px;
+  padding: 8px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 10px;
 
   svg {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
 //button variants
 button.solid {
-  background-color: #015efc;
+  background-color: #2d2df1;
   color: #ffffff;
 
   &:hover {
-    background-color: #0d3ddc;
+    background-color: #0e0edb;
   }
 
   &:disabled {
@@ -172,8 +172,8 @@ button.solid-error {
 
 button.outlined {
   background-color: #ffffff;
-  color: #015efc;
-  border: 1px solid #015efc;
+  color: #2d2df1;
+  border: 1px solid #2d2df1;
 
   &:hover {
     background-color: #e5efff;
@@ -231,7 +231,7 @@ button.outlined-error {
 .text {
   background-color: transparent;
   border: none;
-  color: #015efc;
+  color: #2d2df1;
 
   &:hover {
     background-color: #e5efff;

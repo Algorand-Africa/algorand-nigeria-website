@@ -34,6 +34,18 @@ const config: Config = {
         ['Trap-800']: ['var(--font-trap-800)'],
         ['Trap-900']: ['var(--font-trap-900)'],
       },
+      utilities: {
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/line-clamp')],
