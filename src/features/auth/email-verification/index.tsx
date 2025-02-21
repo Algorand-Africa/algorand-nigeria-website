@@ -2,24 +2,10 @@
 import { Button } from '@/components';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { OneTimePin } from './OneTimePin';
+import { OneTimePin } from '@/components/one-time-pin';
 
 export const EmailVerification = () => {
   const [pin, setPin] = useState(['', '', '', '', '', '']);
-
-  const handleInputChange = (index: number, value: string) => {
-    const newPin = [...pin];
-    newPin[index] = value;
-
-    if (value.length === 1 && index < pin.length - 1) {
-      const nextInput = document.querySelector(
-        `input[name="pin-${index + 1}"]`,
-      ) as HTMLInputElement;
-      if (nextInput) nextInput.focus();
-    }
-
-    setPin(newPin);
-  };
 
   return (
     <main
@@ -40,12 +26,10 @@ export const EmailVerification = () => {
         <p className="text-[#6D6D6D] text-[14px] leading-[20px] text-center mt-[-8px]">
           Please enter the verification code sent to your email.
         </p>
-
-        <OneTimePin value={pin} onChange={handleInputChange} />
-
+        <OneTimePin value={pin} onChange={setPin} />
         <div className="flex flex-col gap-[16px]">
           <Button className="bg-[#2D2DF1] text-[#FFFFFF]">Verify</Button>
-          <Button variant="outlined">Cancel</Button>{' '}
+          <Button variant="outlined">Cancel</Button>
         </div>
       </div>
     </main>
