@@ -1,10 +1,12 @@
+'use client';
+
 import classNames from 'classnames';
 import Link from 'next/link';
 import styles from './index.module.scss';
-import { IoCalendarOutline } from 'react-icons/io5';
 import { CalendarIcon } from '@/assets/icons/calendar.icon';
 import { LocationIcon } from '@/assets/icons/location.icon';
 import { ArrowIcon } from '@/assets/icons/arrow.icon';
+import { motion } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -17,7 +19,13 @@ interface Props {
 
 export const EventCard = ({ title, description, date, location, image, rsvp }: Props) => {
   return (
-    <div className={classNames(styles.event_card)}>
+    <motion.div
+      className={classNames(styles.event_card)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
       <img
         src={image}
         alt="Event image"
@@ -67,16 +75,22 @@ export const EventCard = ({ title, description, date, location, image, rsvp }: P
           <Link
             className={classNames(
               'pt-5 flex flex-row items-center font-Inter font-[700] text-sm',
-              'text-[#6D6D6D] gap-2 md:text-[24px] md:leading-[28.8px]',
+              'text-[#6D6D6D] hover:text-[#001324] transition-colors duration-300',
+              'gap-2 md:text-[24px] md:leading-[28.8px] group',
             )}
             href={rsvp}
             target="_blank"
           >
             <span className="underline">Register Now</span>
-            <ArrowIcon className="md:text-[37.2px] text-[24px]" />
+            <ArrowIcon
+              className={classNames(
+                'md:text-[37.2px] text-[24px] transition-transform duration-300',
+                'group-hover:translate-x-1',
+              )}
+            />
           </Link>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };

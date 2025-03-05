@@ -1,11 +1,18 @@
+'use client';
+
 import { StarCheckIcon } from '@/assets/icons/star-check.icon';
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 export const MissionVision = () => {
   return (
     <PageMaxWidth>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
         className={classNames(
           'flex items-center justify-end pt-[40px] ',
           'md:pt-[100px] md:pr-[32px] gap-[4px] md:text-[32px] md:leading-[35.2px] font-[700]',
@@ -15,9 +22,13 @@ export const MissionVision = () => {
       >
         <span className="font-Trap-900">.</span> <span className="text-[#070D17]">Guiding</span>{' '}
         Principles
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
         className={classNames(
           'font-Trap-700 text-[#000000] font-[500] md:text-[130px] text-[42px]',
           'md:leading-[157.33px] leading-[46.2px] tracking-[1%]',
@@ -25,9 +36,13 @@ export const MissionVision = () => {
         )}
       >
         Our Mission and What Drives Us Forward
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
         className={classNames(
           'md:h-[583px] h-[512px] w-full bg-[#9595F5] md:rounded-[40px]',
           'rounded-[24px] flex flex-col md:justify-between',
@@ -49,7 +64,7 @@ export const MissionVision = () => {
               'md:mb-[28px] text-center text-[24px] leading-[28.8px]',
             )}
           >
-            What is Algorand Nigeria’s Mission
+            What is Algorand Nigeria's Mission
           </h4>
           <p
             className={classNames(
@@ -57,11 +72,11 @@ export const MissionVision = () => {
               'text-center text-[18px] leading-[25.2px]',
             )}
           >
-            Our mission is in line with Algorand Foundation’s mission to power a world where
+            Our mission is in line with Algorand Foundation's mission to power a world where
             information has integrity and innovative solutions can scale.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* <div
         className={classNames(
@@ -85,7 +100,7 @@ export const MissionVision = () => {
               'md:mb-[28px] text-center text-[24px] leading-[28.8px]',
             )}
           >
-            What is Algorand Nigeria’s Vision
+            What is Algorand Nigeria's Vision
           </h4>
           <p
             className={classNames(
@@ -121,7 +136,7 @@ export const MissionVision = () => {
               'md:mb-[28px] text-center text-[24px] leading-[28.8px]',
             )}
           >
-            What is Algorand Nigeria’s Value
+            What is Algorand Nigeria's Value
           </h4>
           <div className="flex flex-col md:gap-[28px] gap-[8px] items-center">
             <div className="flex md:gap-[20px] gap-[8px] items-center">

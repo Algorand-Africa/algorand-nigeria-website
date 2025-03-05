@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import styles from './index.module.scss';
 import { PageMaxWidth } from '../page-max-width';
@@ -7,8 +9,13 @@ import { InstagramIcon } from '@/assets/icons/instagram.icon';
 import { XIcon } from '@/assets/icons/x.icon';
 import { TelegramIcon } from '@/assets/icons/telegram.icon';
 import { DiscordIcon } from '@/assets/icons/discord.icon';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export const Footer = () => {
+  const footerRef = useRef(null);
+  const isInView = useInView(footerRef, { once: true });
   const links = [
     'About Us',
     'Events',
@@ -20,7 +27,11 @@ export const Footer = () => {
 
   return (
     <PageMaxWidth className="relative">
-      <footer
+      <motion.footer
+        ref={footerRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         className={classNames(
           'flex flex-col bg-[#001324] mb-[25px] md:mb-[52px]',
           'rounded-[20px] pt-[50px] pb-8 px-[35px] md:pb-[70px]',
@@ -216,7 +227,7 @@ export const Footer = () => {
             </Link>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </PageMaxWidth>
   );
 };

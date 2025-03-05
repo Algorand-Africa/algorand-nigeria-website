@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 import { UIEvent, useEffect, useRef, useState } from 'react';
 import { EventCard } from './event-card';
 import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
+import { motion } from 'framer-motion';
 
 export const Discover = () => {
   const [buttonState, setButtonState] = useState({
@@ -83,7 +84,11 @@ export const Discover = () => {
   }, []);
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
       className={classNames(
         'flex flex-col pt-10 pb-10',
         'md:pt-[220px] md:pb-[100px]',
@@ -92,7 +97,11 @@ export const Discover = () => {
     >
       <PageMaxWidth>
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
-          <h4
+          <motion.h4
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className={classNames(
               'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
@@ -100,17 +109,25 @@ export const Discover = () => {
           >
             <span className="font-Trap-700 md:text-[50px] md:leading-[55px]">.</span>{' '}
             <span className="text-[#070D17]">Upcoming</span> Events
-          </h4>
-          <h1
+          </motion.h4>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className={classNames(
               'font-Trap-500 font-[500] text-[42px] leading-[46.2px]',
               'text-[#001324] md:text-[130px] md:leading-[157.33px]',
             )}
           >
             Discover, Learn, and Network with Great Minds.
-          </h1>
+          </motion.h1>
         </div>
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className={classNames(
             'mt-5 md:mt-10 flex flex-row items-center md:justify-between',
             'gap-2 md:gap-4 justify-end mb-6 md:mb-[90px]',
@@ -151,9 +168,13 @@ export const Discover = () => {
               <BsArrowRight />
             </button>
           </div>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
           ref={ref}
           onScroll={handleScroll}
           className={classNames(styles.container, styles.full_page_width)}
@@ -163,9 +184,15 @@ export const Discover = () => {
               <EventCard key={idx} {...item} />
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex md:hidden justify-center mt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex md:hidden justify-center mt-6"
+        >
           <Link
             className={classNames(
               'flex border-[1px] border-[#001324] rounded-[100px] px-[46.5px]',
@@ -177,8 +204,8 @@ export const Discover = () => {
           >
             View All Events
           </Link>
-        </div>
+        </motion.div>
       </PageMaxWidth>
-    </section>
+    </motion.section>
   );
 };

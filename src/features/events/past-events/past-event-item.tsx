@@ -1,7 +1,10 @@
+'use client';
+
 import { TbCalendarMonth } from 'react-icons/tb';
 import { SlLocationPin } from 'react-icons/sl';
 import classNames from 'classnames';
 import { FaCirclePlay } from 'react-icons/fa6';
+import { motion } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -13,11 +16,13 @@ interface Props {
 
 export const PastEventItem = ({ title, description, date, location, image }: Props) => {
   return (
-    <div
+    <motion.div
       className={classNames(
         'bg-[#192A39] rounded-[32px] p-4 md:p-[25px]',
         'flex flex-col cursor-pointer font-Inter',
       )}
+      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="relative flex items-center justify-center">
         <img
@@ -65,6 +70,6 @@ export const PastEventItem = ({ title, description, date, location, image }: Pro
           {location}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };

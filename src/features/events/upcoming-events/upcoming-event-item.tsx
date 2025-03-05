@@ -1,8 +1,11 @@
+'use client';
+
 import { TbCalendarMonth } from 'react-icons/tb';
 import { SlLocationPin } from 'react-icons/sl';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { Tooltip } from '@/components/tooltip';
+import { motion } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -15,14 +18,19 @@ interface Props {
 
 export const UpcomingEventItem = ({ title, description, date, location, image, rsvp }: Props) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className={classNames(
         'bg-[#F9F9F9] rounded-[16px] p-4 md:p-[25px]',
         'font-Inter',
         'flex flex-col',
       )}
     >
-      <img
+      <motion.img
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.2 }}
         className={classNames(
           'h-[150px] md:h-[371px] mb-4 md:mb-[25px] w-full',
           'object-cover rounded-[8px] overflow-[hidden]',
@@ -91,6 +99,6 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
           RSVP
         </button>
       )}
-    </div>
+    </motion.div>
   );
 };

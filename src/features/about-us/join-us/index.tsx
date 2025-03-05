@@ -1,13 +1,25 @@
+'use client';
+
 import { RightArrowIcon } from '@/assets/icons/right-arrow.icon';
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export const JoinUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
     <PageMaxWidth>
       <div className="mt-[46.6px] md:mt-[131px] flex flex-col">
-        <div
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className={classNames(
             'md:mx-[60px] bg-[#F3F7FA] md:rounded-[30px] rounded-[32px]',
             'md:h-[482px] h-[521px]',
@@ -15,7 +27,11 @@ export const JoinUs = () => {
             'md:justify-center p-[16px] mb-[93px] md:mb-[174px]',
           )}
         >
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+          >
             <h4
               className={classNames(
                 'font-Inter font-bold text-[#070D17] mb-[16px]',
@@ -46,18 +62,24 @@ export const JoinUs = () => {
                 Get Involved <RightArrowIcon />
               </div>
             </Link>
-          </div>
+          </motion.div>
 
-          <img
+          <motion.img
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
             className="md:block hidden w-[504px] h-[307px] object-contain"
             src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737757794/Group_100_1_kphrtz.png"
           />
 
-          <img
+          <motion.img
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
             className="md:hidden w-[100%] object-contain"
             src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737757794/Group_100_vg23hm.png"
           />
-        </div>
+        </motion.div>
       </div>
     </PageMaxWidth>
   );

@@ -1,8 +1,16 @@
+'use client';
+
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { JourneyItem } from './journey-item';
 
 export const TheJourney = () => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+
   const items: {
     period: string;
     title: string;
@@ -18,19 +26,19 @@ export const TheJourney = () => {
       period: '2021 - 2022',
       title: 'Decentralized Umoja Bounty Hacks',
       description:
-        'Algorand Foundation launched the series of hackathons tagged Decentralized Umoja Algorand Bounty Hack. In line with the foundation’s commitment to foster blockchain education on the African continent, Algorand Foundation organized this agile and fast paced program for African web developers to get into blockchain development.',
+        "Algorand Foundation launched the series of hackathons tagged Decentralized Umoja Algorand Bounty Hack. In line with the foundation's commitment to foster blockchain education on the African continent, Algorand Foundation organized this agile and fast paced program for African web developers to get into blockchain development.",
     },
     {
       period: 'December, 2023',
       title: 'Developer Ecosystem and Community Growth',
       description:
-        'Algorand Foundation’s efforts led to the empowerment of over 500 Nigerian software developers through comprehensive training via online and in-person bootcamps. Nigerian developers made a significant impact in the Build-A-Bull Global Hackathon, securing top positions across multiple tracks.',
+        "Algorand Foundation's efforts led to the empowerment of over 500 Nigerian software developers through comprehensive training via online and in-person bootcamps. Nigerian developers made a significant impact in the Build-A-Bull Global Hackathon, securing top positions across multiple tracks.",
     },
     {
       period: 'February, 2024',
       title: 'Developer Ecosystem and Community Growth',
       description:
-        'The Foundation expanded its outreach to Plateau State, organizing workshops for over 50 software developers and hosting a policy dinner that brought together government officials and aspiring developers to explore blockchain’s potential in the region.',
+        "The Foundation expanded its outreach to Plateau State, organizing workshops for over 50 software developers and hosting a policy dinner that brought together government officials and aspiring developers to explore blockchain's potential in the region.",
     },
     {
       period: 'February, 2024',
@@ -42,19 +50,19 @@ export const TheJourney = () => {
       period: 'February, 2024',
       title: 'Cultural Integration and Community Engagement',
       description:
-        'The Foundation sponsored the Incredible Music Festival in Jos, Plateau State, and collaborated with Algogems to host a workshop introducing local creatives to Web3, empowering them to participate in the digital economy. ',
+        'The Foundation sponsored the Incredible Music Festival in Jos, Plateau State, and collaborated with Algogems to host a workshop introducing local creatives to Web3, empowering them to participate in the digital economy.',
     },
     {
       period: 'May, 2024',
       title: 'Educational Initiatives',
       description:
-        'The #PythonMay series was launched, beginning with a webinar about Python on Algorand, followed by office hours and an in-person meetup in Abuja for intermediate blockchain developers. This series onboarded over 200 software developers to build on Algorand. ',
+        'The #PythonMay series was launched, beginning with a webinar about Python on Algorand, followed by office hours and an in-person meetup in Abuja for intermediate blockchain developers. This series onboarded over 200 software developers to build on Algorand.',
     },
     {
       period: 'August, 2024',
       title: 'Taraba Blockchain Partnership for Real World Impact',
       description:
-        'The Government of Taraba State partnered with the Algorand Foundation to explore the transformative potential of blockchain technology across key sectors. This collaboration focuses on improving agricultural processes, addressing supply chain challenges, and enhancing identity management systems. By leveraging blockchain’s efficiency and transparency, the partnership aims to drive economic growth and create new opportunities for residents.',
+        "The Government of Taraba State partnered with the Algorand Foundation to explore the transformative potential of blockchain technology across key sectors. This collaboration focuses on improving agricultural processes, addressing supply chain challenges, and enhancing identity management systems. By leveraging blockchain's efficiency and transparency, the partnership aims to drive economic growth and create new opportunities for residents.",
     },
     {
       period: 'October 2024 - November 2024',
@@ -66,7 +74,7 @@ export const TheJourney = () => {
       period: 'January, 2025',
       title: 'Nigeria Blockchain Partnership for Real World Impact with SEC',
       description:
-        'The partnership with Nigeria’s SEC brings together key stakeholders from the SEC, capital markets, and public sector to identify challenges and explore blockchain-driven solutions, fostering innovation and regulatory collaboration.',
+        "The partnership with Nigeria's SEC brings together key stakeholders from the SEC, capital markets, and public sector to identify challenges and explore blockchain-driven solutions, fostering innovation and regulatory collaboration.",
     },
   ];
   return (
@@ -93,17 +101,27 @@ export const TheJourney = () => {
       </div>
 
       <div className="mb-[80px] mr-[69px] text-[#6D6D6D] font-light font-Inter leading-[25.2px] text-[18px] hidden md:block">
-        Algorand’s journey in Nigeria is a story of innovation, collaboration, and empowerment. From
+        Algorand's journey in Nigeria is a story of innovation, collaboration, and empowerment. From
         its inception, Algorand has set out to redefine the blockchain landscape with its unique
         Pure Proof-of-Stake consensus, bringing security, scalability, and sustainability to the
-        forefront. Here’s how Algorand has evolved and impacted the Nigerian blockchain ecosystem.
+        forefront. Here's how Algorand has evolved and impacted the Nigerian blockchain ecosystem.
       </div>
 
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-5 mb-[71px] md:mb-[150px]">
+      <motion.div
+        ref={containerRef}
+        className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-5 mb-[71px] md:mb-[150px]"
+      >
         {items.map((item, index) => (
-          <JourneyItem key={index} {...item} />
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <JourneyItem {...item} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </PageMaxWidth>
   );
 };

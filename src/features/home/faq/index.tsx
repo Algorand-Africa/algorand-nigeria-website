@@ -1,7 +1,9 @@
+'use client';
+
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
-import Link from 'next/link';
 import { FaqAccordion } from './faq-accordion';
+import { motion } from 'framer-motion';
 
 export const Faq = () => {
   const faqs = [
@@ -35,7 +37,11 @@ export const Faq = () => {
     <section className={classNames('flex flex-col pt-10 pb-10', 'md:pt-[114px] md:pb-[100px]')}>
       <PageMaxWidth>
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
-          <h4
+          <motion.h4
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className={classNames(
               'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
@@ -43,9 +49,13 @@ export const Faq = () => {
           >
             <span className="font-Trap-700 md:text-[50px] md:leading-[55px]">.</span>{' '}
             <span className="text-[#070D17]">Any</span> Question?
-          </h4>
+          </motion.h4>
         </div>
-        <h2
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className={classNames(
             'pt-[62px] font-[700] text-[42px] leading-[46.2px]',
             'text-black font-Trap-600 md:text-[80px] md:leading-[88px]',
@@ -53,11 +63,19 @@ export const Faq = () => {
           )}
         >
           FAQ
-        </h2>
+        </motion.h2>
 
         <div className="flex flex-col gap-4 md:gap-[50px]">
-          {faqs.map((faq) => (
-            <FaqAccordion key={faq.question} question={faq.question} answer={faq.answer} />
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={faq.question}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            >
+              <FaqAccordion question={faq.question} answer={faq.answer} />
+            </motion.div>
           ))}
         </div>
 

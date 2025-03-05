@@ -1,12 +1,19 @@
+'use client';
+
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import styles from './index.module.scss';
+import { motion } from 'framer-motion';
 
 export const CommunityDrivenBlockchain = () => {
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
       className={classNames(
         'flex flex-col bg-[#E1F9F9] pt-10 pb-10',
         'md:pt-[220px] md:pb-[100px]',
@@ -14,7 +21,11 @@ export const CommunityDrivenBlockchain = () => {
     >
       <PageMaxWidth>
         <div className={classNames('flex flex-col gap-[46px] md:gap-[80px]')}>
-          <h4
+          <motion.h4
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className={classNames(
               'text-right font-Trap-700 text-sm text-[#070D17]',
               'md:text-[32px] md:leading-[35.2px]',
@@ -22,16 +33,24 @@ export const CommunityDrivenBlockchain = () => {
           >
             <span className="font-Trap-700 md:text-[50px] md:leading-[55px]">.</span>{' '}
             <span className="text-[#070D17]">About</span> Us
-          </h4>
-          <h1
+          </motion.h4>
+          <motion.h1
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className={classNames(
               'font-Trap-500 font-[500] text-[42px] leading-[46.2px]',
               'text-[#001324] md:text-[130px] md:leading-[157.33px]',
             )}
           >
             Algorand as a Community Driven Blockchain
-          </h1>
-          <div
+          </motion.h1>
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className={classNames(
               'px-4 pt-8 pb-4 bg-[#17CAC6] flex flex-col rounded-2xl',
               'gap-8 md:flex-row md:items-center md:px-[100px] md:pt-[50px] md:pb-[50px]',
@@ -56,7 +75,7 @@ export const CommunityDrivenBlockchain = () => {
                 >
                   Algorand Nigeria is a vibrant community dedicated to fostering growth and
                   innovation in the blockchain space. We connect enthusiasts, developers, and
-                  businesses with the power of Algorand’s technology.
+                  businesses with the power of Algorand's technology.
                 </p>
               </div>
               <Link className="flex flex-row items-center gap-2" href="/about-us">
@@ -78,9 +97,9 @@ export const CommunityDrivenBlockchain = () => {
                 <div className={styles.picture3}></div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </PageMaxWidth>
-    </section>
+    </motion.section>
   );
 };

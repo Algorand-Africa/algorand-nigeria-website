@@ -1,6 +1,9 @@
+'use client';
+
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
 import Marquee from 'react-fast-marquee';
+import { motion } from 'framer-motion';
 import { Logos } from './logos';
 import { shuffleArray } from '@/utils/shuffle-array';
 
@@ -13,7 +16,12 @@ export const OneBlockchain = () => {
       )}
     >
       <PageMaxWidth>
-        <div className={classNames('flex flex-col gap-10 items-center')}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className={classNames('flex flex-col gap-10 items-center')}
+        >
           <div className={classNames('flex flex-col gap-4 md:gap-[6px]')}>
             <h1
               className={classNames(
@@ -32,7 +40,7 @@ export const OneBlockchain = () => {
               A list of solutions built on the Algorand Blockchain.
             </p>
           </div>
-        </div>
+        </motion.div>
       </PageMaxWidth>
       <div className={classNames('flex flex-col gap-[19px] md:gap-[27px]')}>
         <Marquee speed={25} pauseOnHover>
@@ -64,7 +72,13 @@ export const OneBlockchain = () => {
         </Marquee>
         <div className={classNames('flex flex-row items-center justify-center gap-5')}>
           {Array.from({ length: 15 }).map((_, i) => (
-            <div className="h-[0.5px] bg-[#192A39] min-w-10 opacity-20" key={i}></div>
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 0.2, scaleX: 1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="h-[0.5px] bg-[#192A39] min-w-10"
+              key={i}
+            ></motion.div>
           ))}
         </div>
         <Marquee speed={25} pauseOnHover direction="right">

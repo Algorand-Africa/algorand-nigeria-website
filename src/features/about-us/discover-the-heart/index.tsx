@@ -1,11 +1,17 @@
+'use client';
+
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 export const DiscoverTheHeart = () => {
   return (
     <PageMaxWidth>
       <div className={'flex flex-col pt-[48px] md:pt-[121px] gap-[16px] mb-[78px] md:mb-[178px]'}>
-        <h1
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className={classNames(
             'font-Trap-900 md:text-[60px] text-[32px]',
             'text-[#001324] text-center md:text-left leading-[35px] md:leading-[66px]',
@@ -13,17 +19,23 @@ export const DiscoverTheHeart = () => {
           )}
         >
           Discover the Heart of Algorand Nigeria
-        </h1>
-        <p
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className={classNames(
             'font-Inter font-[400] text-sm text-[#6D6D6D]',
             'md:text-[28px] md:leading-[33.6px] text-center md:text-left',
           )}
         >
           Unifying Blockchain Enthusiasts Across Nigeria
-        </p>
+        </motion.p>
 
-        <img
+        <motion.img
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738583795/_GT16031_xnoly8.jpg"
           alt="Algorand Nigeria Bootcamp"
           className={classNames(
