@@ -11,7 +11,7 @@ export const AboutUs = () => {
       <MissionVision />
       <TheJourney />
       <MeetTheTeam />
-      {/* <JoinUs /> */}
+      <JoinUs />
     </main>
   );
 };

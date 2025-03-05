@@ -1,6 +1,7 @@
 import { RightArrowIcon } from '@/assets/icons/right-arrow.icon';
 import { PageMaxWidth } from '@/components/page-max-width';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 export const JoinUs = () => {
   return (
@@ -33,16 +34,18 @@ export const JoinUs = () => {
             >
               Be a part of a thriving blockchain community
             </p>
-            <div
-              className={classNames(
-                'text-[#FFF] bg-[#001324] rounded-[5px] w-fit cursor-pointer',
-                'px-[20px] py-[12.5px] md:py-[18px]',
-                'flex items-center gap-[8px] shadow-custom-1',
-                'hover:bg-[#00243E] hover:shadow-lg hover:scale-105 transition-transform duration-300',
-              )}
-            >
-              Get Involved <RightArrowIcon />
-            </div>
+            <Link href="https://t.me/algorandnigeriaofficial" target="_blank">
+              <div
+                className={classNames(
+                  'text-[#FFF] bg-[#001324] rounded-[5px] w-fit cursor-pointer',
+                  'px-[20px] py-[12.5px] md:py-[18px]',
+                  'flex items-center gap-[8px] shadow-custom-1',
+                  'hover:bg-[#00243E] hover:shadow-lg hover:scale-105 transition-transform duration-300',
+                )}
+              >
+                Get Involved <RightArrowIcon />
+              </div>
+            </Link>
           </div>
 
           <img

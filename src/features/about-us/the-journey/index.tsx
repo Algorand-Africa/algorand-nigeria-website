@@ -18,7 +18,7 @@ export const TheJourney = () => {
       period: '2021 - 2022',
       title: 'Decentralized Umoja Bounty Hacks',
       description:
-        'Algorand Foundation   and  Reach   in partnership with  Africa Blockchain Alliance   launched the series of hackathons tagged Decentralized Umoja Algorand Bounty Hack. In line with the foundation’s commitment to foster blockchain education on the African continent, Algorand Foundation partnered with the Alliance and Reach to organize this agile and fast paced program for African web developers to get into blockchain development.',
+        'Algorand Foundation launched the series of hackathons tagged Decentralized Umoja Algorand Bounty Hack. In line with the foundation’s commitment to foster blockchain education on the African continent, Algorand Foundation organized this agile and fast paced program for African web developers to get into blockchain development.',
     },
     {
       period: 'December, 2023',
@@ -49,6 +49,24 @@ export const TheJourney = () => {
       title: 'Educational Initiatives',
       description:
         'The #PythonMay series was launched, beginning with a webinar about Python on Algorand, followed by office hours and an in-person meetup in Abuja for intermediate blockchain developers. This series onboarded over 200 software developers to build on Algorand. ',
+    },
+    {
+      period: 'August, 2024',
+      title: 'Taraba Blockchain Partnership for Real World Impact',
+      description:
+        'The Government of Taraba State partnered with the Algorand Foundation to explore the transformative potential of blockchain technology across key sectors. This collaboration focuses on improving agricultural processes, addressing supply chain challenges, and enhancing identity management systems. By leveraging blockchain’s efficiency and transparency, the partnership aims to drive economic growth and create new opportunities for residents.',
+    },
+    {
+      period: 'October 2024 - November 2024',
+      title: 'Algorand Regional Hackathon',
+      description:
+        'The Algorand Regional Hackathon in Nigeria gathered developers to build solutions in Decentralized Identity, Financial Inclusion, and Supply Chain. With strong participation and innovative projects, the event concluded with a finale in Taraba State, showcasing impactful blockchain solutions for real-world challenges.',
+    },
+    {
+      period: 'January, 2025',
+      title: 'Nigeria Blockchain Partnership for Real World Impact with SEC',
+      description:
+        'The partnership with Nigeria’s SEC brings together key stakeholders from the SEC, capital markets, and public sector to identify challenges and explore blockchain-driven solutions, fostering innovation and regulatory collaboration.',
     },
   ];
   return (
