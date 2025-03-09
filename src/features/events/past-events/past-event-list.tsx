@@ -1,6 +1,6 @@
 'use client';
 
-import { MOCK_PAST_EVENTS, REAL_PAST_EVENTS } from '@/constants/mock-events.constant';
+import { REAL_PAST_EVENTS } from '@/constants/mock-events.constant';
 import { PastEventItem } from './past-event-item';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
