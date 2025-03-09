@@ -31,7 +31,7 @@ export const PastEventItem = ({ title, description, date, location, image, id }:
           <img
             className={classNames(
               'h-[250px] md:h-[500px] mb-4 md:mb-[40px] w-full',
-              'object-cover rounded-[25px]',
+              'object-cover rounded-[25px] object-top',
             )}
             src={image}
             alt={title}

@@ -10,6 +10,7 @@ import { formatImages } from '@/utils/organize-images';
 import { useWindowSize } from '@/hooks/use-window-size';
 import { ImageOverlay } from '@/components/image-overlay';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export const PastEvent = () => {
   const { id } = useParams();
@@ -36,12 +37,18 @@ export const PastEvent = () => {
   return (
     <PageMaxWidth maxWidth={1200} className={classNames('py-11 md:py-[94px]', 'relative')}>
       {event?.image && (
-        <img
+        <motion.img
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           src={event.image}
-          className="absolute top-0 left-0 w-full h-[150px] md:h-[400px] object-cover object-top"
+          className="absolute top-0 left-0 w-full h-[150px] md:h-[400px] object-cover object-top blur-sm"
         />
       )}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className={classNames(
           'bg-[#F9F9F9] rounded-[16px] p-6 md:p-[50px] relative z-10',
           'flex flex-col cursor-pointer font-Inter',
@@ -91,7 +98,7 @@ export const PastEvent = () => {
           ))}
         </div>
 
-        {event?.images && (
+        {(event?.images?.length || 0) > 0 && (
           <h4
             className={classNames(
               'text-[#001324] tracking-[-0.01em] mb-8',
@@ -103,12 +110,20 @@ export const PastEvent = () => {
           </h4>
         )}
 
-        {event?.images && (
-          <div className="flex flex-col gap-2 md:gap-5">
+        {(event?.images?.length || 0) > 0 && (
+          <motion.div
+            className="flex flex-col gap-2 md:gap-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
               <div className="flex flex-wrap gap-2 md:gap-5">
                 {column1.map((image, index) => (
-                  <img
+                  <motion.img
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.1 * index }}
                     key={image.url + index + 'column1'}
                     src={image.url}
                     alt={image.alt || `Gallery image ${index + 1}`}
@@ -124,7 +139,10 @@ export const PastEvent = () => {
 
               <div className="flex flex-wrap gap-2 md:gap-5">
                 {column2.map((image, index) => (
-                  <img
+                  <motion.img
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.1 * (index + column1.length) }}
                     key={image.url + index + 'column2'}
                     src={image.url}
                     alt={image.alt || `Gallery image ${index + 1}`}
@@ -142,7 +160,13 @@ export const PastEvent = () => {
             {spillOver.length > 0 && (
               <div className="flex flex-col gap-2 md:gap-5">
                 {spillOver.map((image, index) => (
-                  <img
+                  <motion.img
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * (index + column1.length + column2.length),
+                    }}
                     key={image.url + index + 'spillOver'}
                     src={image.url}
                     alt={image.alt || `Gallery image ${index + 1}`}
@@ -156,7 +180,7 @@ export const PastEvent = () => {
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         )}
 
         {selectedImage && (
@@ -166,7 +190,7 @@ export const PastEvent = () => {
             onClose={() => setSelectedImage(null)}
           />
         )}
-      </div>
+      </motion.div>
     </PageMaxWidth>
   );
 };

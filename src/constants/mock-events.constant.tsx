@@ -90,53 +90,58 @@ export const REAL_PAST_EVENTS: IPastEvent[] = [
       `Beyond the conversations, the event reinforced Algorand’s commitment to fostering a thriving fintech ecosystem in Nigeria. As the evening drew to a close, participants left with a renewed sense of possibility—excited about the synergies that could emerge from blockchain-powered financial solutions. With engagements like this paving the way, Algorand Nigeria remains at the forefront of bridging the gap between innovation and mainstream adoption in the country’s financial landscape.`,
     ],
   },
+  {
+    title: 'Staking On Algorand',
+    description:
+      'An Algorand Nigeria Webinar to learn how to stake on Algorand effortlessly—no matter your ALGO balance!',
+    location: 'Virtual',
+    date: 'Feb 11, 2025',
+    id: 'staking-on-algorand',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/Staking_on_Algorand_Final_xqdtt3.png',
+    images: [],
+    descriptionParagraphs: [
+      `On February 11, 2025, Algorand Nigeria hosted an insightful webinar on staking, providing community members with the knowledge needed to maximize their rewards on the Algorand blockchain. Designed for both beginners and experienced users, the virtual event focused on simplifying the staking process—debunking myths and highlighting various methods beyond the commonly known 30,000 ALGO requirement. As staking continues to be a key feature of blockchain ecosystems, this session ensured that Nigerian Algorand enthusiasts could take full advantage of available earning opportunities.`,
+      `Participants explored different staking options, including liquid staking and staking pools, which allow users to participate without holding a massive ALGO balance. The webinar emphasized how Algorand’s efficient and low-cost blockchain infrastructure enables seamless staking with minimal barriers to entry. Attendees gained hands-on insights into choosing the best staking methods for their portfolios, with experts guiding them through step-by-step processes to optimize returns while maintaining asset flexibility.
+`,
+      `This webinar marked the first in a series of educational initiatives planned by Algorand Nigeria for 2025, reinforcing its commitment to empowering the local community with practical blockchain knowledge. As more Nigerians seek to leverage Algorand’s advanced financial tools, events like this play a crucial role in driving broader adoption and engagement. With staking becoming more accessible than ever, the future of passive income on Algorand looks bright! 🚀`,
+    ],
+  },
+  {
+    title: 'Dev Refresher Bootcamp',
+    description:
+      'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581948/Dev_Refresher_Bootcamp_Final_clu9du.png',
+    location: 'Virtual',
+    date: 'Feb 18th, 2025',
+    images: [],
+    descriptionParagraphs: [
+      `On February 18, 2025, developers from across Nigeria gathered virtually for the Algorand Nigeria Dev Refresher Bootcamp, an intensive session designed to update and upskill both new and experienced developers on Algorand’s latest advancements. The bootcamp provided a deep dive into blockchain fundamentals, Algorand’s unique technology stack, and the evolving landscape of decentralized applications. With a structured curriculum covering everything from Algorand’s origins to its smart contract capabilities, attendees gained valuable insights into building efficient and scalable blockchain solutions.`,
+      `A key focus of the bootcamp was smart contract development on Algorand, where participants explored TEAL, PyTeal, Python and TealScript—languages powering Algorand’s Layer-1 capabilities. The session covered state management, security best practices, and practical implementations, equipping developers with the knowledge to build real-world applications. Tools, resources, and live coding examples reinforced the learning experience, ensuring attendees could confidently apply their skills. The event also fostered collaboration, allowing developers to connect, exchange ideas, and strengthen the local Algorand community.`,
+      `To cap off the bootcamp, attendees received NFTs as proof of participation, marking their engagement in the learning experience. A developer challenge was also issued, rewarding the first 20 participants to complete a designated task with exciting prizes. With this successful kickoff event, Algorand Nigeria reaffirmed its commitment to fostering blockchain talent and innovation, setting the tone for an exciting year ahead in decentralized development. 🚀`,
+    ],
+    id: 'dev-refresher-bootcamp',
+  },
+  {
+    title: 'Building DiD for Africa',
+    description:
+      ' Discussions on various DiD approaches being explored by startups and governments in Nigeria',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/DiD_Africa_Final_wufjs2.png',
+    location: 'Twitter Space',
+    date: 'Feb 20th, 2025',
+    id: 'building-did-for-africa',
+    images: [],
+    descriptionParagraphs: [
+      `On February 20, 2025, Algorand Nigeria hosted an insightful Twitter Space discussion on Decentralized Identity (DiD) and its potential to revolutionize digital verification across Africa. As digital transformation accelerates across the continent, the need for secure, self-sovereign identity systems has never been greater. This virtual event brought together blockchain experts, developers, and industry stakeholders to explore how DiD can empower individuals by giving them control over their personal data while ensuring seamless and tamper-proof authentication for digital services.`,
+      `The discussion delved into the fundamental principles of Decentralized Identity, highlighting how blockchain technology eliminates reliance on centralized authorities and mitigates fraud risks. Speakers shared insights into real-world applications of DiD in finance, healthcare, and public services—demonstrating how this innovation can enhance access, privacy, and security. Attendees also gained a deeper understanding of how Algorand’s advanced Layer-1 blockchain infrastructure is uniquely suited to power scalable and efficient identity solutions for the African market.`,
+      `As the conversation unfolded, one key message became clear: DiD is not just a futuristic concept but a tangible solution ready for implementation. With growing adoption and strategic collaborations, the future of digital identity in Africa is being shaped in real time. Algorand Nigeria remains committed to fostering these critical conversations and driving the development of blockchain-powered identity solutions that will redefine access and trust in the digital economy. 🚀`,
+    ],
+  },
 ];
 
 export const REAL_UPCOMING_EVENTS: IUpcomingEvent[] = [
-  // {
-  //   title: 'Algorand Nigeria Fintech Dinner',
-  //   description:
-  //     'The Algorand Nigeria Fintech dinner in Lagos is an informal networking gathering of blockchain industry players in Lagos and financial services entrepreneurs, startups and established companies to showcase Algorand cutting edge technology and its potential use cases in financial services. ',
-  //   image:
-  //     'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581040/Fintech_Dinner_xufcll.png',
-  //   location: 'Eko Hotel and Towers, Victoria Island',
-  //   date: 'Feb 6, 2025',
-  //   rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Algorand%20Nigeria%20Fintech%20Dinner',
-  //   id: 'algorand-nigeria-fintech-dinner',
-  // },
-  // {
-  //   title: 'Staking On Algorand',
-  //   description:
-  //     'Join our Algorand Nigeria Webinar to learn how to stake on Algorand effortlessly—no matter your ALGO balance!',
-  //   image:
-  //     'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/Staking_on_Algorand_Final_xqdtt3.png',
-  //   location: 'Virtual',
-  //   date: 'Feb 11, 2025',
-  //   rsvp: 'https://bit.ly/Algorandstaking',
-  //   id: 'staking-on-algorand',
-  // },
-  // {
-  //   title: 'Dev Refresher Bootcamp',
-  //   description:
-  //     'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
-  //   image:
-  //     'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581948/Dev_Refresher_Bootcamp_Final_clu9du.png',
-  //   location: 'Virtual',
-  //   date: 'Feb 18th, 2025',
-  //   rsvp: 'https://bit.ly/algongdevcamp',
-  //   id: 'dev-refresher-bootcamp',
-  // },
-  // {
-  //   title: 'Building DiD for Africa',
-  //   description:
-  //     'Kickstart 2025 with the ultimate Algorand dev refresher—sharpen your skills, connect, and build!',
-  //   image:
-  //     'https://res.cloudinary.com/dy7olyvi0/image/upload/v1738581940/DiD_Africa_Final_wufjs2.png',
-  //   location: 'Twitter Space',
-  //   date: 'Feb 20th, 2025',
-  //   rsvp: 'mailto:algorandafrica@algorand.foundation?subject=Application%20to%20attend%20Twitter%20Space%20on%20Building%20DiD%20for%20Africa',
-  //   id: 'building-did-for-africa',
-  // },
   {
     title: 'Algorand Nigeria Project Spotlight - Counterfix',
     date: 'March 12th, 2025',
