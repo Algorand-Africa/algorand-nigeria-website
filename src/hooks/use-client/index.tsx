@@ -37,8 +37,9 @@ export const useClient = () => {
           accessToken: data.accessToken,
           expiresIn: data.expiresIn,
           expiryTime: data.expiryTime,
-          isOnboarded: data.isOnboarded,
         };
+
+        setSession(newToken);
 
         return newToken;
       }

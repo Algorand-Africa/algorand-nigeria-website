@@ -6,7 +6,7 @@ export interface ILogin {
 export interface ISignUp {
   email: string;
   fullName: string;
-  country: string;
+  username: string;
   password: string;
   confirmPassword: string;
 }
@@ -19,6 +19,7 @@ export interface IProfile {
   verified: boolean;
   phone: string;
   timezone: string;
+  username: string;
 }
 
 export interface IUpdateProfile {

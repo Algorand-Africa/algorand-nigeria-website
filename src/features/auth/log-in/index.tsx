@@ -33,7 +33,7 @@ export const LogIn = () => {
       const response = await login(formData);
       if (response.data) {
         if (!response.data.user?.verified) {
-          router.push(`/auth/verify-email?email=${formData.email}`);
+          router.push(`/auth/verify-your-account?email=${formData.email}`);
         } else {
           toast.success('Login successful');
           setTimeout(() => {
