@@ -22,6 +22,7 @@ interface InputProp {
   className?: string;
   description?: string;
   autoComplete?: boolean;
+  required?: boolean;
 }
 
 export const Input = ({
@@ -38,6 +39,7 @@ export const Input = ({
   className,
   description = '',
   autoComplete = true,
+  required = false,
 }: InputProp) => {
   const [hidePassword, setHidePassword] = useState(true);
 
@@ -95,6 +97,7 @@ export const Input = ({
           onChange={(event) => handleChange(event.target.value)}
           disabled={disabled}
           autoComplete={autoComplete ? 'on' : 'off'}
+          required={required}
         />
 
         {type === 'password' && (

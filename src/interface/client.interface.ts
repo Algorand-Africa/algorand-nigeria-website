@@ -1,3 +1,5 @@
+import { IProfile } from './auth.interface';
+
 export type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 interface PrefixType {
@@ -14,7 +16,7 @@ export interface Token {
   accessToken: string;
   expiresIn: string;
   expiryTime?: number;
-  isOnboarded?: boolean;
+  user?: IProfile;
 }
 
 export interface ClientRequestOptions {

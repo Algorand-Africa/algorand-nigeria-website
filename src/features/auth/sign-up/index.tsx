@@ -51,9 +51,9 @@ export const SignUp = () => {
             </p>
           </div>
           <p className="text-[#645D5D] text-sm text-center mt-[-8px]">
-            Don't have an account?{' '}
-            <Link className="text-[#2D2DF1] font-semibold" href="/sign-up">
-              Sign Up
+            Already have an account?{' '}
+            <Link className="text-[#2D2DF1] font-semibold" href="/auth/log-in">
+              Sign In
             </Link>
           </p>
         </div>

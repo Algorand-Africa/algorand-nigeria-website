@@ -1,29 +1,35 @@
-export interface LoginDto {
-  phoneNo: string;
-  password: string;
-}
-
-export interface SignUpDto {
+export interface ILogin {
   email: string;
   password: string;
-  confirmPassword: string;
-  phoneNo: string;
-  name: string;
 }
 
-export interface VerifyEmailDto {
-  verificationToken: string;
-}
-
-export interface ForgotPasswordDto {
-  token: string;
+export interface ISignUp {
+  email: string;
+  fullName: string;
+  country: string;
   password: string;
   confirmPassword: string;
 }
 
-export interface IPlan {
-  smsCode: string;
-  title: string;
-  price: number;
-  duration: 'day' | 'week' | 'month';
+export interface IProfile {
+  id: string;
+  email: string;
+  fullName: string;
+  country: string;
+  verified: boolean;
+  phone: string;
+  timezone: string;
+}
+
+export interface IUpdateProfile {
+  full_name?: string;
+  country?: string;
+  phone?: string;
+  timezone?: string;
+}
+
+export interface IUpdatePassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }

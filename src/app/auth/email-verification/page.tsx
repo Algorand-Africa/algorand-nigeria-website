@@ -1,5 +1,5 @@
-import { EmailVerification } from '@/features/auth/email-verification';
+import { EmailVerificationWithLink } from '@/features/auth/email-verification-with-link';
 
 export default function Page() {
-  return <EmailVerification />;
+  return <EmailVerificationWithLink />;
 }

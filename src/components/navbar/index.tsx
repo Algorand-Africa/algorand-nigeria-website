@@ -58,21 +58,23 @@ export const Navbar = () => {
           <RxHamburgerMenu />
         </motion.button>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className={classNames(
-            'hidden md:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
-            'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
-            'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
-            'hover:bg-[#2d4af1]',
-          )}
-        >
-          Sign in
-        </motion.button>
+        <Link href={'/auth/log-in'}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className={classNames(
+              'hidden md:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
+              'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
+              'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+              'hover:bg-[#2d4af1]',
+            )}
+          >
+            Sign in
+          </motion.button>
+        </Link>
       </motion.nav>
     </PageMaxWidth>
   );
