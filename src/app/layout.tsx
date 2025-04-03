@@ -5,6 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';
 import RecoilContextProvider from '@/providers/recoil-provider';
+import { WalletConnectProvider } from '@/providers/wallet-connect-provider';
 
 const trap300 = localFont({
   src: './fonts/Trap/Trap-Light.otf',
@@ -95,7 +96,9 @@ export default function RootLayout({
         className={`${trap.variable} ${trap300.variable} ${trap500.variable} ${trap600.variable} ${trap700.variable} ${trap800.variable} ${trap900.variable} antialiased`}
       >
         <Toaster />
-        <RecoilContextProvider>{children}</RecoilContextProvider>
+        <RecoilContextProvider>
+          <WalletConnectProvider>{children}</WalletConnectProvider>
+        </RecoilContextProvider>
       </body>
     </html>
   );
