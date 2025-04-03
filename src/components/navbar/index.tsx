@@ -11,16 +11,16 @@ import { BackgroundOverlay } from '../background-overlay';
 import { GrClose } from 'react-icons/gr';
 import { useEffect, useState } from 'react';
 
+const links = [
+  'Events',
+  'About Us',
+  'Contact Us',
+  // 'Blog',
+  //  'Forum'
+];
+
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const links = [
-    'About Us',
-    'Events',
-    // 'Contact Us',
-    // 'Blog',
-    //  'Forum'
-  ];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -64,7 +64,11 @@ export const Navbar = () => {
           ))}
         </div>
 
-        <motion.button whileTap={{ scale: 0.95 }} className="outline-none border-none lg:hidden">
+        <motion.button
+          onClick={toggleMenu}
+          whileTap={{ scale: 0.95 }}
+          className="outline-none border-none lg:hidden"
+        >
           <RxHamburgerMenu />
         </motion.button>
 
@@ -86,9 +90,11 @@ export const Navbar = () => {
           </motion.button>
         </Link>
 
-        {/* <div className="lg:hidden">
-          <MobileMenu isOpen={isOpen} onClose={toggleMenu} />
-        </div> */}
+        {isOpen && (
+          <div className="lg:hidden">
+            <MobileMenu isOpen={isOpen} onClose={toggleMenu} />
+          </div>
+        )}
       </motion.nav>
     </PageMaxWidth>
   );
@@ -124,16 +130,16 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     <BackgroundOverlay visible={isOpen} onClose={handleClose}>
       <div
         className={classNames(
-          'self-end fixed h-screen w-[95%] max-w-[286px] bg-white dark:bg-[#020817] z-50',
+          'self-end fixed h-screen w-[95%] max-w-[286px] bg-white z-50',
           'transition-all duration-300 flex-col',
         )}
         style={{ transform: open ? 'translateX(0)' : 'translateX(100%)' }}
       >
         {/* Logo and close button */}
-        <div className="flex items-center justify-between p-4 border-b-[1px] border-b-[#CBD5E1] dark:border-b-[#334155]">
+        <div className="flex items-center justify-between px-6 pt-20 pb-[30px]">
           <button
             onClick={handleClose}
-            className="inline-flex items-center justify-center rounded-md text-[#0F172A] dark:text-white"
+            className="inline-flex items-center justify-center rounded-md text-[#141B34]"
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
@@ -142,64 +148,35 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         </div>
 
         {/* Menu items */}
-        <div className="flex flex-col gap-6 px-4 py-8">
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/marketplace"
-          >
-            Creator Market
-          </Link>
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/secondary-marketplace"
-          >
-            Trader Market
-          </Link>
+        <div className="flex flex-col gap-[30px] px-6">
+          {links.map((link, index) => (
+            <motion.div
+              key={link}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link
+                className={classNames(
+                  'font-Inter font-[500] text-base leading-[140%]',
+                  'text-[#141B34] hover:font-[700] transition-all',
+                )}
+                href={`/${link.replaceAll(' ', '-').toLowerCase()}`}
+              >
+                {link}
+              </Link>
+            </motion.div>
+          ))}
 
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/asset-factory"
-          >
-            Create Asset
-          </Link>
-
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/list-asset"
-          >
-            List an Asset
-          </Link>
-
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/listings"
-          >
-            Your listings
-          </Link>
-
-          <Link
-            className={classNames(
-              'text-[#64748B] font-inter font-semibold',
-              'hover:text-gray-900 dark:text-[#94A3B8] dark:hover:text-white text-base',
-            )}
-            href="/profile"
-          >
-            Profile
+          <Link className="w-full flex" href={'/auth/log-in'}>
+            <button
+              className={classNames(
+                'bg-[#2D2DF1] px-5 py-2 rounded-2xl h-[60px] w-full',
+                'text-[#E9E9FD] font-Inter font-[700] text-[18px] leading-[140%]',
+              )}
+            >
+              Sign in
+            </button>
           </Link>
 
           {/* {activeAddress ? (
