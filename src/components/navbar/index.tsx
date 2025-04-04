@@ -10,6 +10,9 @@ import { Button } from '../button';
 import { BackgroundOverlay } from '../background-overlay';
 import { GrClose } from 'react-icons/gr';
 import { useEffect, useState } from 'react';
+import { useAuthActions } from '@/actions/auth';
+import { useRecoilValue } from 'recoil';
+import { profileAtom } from '@/state';
 
 const links = [
   'Events',
@@ -21,10 +24,18 @@ const links = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { getProfile } = useAuthActions();
+  const profile = useRecoilValue(profileAtom);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  console.log(profile);
 
   return (
     <PageMaxWidth className="relative">
@@ -72,23 +83,48 @@ export const Navbar = () => {
           <RxHamburgerMenu />
         </motion.button>
 
-        <Link className="hidden lg:flex" href={'/auth/log-in'}>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+        {!profile && (
+          <Link className="hidden lg:flex" href={'/auth/log-in'}>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className={classNames(
+                'hidden lg:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
+                'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
+                'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+                'hover:bg-[#2d4af1]',
+              )}
+            >
+              Sign in
+            </motion.button>
+          </Link>
+        )}
+
+        {profile && (
+          <motion.div
             className={classNames(
-              'hidden lg:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
-              'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
-              'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
-              'hover:bg-[#2d4af1]',
+              'w-12 h-12 rounded-full bg-gradient-to-tr',
+              'flex items-center justify-center',
             )}
+            style={{ background: 'linear-gradient(135deg, #BEF264 0%, #34D399 100%)' }}
+            animate={{ scale: 1 }}
+            initial={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
-            Sign in
-          </motion.button>
-        </Link>
+            <motion.p
+              className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {profile?.fullName.charAt(0).toUpperCase() || 'P'}
+            </motion.p>
+          </motion.div>
+        )}
 
         {isOpen && (
           <div className="lg:hidden">

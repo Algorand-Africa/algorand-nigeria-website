@@ -76,7 +76,7 @@ export const useClient = () => {
           };
         }
 
-        const responseData: R = data.message || data;
+        const responseData: R = data.message || data.data || data;
 
         return {
           data: responseData,

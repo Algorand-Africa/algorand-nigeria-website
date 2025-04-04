@@ -129,7 +129,7 @@ export const useAuthActions = () => {
   const getProfile = useCallback(async () => {
     const url = `/auth/profile`;
 
-    const response = await client.get<IProfile>(url);
+    const response = await client.get<IProfile>(url, undefined, { redirectIfUnauthorized: false });
 
     if (response.data) {
       setProfile(response.data);
