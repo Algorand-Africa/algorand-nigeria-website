@@ -1,14 +1,18 @@
 import { PageMaxWidth } from '@/components/page-max-width';
-import { Filters } from './filters';
 import { UpcomingEventsList } from './upcoming-events-list';
 import { TopSection } from './top-section';
+import { IEvent } from '@/interface/event.interface';
 
-export const UpcomingEvents = () => {
+interface UpcomingEventsProps {
+  upcomingEvents: IEvent[];
+}
+
+export const UpcomingEvents = ({ upcomingEvents }: UpcomingEventsProps) => {
   return (
     <PageMaxWidth>
       <TopSection />
       {/* <Filters /> */}
-      <UpcomingEventsList />
+      <UpcomingEventsList upcomingEvents={upcomingEvents} />
     </PageMaxWidth>
   );
 };

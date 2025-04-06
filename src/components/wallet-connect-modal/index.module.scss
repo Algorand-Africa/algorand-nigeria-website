@@ -9,7 +9,9 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  transform: translateX(0.001px);
   gap: 20px;
+  z-index: 100;
 
   .title {
     display: flex;

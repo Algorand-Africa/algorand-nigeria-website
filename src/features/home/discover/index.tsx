@@ -9,14 +9,19 @@ import { UIEvent, useEffect, useRef, useState } from 'react';
 import { EventCard } from './event-card';
 import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
 import { motion } from 'framer-motion';
+import { IEvent } from '@/interface/event.interface';
+import { useEventsActions } from '@/actions/events';
+import { AlgorandEventCard, AlgorandEventCardSkeleton } from '@/components/algorand-event-card';
 
 export const Discover = () => {
   const [buttonState, setButtonState] = useState({
     left: false,
     right: true,
   });
-
+  const { getAllEvents } = useEventsActions();
   const ref = useRef<HTMLDivElement>(null);
+  const [events, setEvents] = useState<IEvent[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleScroll = (event: UIEvent<HTMLDivElement, globalThis.UIEvent>) => {
     const target = event.target as HTMLDivElement;
@@ -62,6 +67,16 @@ export const Discover = () => {
     }
   };
 
+  const fetchEvents = async () => {
+    const events = await getAllEvents({ page: 1 });
+
+    if (events) {
+      setEvents(events.data);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (ref.current) {
       const target = ref.current;
@@ -81,6 +96,8 @@ export const Discover = () => {
         setButtonState((prev) => ({ ...prev, right: false }));
       }
     }
+
+    fetchEvents();
   }, []);
 
   return (
@@ -180,9 +197,12 @@ export const Discover = () => {
           className={classNames(styles.container, styles.full_page_width)}
         >
           <div className="flex flex-row gap-12">
-            {REAL_UPCOMING_EVENTS.map((item, idx) => (
+            {/* {REAL_UPCOMING_EVENTS.map((item, idx) => (
               <EventCard key={idx} {...item} />
-            ))}
+            ))} */}
+            {isLoading
+              ? Array.from({ length: 3 }).map((_, idx) => <AlgorandEventCardSkeleton key={idx} />)
+              : events.map((item, idx) => <AlgorandEventCard key={idx} event={item} />)}
           </div>
         </motion.div>
 

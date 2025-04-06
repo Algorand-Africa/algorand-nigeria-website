@@ -1,0 +1,20 @@
+@import '/src/styles/index.scss';
+
+.event_card {
+  width: calc(100vw - 48px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  border-radius: 24px;
+  background: #e5e7e9;
+
+  @include tablet {
+    width: 1097px;
+    max-width: calc(100vw - 48px);
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    padding: 25px;
+    border-radius: 50px;
+  }
+}

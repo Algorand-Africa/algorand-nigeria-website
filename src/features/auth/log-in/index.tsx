@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-export const LogIn = () => {
+export const LogIn = ({ redirect }: { redirect?: string }) => {
   const { login } = useAuthActions();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ export const LogIn = () => {
         } else {
           toast.success('Login successful');
           setTimeout(() => {
-            router.push('/');
+            router.push(redirect || '/');
           }, 500);
         }
       }

@@ -54,7 +54,7 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
           className={classNames(
             'text-[#4C5965] font-normal tracking-[0.01em] mb-3 md:mb-4',
             'text-[14px] leading-[19.6px] md:text-[18px] md:leading-[25.2px] line-clamp-3',
-            ' md:h-[75px] h-[60px]',
+            // ' md:min-h-[75px] min-h-[60px]',
           )}
         >
           {description}
@@ -63,7 +63,11 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
       <div className="flex gap-[10.5px] md:gap-2 items-center mb-[9px] md:mt-auto">
         <TbCalendarMonth color="#4C5965" size={18} />
         <p className="text-[#4C5965] font-normal text-[16px] leading-[22.4px] tracking-[0.01em]">
-          {date}
+          {new Date(date).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          })}
         </p>
       </div>
       <div className="flex gap-[10.5px] md:gap-2 items-center mb-[19px]">
@@ -73,7 +77,7 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
         </p>
       </div>
       {rsvp ? (
-        <Link target="_blank" href={rsvp}>
+        <Link href={rsvp}>
           <button
             className={classNames(
               'mt-auto self-start w-full h-[60px] bg-[#001324] rounded-[8px]',
@@ -81,7 +85,7 @@ export const UpcomingEventItem = ({ title, description, date, location, image, r
               'hover:shadow-lg hover:scale-105 transition-transform duration-300',
             )}
           >
-            RSVP
+            View Event
           </button>
         </Link>
       ) : (

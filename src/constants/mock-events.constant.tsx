@@ -1,6 +1,25 @@
 import { IPastEvent, IUpcomingEvent } from '@/interface/event.interface';
 
-export const REAL_PAST_EVENTS: IPastEvent[] = [
+export const REAL_PAST_EVENTS: Partial<IPastEvent>[] = [
+  {
+    title: 'Algorand Nigeria Project Spotlight - Counterfix',
+    date: 'March 12th, 2025',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1741541176/Spotlight_Project_CounterFix_qufg1j.png',
+    location: 'Virtual',
+    description:
+      'Spotlighting Counterfix this March—revolutionizing supply chains with the Algorand blockchain',
+    id: 'algorand-nigeria-project-spotlight-counterfix',
+  },
+  {
+    title: 'Algorand Nigera Peer Coding Session 1',
+    image:
+      'https://res.cloudinary.com/dy7olyvi0/image/upload/v1741540961/Peer_Coding_Session_1_w6jcde.png',
+    description: 'Collaborate, code, and build on-chain solutions in real time.',
+    location: 'Virtual',
+    date: 'March 18th, 2025',
+    id: 'algorand-nigera-peer-coding-session-1',
+  },
   {
     title: 'Nigeria Blockchain Partnership for Real World Impact with SEC Nigeria',
     description:
@@ -141,7 +160,7 @@ export const REAL_PAST_EVENTS: IPastEvent[] = [
   },
 ];
 
-export const REAL_UPCOMING_EVENTS: IUpcomingEvent[] = [
+export const REAL_UPCOMING_EVENTS: Partial<IUpcomingEvent>[] = [
   {
     title: 'Algorand Nigeria Project Spotlight - Counterfix',
     date: 'March 12th, 2025',

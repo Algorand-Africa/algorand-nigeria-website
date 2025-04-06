@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react';
 import { useAuthActions } from '@/actions/auth';
 import { useRecoilValue } from 'recoil';
 import { profileAtom } from '@/state';
+import { usePathname } from 'next/navigation';
+import { useWallet } from '@txnlab/use-wallet';
 
 const links = [
   'Events',
@@ -24,8 +26,17 @@ const links = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { getProfile } = useAuthActions();
+  const { getProfile, logout } = useAuthActions();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const profile = useRecoilValue(profileAtom);
+  const pathname = usePathname();
+  const { activeAddress, providers } = useWallet();
+
+  const disconnectWallet = () => {
+    providers?.forEach((provider) => {
+      provider.disconnect();
+    });
+  };
 
   useEffect(() => {
     getProfile();
@@ -34,8 +45,6 @@ export const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
-  console.log(profile);
 
   return (
     <PageMaxWidth className="relative">
@@ -75,56 +84,107 @@ export const Navbar = () => {
           ))}
         </div>
 
-        <motion.button
-          onClick={toggleMenu}
-          whileTap={{ scale: 0.95 }}
-          className="outline-none border-none lg:hidden"
-        >
-          <RxHamburgerMenu />
-        </motion.button>
-
-        {!profile && (
-          <Link className="hidden lg:flex" href={'/auth/log-in'}>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className={classNames(
-                'hidden lg:flex px-[44px] py-[23.5px] text-[#E7FAF9]',
-                'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
-                'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
-                'hover:bg-[#2d4af1]',
-              )}
-            >
-              Sign in
-            </motion.button>
-          </Link>
-        )}
-
-        {profile && (
-          <motion.div
-            className={classNames(
-              'w-12 h-12 rounded-full bg-gradient-to-tr',
-              'flex items-center justify-center',
-            )}
-            style={{ background: 'linear-gradient(135deg, #BEF264 0%, #34D399 100%)' }}
-            animate={{ scale: 1 }}
-            initial={{ scale: 0.9 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+        <div className="flex flex-row items-center gap-4">
+          <motion.button
+            onClick={toggleMenu}
+            whileTap={{ scale: 0.95 }}
+            className="outline-none border-none lg:hidden"
           >
-            <motion.p
-              className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
+            <RxHamburgerMenu />
+          </motion.button>
+
+          {!profile && (
+            <Link
+              className="hidden lg:flex"
+              href={`/auth/log-in${pathname !== '/auth/log-in' ? '?redirect=' + pathname : ''}`}
             >
-              {profile?.fullName.charAt(0).toUpperCase() || 'P'}
-            </motion.p>
-          </motion.div>
-        )}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className={classNames(
+                  'hidden lg:flex px-[44px] py-[20px] text-[#E7FAF9]',
+                  'font-Inter text-[18px] leading-[25.2px] font-[700] transition-all',
+                  'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+                  'hover:bg-[#2d4af1]',
+                )}
+              >
+                Sign in
+              </motion.button>
+            </Link>
+          )}
+
+          {profile && (
+            <div className="relative">
+              <motion.div
+                className={classNames(
+                  'w-12 h-12 rounded-full bg-gradient-to-tr cursor-pointer',
+                  'flex items-center justify-center',
+                )}
+                style={{ background: '#1c16c1' }}
+                animate={{ scale: 1 }}
+                initial={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setIsPopupOpen(!isPopupOpen)}
+              >
+                <motion.p
+                  className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {profile?.fullName.charAt(0).toUpperCase() || 'P'}
+                </motion.p>
+              </motion.div>
+
+              {isPopupOpen && (
+                <motion.div
+                  className="absolute right-0 mt-2 w-48 z-20 bg-white rounded-lg shadow-lg py-2 overflow-hidden"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Link
+                    href="/profile/settings"
+                    className="block px-4 py-2 text-gray-800 font-Inter hover:bg-[#1c16c1] hover:text-white transition-all"
+                  >
+                    Profile Settings
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 font-Inter"
+                  >
+                    Log out
+                  </button>
+                </motion.div>
+              )}
+            </div>
+          )}
+
+          {activeAddress && (
+            <motion.div
+              className={classNames(
+                'bg-gradient-to-tr flex items-center justify-center cursor-pointer',
+              )}
+              onClick={disconnectWallet}
+            >
+              <motion.p
+                className="font-inter text-sm font-[500] leading-6 text-[#020817] dark:text-white"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.1 }}
+              >
+                {activeAddress.slice(0, 10)}...{' '}
+                <button onClick={disconnectWallet}>
+                  <GrClose />
+                </button>
+              </motion.p>
+            </motion.div>
+          )}
+        </div>
 
         {isOpen && (
           <div className="lg:hidden">
@@ -138,6 +198,9 @@ export const Navbar = () => {
 
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [open, setOpen] = useState(false);
+  const profile = useRecoilValue(profileAtom);
+  const pathname = usePathname();
+
   // const setConnectWalletVisible = useSetRecoilState(ConnectWalletVisibleAtom);
   // const { activeAddress, providers } = useWallet();
 
@@ -204,16 +267,21 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             </motion.div>
           ))}
 
-          <Link className="w-full flex" href={'/auth/log-in'}>
-            <button
-              className={classNames(
-                'bg-[#2D2DF1] px-5 py-2 rounded-2xl h-[60px] w-full',
-                'text-[#E9E9FD] font-Inter font-[700] text-[18px] leading-[140%]',
-              )}
+          {!profile && (
+            <Link
+              className="w-full flex"
+              href={`/auth/log-in${pathname !== '/auth/log-in' ? '?redirect=' + pathname : ''}`}
             >
-              Sign in
-            </button>
-          </Link>
+              <button
+                className={classNames(
+                  'bg-[#2D2DF1] px-5 py-2 rounded-2xl h-[60px] w-full',
+                  'text-[#E9E9FD] font-Inter font-[700] text-[18px] leading-[140%]',
+                )}
+              >
+                Sign in
+              </button>
+            </Link>
+          )}
 
           {/* {activeAddress ? (
             <motion.div

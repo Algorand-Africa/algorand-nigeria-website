@@ -26,7 +26,7 @@ export const useAuthActions = () => {
 
     setAuth(null);
     setTimeout(() => {
-      push('/');
+      window.location.reload();
     }, 500);
   }, []);
 
@@ -135,7 +135,7 @@ export const useAuthActions = () => {
       setProfile(response.data);
       return response.data;
     } else {
-      toast.error(String(response.error?.toString()));
+      // toast.error(String(response.error?.toString()));
     }
   }, []);
 

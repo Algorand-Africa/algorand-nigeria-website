@@ -7,6 +7,13 @@ const nextConfig = {
     }
     return config;
   },
+  redirects: () => [
+    {
+      source: '/event/:id',
+      destination: '/events/:id',
+      permanent: false,
+    },
+  ],
 };
 
 export default nextConfig;

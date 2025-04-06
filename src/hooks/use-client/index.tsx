@@ -76,7 +76,7 @@ export const useClient = () => {
           };
         }
 
-        const responseData: R = data.message || data.data || data;
+        const responseData: R = data.message || ('total' in data ? data : data.data) || data;
 
         return {
           data: responseData,

@@ -3,8 +3,13 @@
 import { REAL_UPCOMING_EVENTS } from '@/constants/mock-events.constant';
 import { UpcomingEventItem } from './upcoming-event-item';
 import { motion } from 'framer-motion';
+import { IEvent } from '@/interface/event.interface';
 
-export const UpcomingEventsList = () => {
+interface UpcomingEventsListProps {
+  upcomingEvents: IEvent[];
+}
+
+export const UpcomingEventsList = ({ upcomingEvents }: UpcomingEventsListProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -12,8 +17,16 @@ export const UpcomingEventsList = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="grid grid-cols-1 gap-[24px] md:grid-cols-3 my-6 md:my-20">
-        {REAL_UPCOMING_EVENTS.map((event, index) => (
-          <UpcomingEventItem {...event} key={index} />
+        {upcomingEvents.map((event, index) => (
+          <UpcomingEventItem
+            key={index}
+            title={event.title}
+            description={event.description}
+            date={event.date}
+            location={event.location}
+            rsvp={`/events/${event.id}`}
+            image={event.image}
+          />
         ))}
       </div>
     </motion.div>
