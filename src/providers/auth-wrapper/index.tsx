@@ -27,7 +27,6 @@ export const AuthWrapper = async ({ children }: Props) => {
           accessToken: parsedAuth.accessToken,
           expiresIn: parsedAuth.expiresIn,
           expiryTime: parsedAuth.expiryTime,
-          isOnboarded: parsedAuth.isOnboarded,
         };
 
         const currentTime = Date.now();
