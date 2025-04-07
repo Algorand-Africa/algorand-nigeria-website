@@ -11,10 +11,12 @@ import { BackgroundOverlay } from '../background-overlay';
 import { GrClose } from 'react-icons/gr';
 import { useEffect, useState } from 'react';
 import { useAuthActions } from '@/actions/auth';
-import { useRecoilValue } from 'recoil';
-import { profileAtom } from '@/state';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { profileAtom, profilePhotoBgIndexAtom } from '@/state';
 import { usePathname } from 'next/navigation';
 import { useWallet } from '@txnlab/use-wallet';
+import { ConnectWalletVisibleAtom } from '@/state/wallet.atom';
+import { profileColors } from '@/constants/profile-colors';
 
 const links = [
   'Events',
@@ -29,7 +31,9 @@ export const Navbar = () => {
   const { getProfile, logout } = useAuthActions();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const profile = useRecoilValue(profileAtom);
+  const [selectedIndex, setSelectedIndex] = useRecoilState(profilePhotoBgIndexAtom);
   const pathname = usePathname();
+  const setConnectWalletVisible = useSetRecoilState(ConnectWalletVisibleAtom);
   const { activeAddress, providers } = useWallet();
 
   const disconnectWallet = () => {
@@ -38,8 +42,29 @@ export const Navbar = () => {
     });
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    const popup = document.getElementById('asset-factory-popup');
+
+    if (!popup?.contains(target)) {
+      setIsPopupOpen(false);
+    }
+  };
+
   useEffect(() => {
     getProfile();
+
+    const bgIndex = localStorage.getItem('profile-photo-prompt-bg-index');
+
+    if (bgIndex && parseInt(bgIndex) < profileColors.length) {
+      setSelectedIndex(parseInt(bgIndex));
+    }
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -117,18 +142,19 @@ export const Navbar = () => {
           )}
 
           {profile && (
-            <div className="relative">
+            <div className="relative" id="asset-factory-popup">
               <motion.div
                 className={classNames(
                   'w-12 h-12 rounded-full bg-gradient-to-tr cursor-pointer',
                   'flex items-center justify-center',
+                  profileColors[selectedIndex].className,
                 )}
-                style={{ background: '#1c16c1' }}
                 animate={{ scale: 1 }}
                 initial={{ scale: 0.9 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => setIsPopupOpen(!isPopupOpen)}
+                style={profileColors[selectedIndex].properties}
               >
                 <motion.p
                   className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
@@ -148,41 +174,32 @@ export const Navbar = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <Link
-                    href="/profile/settings"
+                    href="/profile"
                     className="block px-4 py-2 text-gray-800 font-Inter hover:bg-[#1c16c1] hover:text-white transition-all"
                   >
                     Profile Settings
                   </Link>
                   <button
+                    onClick={() => {
+                      if (activeAddress) {
+                        disconnectWallet();
+                      } else {
+                        setConnectWalletVisible(true);
+                      }
+                    }}
+                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#1c16c1] hover:text-white font-Inter"
+                  >
+                    {activeAddress ? activeAddress.slice(0, 10) + '...' : 'Connect Wallet'}
+                  </button>
+                  <button
                     onClick={logout}
-                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 font-Inter"
+                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#1c16c1] hover:text-white font-Inter"
                   >
                     Log out
                   </button>
                 </motion.div>
               )}
             </div>
-          )}
-
-          {activeAddress && (
-            <motion.div
-              className={classNames(
-                'bg-gradient-to-tr flex items-center justify-center cursor-pointer',
-              )}
-              onClick={disconnectWallet}
-            >
-              <motion.p
-                className="font-inter text-sm font-[500] leading-6 text-[#020817] dark:text-white"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.1 }}
-              >
-                {activeAddress.slice(0, 10)}...{' '}
-                <button onClick={disconnectWallet}>
-                  <GrClose />
-                </button>
-              </motion.p>
-            </motion.div>
           )}
         </div>
 

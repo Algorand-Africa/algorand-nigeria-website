@@ -116,8 +116,10 @@ export const useClient = () => {
         };
 
         if (body) {
-          requestOptions.headers['Content-Type'] = 'application/json';
-          requestOptions.body = JSON.stringify(body);
+          requestOptions.body =
+            requestOptions.headers['Content-Type'] === 'multipart/form-data'
+              ? (body as any)
+              : JSON.stringify(body);
         }
 
         const hideSlash = url.startsWith('/');

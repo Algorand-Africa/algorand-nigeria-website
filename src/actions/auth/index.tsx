@@ -16,8 +16,26 @@ import { useSetRecoilState } from 'recoil';
 export const useAuthActions = () => {
   const client = useClient();
   const setAuth = useSetRecoilState(authAtom);
-  const { push } = useRouter();
   const setProfile = useSetRecoilState(profileAtom);
+
+  async function getFallBackToken(): Promise<Token | undefined> {
+    try {
+      const response = await fetch('/api/auth');
+      const data = await response.json();
+
+      if (!!data.accessToken && !!data.expiresIn && !!data.expiryTime) {
+        const newToken: Token = {
+          accessToken: data.accessToken,
+          expiresIn: data.expiresIn,
+          expiryTime: data.expiryTime,
+        };
+
+        return newToken;
+      }
+    } catch (err) {
+      return undefined;
+    }
+  }
 
   const logout = useCallback(async () => {
     await fetch('/api/auth', {
@@ -153,16 +171,27 @@ export const useAuthActions = () => {
   }, []);
 
   const uploadProfileImage = useCallback(async (file: File) => {
-    const url = `/auth/profile-image`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/profile/avatar`;
+    const formData = new FormData();
+    formData.append('file', file);
 
-    const response = await client.post<IProfile>(url, file, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    try {
+      const token = await getFallBackToken();
 
-    if (response.data) {
-      return response.data;
-    } else {
-      toast.error(String(response.error?.toString()));
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token?.accessToken}`,
+        },
+      });
+
+      const result = await response.json();
+
+      return result;
+    } catch (err) {
+      toast.error(String(err?.toString()));
+      return undefined;
     }
   }, []);
 

@@ -20,6 +20,7 @@ export interface IProfile {
   phone: string;
   timezone: string;
   username: string;
+  image: string;
 }
 
 export interface IUpdateProfile {

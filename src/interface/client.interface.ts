@@ -9,7 +9,7 @@ interface PrefixType {
 export interface RequestOptions {
   method: RequestMethod;
   headers: PrefixType;
-  body?: string;
+  body?: string | FormData;
 }
 
 export interface Token {
