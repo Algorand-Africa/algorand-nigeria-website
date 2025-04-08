@@ -154,7 +154,11 @@ export const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => setIsPopupOpen(!isPopupOpen)}
-                style={profileColors[selectedIndex].properties}
+                style={
+                  profile?.image
+                    ? { backgroundImage: `url(${profile?.image})` }
+                    : profileColors[selectedIndex].properties
+                }
               >
                 <motion.p
                   className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
