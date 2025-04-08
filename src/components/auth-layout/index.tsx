@@ -84,9 +84,9 @@ export const AuthLayout = ({ children }: Props) => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 1 }}
-                src="https://res.cloudinary.com/dy7olyvi0/image/upload/v1737657708/3eb9029833009af220bea7cb465f27ce_mhlak4.png"
-                alt="auth-layout-bg"
-                className="w-[40px] h-[40px] object-cover rounded-full border-[#F0E6E6] border-[1px]"
+                src="https://res.cloudinary.com/dvujkjs1q/image/upload/v1744100191/WhatsApp_Image_2025-04-08_at_09.15.16_sec8iq.jpg"
+                alt="Software Developer"
+                className="w-[40px] h-[40px] rounded-full border-[#F0E6E6] border-[1px]"
               />
               <motion.div
                 initial={{ x: 20, opacity: 0 }}
@@ -94,7 +94,7 @@ export const AuthLayout = ({ children }: Props) => {
                 transition={{ duration: 0.5, delay: 1.1 }}
                 className="flex flex-col gap-[5px]"
               >
-                <p className="font-Inter font-[700] text-white text-sm">John Doe</p>
+                <p className="font-Inter font-[700] text-white text-sm">Praise Anosike</p>
                 <p className="font-normal text-white font-Inter text-[12px]">Software Developer</p>
               </motion.div>
             </div>
