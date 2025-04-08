@@ -74,30 +74,48 @@ export const ProfilePhotoPrompt = () => {
 
   return (
     <div className="flex flex-col items-center gap-6 lg:gap-8 lg:flex-row">
-      <motion.div
-        className={classNames(
-          'w-[90px] h-[90px] rounded-full bg-gradient-to-tr',
-          'flex items-center justify-center lg:w-[200px] lg:h-[200px]',
-          randomColor.className,
-        )}
-        style={
-          profile?.image ? { backgroundImage: `url(${profile?.image})` } : randomColor.properties
-        }
-        animate={{ scale: 1 }}
-        initial={{ scale: 0.9 }}
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.2 }}
-      >
-        <motion.p
-          className="text-[#020817] dark:text-white font-inter text-[30px] font-semibold leading-9 tracking-[-0.225px] lg:text-[80px]"
-          key={selectedIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+      {profile?.image ? (
+        <motion.img
+          className={classNames(
+            'w-[90px] h-[90px] rounded-full bg-gradient-to-tr object-cover',
+            'flex items-center justify-center lg:w-[200px] lg:h-[200px]',
+          )}
+          src={profile?.image}
+          alt="profile"
+          animate={{ scale: 1 }}
+          initial={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+        ></motion.img>
+      ) : (
+        <motion.div
+          className={classNames(
+            'w-[90px] h-[90px] rounded-full bg-gradient-to-tr',
+            'flex items-center justify-center lg:w-[200px] lg:h-[200px]',
+            randomColor.className,
+          )}
+          style={
+            profile?.image
+              ? { backgroundImage: `url(${profile?.image})`, backgroundSize: 'cover' }
+              : randomColor.properties
+          }
+          animate={{ scale: 1 }}
+          initial={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
-          {profile?.fullName.charAt(0).toUpperCase() || 'P'}
-        </motion.p>
-      </motion.div>
+          <motion.p
+            className="text-[#020817] dark:text-white font-inter text-[30px] font-semibold leading-9 tracking-[-0.225px] lg:text-[80px]"
+            key={selectedIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            {profile?.fullName.charAt(0).toUpperCase() || 'P'}
+          </motion.p>
+        </motion.div>
+      )}
+
       <div className="relative" id="profile-photo-prompt-popup">
         <motion.div
           className={classNames(

@@ -143,32 +143,52 @@ export const Navbar = () => {
 
           {profile && (
             <div className="relative" id="asset-factory-popup">
-              <motion.div
-                className={classNames(
-                  'w-12 h-12 rounded-full bg-gradient-to-tr cursor-pointer',
-                  'flex items-center justify-center',
-                  profileColors[selectedIndex].className,
-                )}
-                animate={{ scale: 1 }}
-                initial={{ scale: 0.9 }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => setIsPopupOpen(!isPopupOpen)}
-                style={
-                  profile?.image
-                    ? { backgroundImage: `url(${profile?.image})` }
-                    : profileColors[selectedIndex].properties
-                }
-              >
-                <motion.p
-                  className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+              {profile?.image ? (
+                <motion.img
+                  className={classNames(
+                    'w-12 h-12 rounded-full bg-gradient-to-tr cursor-pointer',
+                    'flex items-center justify-center object-cover',
+                  )}
+                  animate={{ scale: 1 }}
+                  initial={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
+                  src={profile.image}
+                  onClick={() => setIsPopupOpen(!isPopupOpen)}
+                  style={
+                    profile?.image
+                      ? { backgroundImage: `url(${profile?.image})` }
+                      : profileColors[selectedIndex].properties
+                  }
+                ></motion.img>
+              ) : (
+                <motion.div
+                  className={classNames(
+                    'w-12 h-12 rounded-full bg-gradient-to-tr cursor-pointer',
+                    'flex items-center justify-center',
+                    profileColors[selectedIndex].className,
+                  )}
+                  animate={{ scale: 1 }}
+                  initial={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setIsPopupOpen(!isPopupOpen)}
+                  style={
+                    profile?.image
+                      ? { backgroundImage: `url(${profile?.image})` }
+                      : profileColors[selectedIndex].properties
+                  }
                 >
-                  {profile?.fullName.charAt(0).toUpperCase() || 'P'}
-                </motion.p>
-              </motion.div>
+                  <motion.p
+                    className="text-[#020817] dark:text-white font-inter text-base font-semibold leading-9 tracking-[-0.225px]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {profile?.fullName.charAt(0).toUpperCase() || 'P'}
+                  </motion.p>
+                </motion.div>
+              )}
 
               {isPopupOpen && (
                 <motion.div
