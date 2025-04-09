@@ -1,7 +1,7 @@
 'use client';
 
 import { PageMaxWidth } from '@/components/page-max-width';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import classNames from 'classnames';
 import { SlLocationPin } from 'react-icons/sl';
 import { TbCalendarMonth } from 'react-icons/tb';
@@ -170,7 +170,7 @@ export const EventDetails = ({ token, id }: EventDetailsProps) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className={classNames(
-                'px-8 py-4 text-[#E7FAF9]',
+                'px-8 py-4 text-[#E7FAF9] min-w-[200px]',
                 'font-Inter text-[16px] md:text-[18px] leading-[25.2px] font-[700]',
                 'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
                 'hover:bg-[#2d4af1] transition-all',
@@ -196,6 +196,25 @@ export const EventDetails = ({ token, id }: EventDetailsProps) => {
               onClick={claimNft}
             >
               Claim Nft
+            </motion.button>
+          )}
+
+          {!profile?.id && !!event && event.status === 'upcoming' && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={classNames(
+                'px-8 py-4 text-[#E7FAF9] min-w-[200px]',
+                'font-Inter text-[16px] md:text-[18px] leading-[25.2px] font-[700]',
+                'rounded-[50px] border-[0.75px] border-[#2D2DF1] bg-[#2D2DF1]',
+                'hover:bg-[#2d4af1] transition-all',
+              )}
+              disabled={isRegistering}
+              onClick={() => {
+                router.push(`/auth/log-in?redirect=/events/${event.id}`);
+              }}
+            >
+              Reserve a spot
             </motion.button>
           )}
         </div>

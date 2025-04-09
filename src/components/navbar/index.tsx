@@ -100,6 +100,7 @@ export const Navbar = () => {
                 className={classNames(
                   'font-Inter font-[500] text-[18px] leading-[25.2px]',
                   'text-[#192A39] hover:font-[700] transition-all',
+                  pathname === `/${link.replaceAll(' ', '-').toLowerCase()}` && 'font-[700]',
                 )}
                 href={`/${link.replaceAll(' ', '-').toLowerCase()}`}
               >
@@ -200,6 +201,7 @@ export const Navbar = () => {
                   <Link
                     href="/profile"
                     className="block px-4 py-2 text-gray-800 font-Inter hover:bg-[#1c16c1] hover:text-white transition-all"
+                    onClick={() => setIsPopupOpen(!isPopupOpen)}
                   >
                     Profile Settings
                   </Link>
@@ -210,13 +212,18 @@ export const Navbar = () => {
                       } else {
                         setConnectWalletVisible(true);
                       }
+
+                      setIsPopupOpen(!isPopupOpen);
                     }}
                     className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#1c16c1] hover:text-white font-Inter"
                   >
                     {activeAddress ? activeAddress.slice(0, 10) + '...' : 'Connect Wallet'}
                   </button>
                   <button
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      setIsPopupOpen(!isPopupOpen);
+                    }}
                     className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#1c16c1] hover:text-white font-Inter"
                   >
                     Log out
@@ -241,15 +248,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   const [open, setOpen] = useState(false);
   const profile = useRecoilValue(profileAtom);
   const pathname = usePathname();
-
-  // const setConnectWalletVisible = useSetRecoilState(ConnectWalletVisibleAtom);
-  // const { activeAddress, providers } = useWallet();
-
-  // const disconnectWallet = () => {
-  //   providers?.forEach((provider) => {
-  //     provider.disconnect();
-  //   });
-  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -302,6 +300,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   'text-[#141B34] hover:font-[700] transition-all',
                 )}
                 href={`/${link.replaceAll(' ', '-').toLowerCase()}`}
+                onClick={handleClose}
               >
                 {link}
               </Link>
@@ -318,46 +317,12 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   'bg-[#2D2DF1] px-5 py-2 rounded-2xl h-[60px] w-full',
                   'text-[#E9E9FD] font-Inter font-[700] text-[18px] leading-[140%]',
                 )}
+                onClick={handleClose}
               >
                 Sign in
               </button>
             </Link>
           )}
-
-          {/* {activeAddress ? (
-            <motion.div
-              className={classNames(
-                'bg-gradient-to-tr flex items-center justify-center cursor-pointer',
-                'rounded-[6px] py-2 px-4 bg-[#F1F5F9] dark:bg-[#1E293B]',
-              )}
-              onClick={disconnectWallet}
-              title="Disconnect Wallet"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
-              <motion.p
-                className="font-inter text-sm font-[500] leading-6 text-[#020817] dark:text-white"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.1 }}
-              >
-                {activeAddress.slice(0, 10)}...
-              </motion.p>
-            </motion.div>
-          ) : (
-            <Button
-              className="px-4"
-              onClick={() => {
-                setConnectWalletVisible(true);
-                handleClose();
-              }}
-            >
-              Connect Wallet
-            </Button>
-          )} */}
         </div>
       </div>
     </BackgroundOverlay>
