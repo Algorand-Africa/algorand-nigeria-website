@@ -6,6 +6,7 @@ import {
   IUpdateProfile,
   ISignUp,
   IUpdatePassword,
+  ICreateEnquiry,
 } from '@/interface/auth.interface';
 import { authAtom, profileAtom } from '@/state';
 import { useRouter } from 'next/navigation';
@@ -207,6 +208,14 @@ export const useAuthActions = () => {
     }
   }, []);
 
+  const createEnquiry = useCallback(async (dto: ICreateEnquiry) => {
+    const url = `/customer-enquiry`;
+
+    const response = await client.post(url, dto);
+
+    return response;
+  }, []);
+
   return {
     login,
     logout,
@@ -219,5 +228,6 @@ export const useAuthActions = () => {
     updateProfile,
     uploadProfileImage,
     updatePassword,
+    createEnquiry,
   };
 };

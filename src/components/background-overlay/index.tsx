@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import classNames from 'classnames';
 import { disableScrollLock, enableScrollLock } from '@/utils/scroll-lock';
@@ -10,6 +10,7 @@ interface BackgroundOverlayProps {
   visible?: boolean;
   onClose?: () => any;
   className?: string;
+  lockScroll?: boolean;
 }
 
 export const BackgroundOverlay = ({
@@ -17,24 +18,39 @@ export const BackgroundOverlay = ({
   visible = true,
   onClose = () => null,
   className,
+  lockScroll = true,
 }: BackgroundOverlayProps) => {
   useEffect(() => {
-    enableScrollLock();
+    if (lockScroll) {
+      enableScrollLock();
+    }
 
-    return () => disableScrollLock();
+    return () => {
+      if (lockScroll) {
+        disableScrollLock();
+      }
+    };
   }, []);
 
   useEffect(() => {
     if (visible) {
-      enableScrollLock();
+      if (lockScroll) {
+        enableScrollLock();
+      }
     } else {
-      disableScrollLock();
+      if (lockScroll) {
+        disableScrollLock();
+      }
     }
   }, [visible]);
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return visible ? (
     <div className={classNames(styles['wrapper'], className)}>
-      <div className={styles['overlay']} onClick={onClose}></div>
+      <div className={styles['overlay']} onClick={handleClose}></div>
       {children}
     </div>
   ) : null;

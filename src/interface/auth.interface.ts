@@ -35,3 +35,11 @@ export interface IUpdatePassword {
   newPassword: string;
   confirmPassword: string;
 }
+
+export interface ICreateEnquiry {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  message: string;
+  enquiryType: string;
+}

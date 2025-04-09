@@ -42,17 +42,17 @@ export const ContactDetails: React.FC = () => {
               <ContactItem
                 iconSrc="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738844443/mail-01_acipy5.svg"
                 altText="Email Icon"
-                href="mailto:support@algorandnigeria.com"
-                text="support@algorandnigeria.com"
+                href="mailto:algorandafrica@algorand.foundation"
+                text="algorandafrica@algorand.foundation"
                 label="Email:"
               />
-              <ContactItem
+              {/* <ContactItem
                 iconSrc="https://res.cloudinary.com/dy7olyvi0/image/upload/v1738844443/call_ume09q.svg"
                 altText="Phone Icon"
                 href="tel:+2348012456789"
                 text="+234 801 245 6789"
                 label="Tel:"
-              />
+              /> */}
             </div>
           </div>
 
