@@ -80,7 +80,6 @@ export const AlgorandEventCard = ({ event }: Props) => {
               'gap-2 md:text-[24px] md:leading-[28.8px] group',
             )}
             href={`/events/${event.id}`}
-            target="_blank"
           >
             <span className="underline">Register Now</span>
             <ArrowIcon
