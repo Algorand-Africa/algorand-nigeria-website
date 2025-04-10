@@ -9,7 +9,6 @@ import {
   ICreateEnquiry,
 } from '@/interface/auth.interface';
 import { authAtom, profileAtom } from '@/state';
-import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useSetRecoilState } from 'recoil';
@@ -209,9 +208,25 @@ export const useAuthActions = () => {
   }, []);
 
   const createEnquiry = useCallback(async (dto: ICreateEnquiry) => {
+    const { fullName, email, phone, message, enquiryType } = dto;
+
+    const cleanedDto: any = { message, enquiryType };
+
+    if (fullName) {
+      cleanedDto.fullName = fullName;
+    }
+
+    if (email) {
+      cleanedDto.email = email;
+    }
+
+    if (phone) {
+      cleanedDto.phone = phone;
+    }
+
     const url = `/customer-enquiry`;
 
-    const response = await client.post(url, dto);
+    const response = await client.post(url, cleanedDto);
 
     return response;
   }, []);
