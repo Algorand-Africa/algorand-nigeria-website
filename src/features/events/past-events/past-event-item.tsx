@@ -64,7 +64,11 @@ export const PastEventItem = ({ title, description, date, location, image, id }:
         <div className="flex gap-[10.5px] md:gap-2 items-center mb-[9px]">
           <TbCalendarMonth color="#B2B8BD" size={18} />
           <p className="text-[#B2B8BD] font-normal text-[16px] leading-[22.4px] tracking-[0.01em]">
-            {date}
+            {new Date(date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
           </p>
         </div>
         <div className="flex gap-[10.5px] md:gap-2 items-center mb-[19px]">

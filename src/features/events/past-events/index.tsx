@@ -3,15 +3,11 @@ import { TopSection } from './top-section';
 import { PastEventsList } from './past-event-list';
 import { IEvent } from '@/interface/event.interface';
 
-interface PastEventsProps {
-  pastEvents: IEvent[];
-}
-
-export const PastEvents = ({ pastEvents }: PastEventsProps) => {
+export const PastEvents = () => {
   return (
     <PageMaxWidth>
       <TopSection />
-      <PastEventsList pastEvents={pastEvents} />
+      <PastEventsList />
     </PageMaxWidth>
   );
 };
