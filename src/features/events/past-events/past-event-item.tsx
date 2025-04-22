@@ -18,7 +18,7 @@ interface Props {
 
 export const PastEventItem = ({ title, description, date, location, image, id }: Props) => {
   return (
-    <Link href={`/events/${id}/past`}>
+    <Link href={`/events/${id}`}>
       <motion.div
         className={classNames(
           'bg-[#192A39] rounded-[32px] p-4 md:p-[25px]',
