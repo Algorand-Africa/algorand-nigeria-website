@@ -62,6 +62,7 @@ export const ForumLayout = ({ children }: Props) => {
         <div
           className={classNames(
             'bg-[#FFF] flex flex-col h-full rounded-[10px] px-5 py-6 lg:px-6 lg:py-5',
+            'overflow-y-auto',
           )}
         >
           <div className="flex flex-row justify-between">
@@ -122,7 +123,7 @@ export const ForumLayout = ({ children }: Props) => {
           <div className="lg:hidden">
             {isOpen && <MobileMenu isOpen={isOpen} onClose={toggleMenu} />}
           </div>
-          <div className="flex flex-col mt-6">{children}</div>
+          <div className="flex flex-col mt-6 flex-1">{children}</div>
         </div>
       </div>
     </div>
