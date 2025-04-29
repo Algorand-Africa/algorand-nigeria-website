@@ -7,6 +7,8 @@ import {
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
+import { mockComments } from './comment/mock';
+import { Comment } from './comment';
 
 export const PostDetails = () => {
   const { back } = useRouter();
@@ -20,7 +22,7 @@ export const PostDetails = () => {
   };
 
   return (
-    <div className="w-full flex flex-col border border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
+    <div className="w-full flex flex-col lg:border lg:border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
       <div className="flex items-center gap-3 lg:gap-[30px]">
         <button onClick={back} className="lg:p-[11px] lg:rounded-full lg:bg-[#F9F9F9]">
           <svg
@@ -258,6 +260,12 @@ export const PostDetails = () => {
             </p>
           </motion.div>
         </motion.div>
+
+        <div className="flex flex-col mt-[10px] lg:mt-4">
+          {mockComments.map((comment) => (
+            <Comment key={comment.id} data={comment} />
+          ))}
+        </div>
       </div>
     </div>
   );
