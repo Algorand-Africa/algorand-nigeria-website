@@ -1,96 +1,102 @@
-'use client';
-
-import { useState } from 'react';
-import { mockCategories, mockColorSchemes, mockImages, mockTitles } from './mock';
-import classNames from 'classnames';
+import {
+  mockCategories,
+  mockTitles,
+  mockImages,
+  mockColorSchemes,
+} from '@/components/post-card/mock';
 import { motion } from 'framer-motion';
+import classNames from 'classnames';
+import { useRouter } from 'next/navigation';
 
-export const PostCard = () => {
-  const [data, setData] = useState({
+export const PostDetails = () => {
+  const { back } = useRouter();
+
+  const data = {
     image: mockImages[Math.floor(Math.random() * mockImages.length)],
     colorScheme: mockColorSchemes[Math.floor(Math.random() * mockColorSchemes.length)],
     category: mockCategories[Math.floor(Math.random() * mockCategories.length)],
     title: mockTitles[Math.floor(Math.random() * mockTitles.length)],
     profileImage: mockImages[Math.floor(Math.random() * mockImages.length)],
-    id: Math.floor(Math.random() * 1000),
-  });
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, type: 'spring', bounce: 0.4 }}
-      className="flex items-start gap-3 pb-2 lg:pb-4 border-b border-[#EAE5E5]"
-    >
-      <motion.img
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
-        src={data.image}
-        alt={data.title}
-        className="w-[80px] h-[80px] rounded-[10px] lg:w-[128px] object-cover"
-      />
-      <div className="flex flex-col gap-[5px] flex-1">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="flex flex-row items-center gap-2 flex-wrap"
-        >
-          <div className="flex flex-row items-center gap-2">
-            <motion.img
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 400 }}
-              src={data.profileImage}
-              alt={data.title}
-              className="w-[20px] h-[20px] rounded-full object-cover"
-            />
-            <p className="text-[12px] text-[#6D6D6D] font-Inter font-[600]">u/ShinyTroll10</p>
-          </div>
-
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            style={{
-              background: data.colorScheme.background,
-              color: data.colorScheme.foreground,
-            }}
-            className={classNames(
-              'flex justify-center items-center pt-[2px] px-[9px] bg-[#F5F5F5] rounded-[100px]',
-              'font-Trap-600 text-xs',
-            )}
+    <div className="w-full flex flex-col border border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
+      <div className="flex items-center gap-3 lg:gap-[30px]">
+        <button onClick={back} className="lg:p-[11px] lg:rounded-full lg:bg-[#F9F9F9]">
+          <svg
+            width="23"
+            height="24"
+            viewBox="0 0 23 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {data.category}
-          </motion.div>
+            <path
+              d="M7.66667 19C7.66667 18.258 6.96421 17.15 6.25313 16.22C5.33888 15.02 4.24638 13.973 2.99383 13.174C2.05467 12.575 0.916167 12 0 12M0 12C0.916167 12 2.05563 11.425 2.99383 10.826C4.24638 10.026 5.33888 8.979 6.25313 7.781C6.96421 6.85 7.66667 5.74 7.66667 5M0 12L23 12"
+              stroke="#6D6D6D"
+              stroke-width="2.53637"
+            />
+          </svg>
+        </button>
 
-          <div className="flex items-center gap-1">
-            <svg
-              width="3"
-              height="3"
-              viewBox="0 0 3 3"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        <div className="flex items-center gap-2">
+          <img
+            src={data.profileImage}
+            alt={data.title}
+            className="w-[35px] h-[35px] lg:w-[45px] lg:h-[45px] object-cover rounded-full"
+          />
+          <div className="flex flex-col">
+            <div className="flex flex-row items-center gap-1">
+              <h4 className="text-sm font-Trap-700 text-black leading-[120%] lg:text-[18px]">
+                u/ShinyTroll10
+              </h4>
+              <svg
+                width="3"
+                height="3"
+                viewBox="0 0 3 3"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="1.5" cy="1.5" r="1.5" fill="#D9D9D9" />
+              </svg>
+
+              <p className="text-[8px] leading-[140%] text-[#7D7C7C] font-Trap-500 lg:text-xs">
+                4h ago
+              </p>
+            </div>
+            <p
+              style={{
+                color: data.colorScheme.foreground,
+              }}
+              className="font-Trap-600 leading-[140%] text-[11px] lg:text-xs"
             >
-              <circle cx="1.5" cy="1.5" r="1.5" fill="#D9D9D9" />
-            </svg>
-            <p className="text-[8px] text-[#6D6D6D] font-Trap-500">5 mins ago</p>
+              {data.category}
+            </p>
           </div>
-        </motion.div>
+        </div>
+      </div>
 
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="text-sm lg:text-base leading-[140%] font-Trap-600 text-[#000000]"
-          href={`/forum/post/${data.id}`}
-        >
+      <div className="flex flex-col">
+        <h2 className="text-lg font-Trap-600 lg:text-[26px] text-[20px] text-[#001324] leading-[120%]">
           {data.title}
-        </motion.a>
+        </h2>
+
+        <img
+          src={data.image}
+          alt={data.title}
+          className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px]"
+        />
+
+        <p className="text-[14px] leading-[140%] text-[#4C5965] font-Trap-500 mt-[10px lg:mt-[15px]">
+          Does it make sense to change software domain to become a blockchain core dev. How is the
+          job market for blockchain. Lot of interest but not sure if it makes sense career wise at
+          the moment. <br /> <br /> Already working as SDE in a big firm.
+        </p>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.5 }}
-          className="flex flex-row items-center gap-[7px] flex-wrap"
+          className="flex flex-row items-center gap-[7px] flex-wrap mt-[15px]"
         >
           {/* Likes */}
           <motion.div
@@ -253,6 +259,6 @@ export const PostCard = () => {
           </motion.div>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
