@@ -2,8 +2,8 @@ import { mockImages } from '@/components/post-card/mock';
 import { IComment } from '@/interface/forum.interface';
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
-import { CiCircleMinus } from 'react-icons/ci';
 import { useState } from 'react';
+import { ReplyInput } from '@/components/reply-input';
 
 interface Props {
   data: IComment;
@@ -12,6 +12,8 @@ interface Props {
 export const Comment = ({ data }: Props) => {
   const profileImage = mockImages[Math.floor(Math.random() * (mockImages.length - 1))];
   const [showReplies, setShowReplies] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
+  const [content, setContent] = useState('');
 
   return (
     <div className="flex flex-col">
@@ -116,15 +118,15 @@ export const Comment = ({ data }: Props) => {
             </motion.div>
 
             {/* Comments */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
+            <motion.button
               transition={{ type: 'spring', stiffness: 400 }}
               className={classNames(
                 'flex items-center gap-[10px] py-1 rounded-[100px]',
                 'px-[9px]',
               )}
+              onClick={() => setShowEditor(true)}
             >
-              <button>
+              <div>
                 <svg
                   width="14"
                   height="15"
@@ -146,15 +148,19 @@ export const Comment = ({ data }: Props) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </button>
+              </div>
 
-              <p
+              <button
                 style={{ transform: 'translateY(2px)' }}
                 className="text-[12px] leading-[140%] text-[#6D6D6D] font-Trap-600"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setShowReplies(true);
+                }}
               >
                 14
-              </p>
-            </motion.div>
+              </button>
+            </motion.button>
 
             {/* Share */}
             <motion.div
@@ -224,6 +230,15 @@ export const Comment = ({ data }: Props) => {
           </div>
         </div>
       )}
+
+      <ReplyInput
+        value={content}
+        onChange={setContent}
+        onSubmit={() => {}}
+        placeholder="Replying to u/ShinyTroll10"
+        visible={showEditor}
+        onClose={() => setShowEditor(false)}
+      />
     </div>
   );
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   mockCategories,
   mockTitles,
@@ -9,9 +11,13 @@ import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
 import { mockComments } from './comment/mock';
 import { Comment } from './comment';
+import { useState } from 'react';
+import { ReplyInput } from '@/components/reply-input';
 
 export const PostDetails = () => {
   const { back } = useRouter();
+  const [showEditor, setShowEditor] = useState(false);
+  const [content, setContent] = useState('');
 
   const data = {
     image: mockImages[Math.floor(Math.random() * mockImages.length)],
@@ -88,7 +94,7 @@ export const PostDetails = () => {
           className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px]"
         />
 
-        <p className="text-[14px] leading-[140%] text-[#4C5965] font-Trap-500 mt-[10px lg:mt-[15px]">
+        <p className="text-[14px] leading-[140%] text-[#4C5965] font-Trap-500 mt-[10px] lg:mt-[15px]">
           Does it make sense to change software domain to become a blockchain core dev. How is the
           job market for blockchain. Lot of interest but not sure if it makes sense career wise at
           the moment. <br /> <br /> Already working as SDE in a big firm.
@@ -148,15 +154,15 @@ export const PostDetails = () => {
           </motion.div>
 
           {/* Comments */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
+          <motion.button
             transition={{ type: 'spring', stiffness: 400 }}
             className={classNames(
               'flex items-center gap-[10px] bg-[#F2F2F2] py-1 rounded-[100px]',
-              'px-[9px]',
+              'px-[9px] cursor-pointer',
             )}
+            onClick={() => setShowEditor(!showEditor)}
           >
-            <button>
+            <div>
               <svg
                 width="14"
                 height="15"
@@ -178,15 +184,15 @@ export const PostDetails = () => {
                   stroke-linejoin="round"
                 />
               </svg>
-            </button>
+            </div>
 
             <p
               style={{ transform: 'translateY(2px)' }}
               className="text-[12px] leading-[140%] text-[#6D6D6D] font-Trap-600"
             >
-              14
+              140
             </p>
-          </motion.div>
+          </motion.button>
 
           {/* Share */}
           <motion.div
@@ -267,6 +273,15 @@ export const PostDetails = () => {
           ))}
         </div>
       </div>
+
+      <ReplyInput
+        value={content}
+        onChange={setContent}
+        onSubmit={() => {}}
+        placeholder="Replying to u/ShinyTroll10"
+        visible={showEditor}
+        onClose={() => setShowEditor(false)}
+      />
     </div>
   );
 };
