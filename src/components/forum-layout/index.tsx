@@ -31,7 +31,7 @@ export const ForumLayout = ({ children }: Props) => {
           <div className="flex flex-col gap-[14px]">
             <NavLink href={'/'} text="Home" icon={<ForumNavIcons.Home />} isActive={true} />
             <NavLink
-              href={'/explore'}
+              href={'/forum/explore'}
               text="Explore"
               icon={<ForumNavIcons.Discover />}
               isActive={false}

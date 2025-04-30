@@ -7,3 +7,14 @@ export interface IComment {
   downvotes: number;
   replies: IComment[];
 }
+
+export interface ICategory {
+  createdAt: Date;
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  textColor: string;
+  image: string;
+  totalPosts: number;
+}
