@@ -6,6 +6,10 @@ import { IForumPostPreview } from '@/interface/forum.interface';
 import { notify } from '@/utils/notify';
 import { useForumActions } from '@/actions/forum';
 import { useState } from 'react';
+import { parseNotificationTime } from '@/utils';
+import { useRecoilValue } from 'recoil';
+import { profileAtom } from '@/state/auth.atom';
+import { useRouter } from 'next/navigation';
 
 interface PostCardProps {
   data: IForumPostPreview;
@@ -15,8 +19,15 @@ interface PostCardProps {
 export const PostCard = ({ data, refresh }: PostCardProps) => {
   const { savePost, upvotePost, downvotePost } = useForumActions();
   const [loading, setLoading] = useState<'save' | 'upvote' | 'downvote'>();
+  const profile = useRecoilValue(profileAtom);
+  const { push } = useRouter();
 
   const handleSavePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=${window.location.href}`);
+      return;
+    }
+
     setLoading('save');
     const res = await savePost(data.id);
 
@@ -28,6 +39,11 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
   };
 
   const handleUpvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=${window.location.href}`);
+      return;
+    }
+
     setLoading('upvote');
     const res = await upvotePost(data.id);
 
@@ -39,6 +55,11 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
   };
 
   const handleDownvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=${window.location.href}`);
+      return;
+    }
+
     setLoading('downvote');
     const res = await downvotePost(data.id);
 
@@ -117,11 +138,7 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
               <circle cx="1.5" cy="1.5" r="1.5" fill="#D9D9D9" />
             </svg>
             <p className="text-[8px] text-[#6D6D6D] font-Trap-500">
-              {new Date(data.createdAt).toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
+              {parseNotificationTime(data.createdAt)}
             </p>
           </div>
         </motion.div>

@@ -1,17 +1,68 @@
 'use client';
+import { useForumActions } from '@/actions/forum';
 import { PostCardCollapsed } from '@/components/post-card/collapsed';
+import { IForumCategory, IForumPost, IForumPostPreview } from '@/interface/forum.interface';
+import { parseNotificationTime } from '@/utils';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-export const ForumCategoryOverview = () => {
+interface Props {
+  categoryName?: string;
+}
+
+export const ForumCategoryOverview = ({ categoryName }: Props) => {
+  const [category, setCategory] = useState<IForumCategory | null>(null);
+  const [posts, setPosts] = useState<IForumPostPreview[]>([]);
+  const { getAllPostPreviews, getAllForumCategories } = useForumActions();
+
+  const fetchCategory = async () => {
+    const response = await getAllForumCategories({ search: categoryName || '' });
+
+    if (response?.data.length) {
+      setCategory(response.data[0]);
+    }
+  };
+
+  const fetchPosts = async () => {
+    if (!category) return;
+
+    const response = await getAllPostPreviews({ categoryId: category.id });
+
+    if (response) {
+      setPosts(response.data);
+    }
+  };
+
+  useEffect(() => {
+    if (categoryName) {
+      fetchCategory();
+    }
+  }, [categoryName]);
+
+  useEffect(() => {
+    if (category) {
+      fetchPosts();
+    }
+  }, [category]);
+
   return (
     <div className="flex flex-col gap-6 bg-[#FAFAFC] rounded-[10px] p-4 h-fit min-h-[500px] w-full">
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h4 className="text-[32px] leading-[110%] text-[#000] font-Trap-700">
-            Blockchain Basics
-          </h4>
-          <h5 className="text-sm leading-[140%] text-[#000] font-Trap-400">
-            Discussions and useful links for SaaS owners, online business owners, and more.
-          </h5>
+          {category ? (
+            <h4 className="text-[32px] leading-[110%] text-[#000] font-Trap-700">
+              {category.name}
+            </h4>
+          ) : (
+            <div className="w-20 h-4 bg-gray-200 rounded-md animate-pulse" />
+          )}
+          {category ? (
+            <h5 className="text-sm leading-[140%] text-[#000] font-Trap-400">
+              {category.description}
+            </h5>
+          ) : (
+            <div className="w-full h-4 bg-gray-200 rounded-md animate-pulse" />
+          )}
         </div>
         <div className="flex flex-col gap-[11px]">
           {/* Created */}
@@ -53,9 +104,13 @@ export const ForumCategoryOverview = () => {
               />
             </svg>
 
-            <p className="text-xs leading-[140%] text-[#6D6D6D] font-Trap-400">
-              Created Jul 31, 2008
-            </p>
+            {category ? (
+              <p className="text-xs leading-[140%] text-[#6D6D6D] font-Trap-400">
+                Created {parseNotificationTime(category.createdAt)}
+              </p>
+            ) : (
+              <div className="w-20 h-4 bg-gray-200 rounded-md animate-pulse" />
+            )}
           </div>
 
           {/* Visibility */}
@@ -95,19 +150,25 @@ export const ForumCategoryOverview = () => {
               />
             </svg>
 
-            <p className="text-xs leading-[140%] text-[#6D6D6D] font-Trap-400">Public</p>
+            {category ? (
+              <p className="text-xs leading-[140%] text-[#6D6D6D] font-Trap-400">Public</p>
+            ) : (
+              <div className="w-20 h-4 bg-gray-200 rounded-md animate-pulse" />
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h4 className="text-[18px] leading-[140%] text-[#6D6D6D] font-Trap-700">136</h4>
+          <h4 className="text-[18px] leading-[140%] text-[#6D6D6D] font-Trap-700">
+            {category ? category.totalPosts : '---'}
+          </h4>
           <p className="text-[10px] leading-[140%] text-[#6D6D6D] font-Trap-400">Total Posts</p>
         </div>
       </div>
 
       {/* Posts */}
       <div className="flex flex-col gap-[13px]">
-        {Array.from({ length: 10 }, (_, i) => (
-          <PostCardCollapsed showCategory={false} key={i} />
+        {posts.map((post) => (
+          <PostCardCollapsed key={post.id} data={post} />
         ))}
       </div>
     </div>

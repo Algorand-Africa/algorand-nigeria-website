@@ -1,5 +1,10 @@
 import { Forum } from '@/features/forum';
+import { Suspense } from 'react';
 
 export default function ForumPage() {
-  return <Forum />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Forum />
+    </Suspense>
+  );
 }

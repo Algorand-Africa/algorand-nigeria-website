@@ -79,6 +79,7 @@ export const ForumCategory = () => {
               ${category?.color}00 100%
             )`,
             backgroundSize: '200% 100%',
+            // backgroundImage: category?.image ? `url(${category?.image})` : 'none',
           }}
         >
           <div
@@ -90,22 +91,18 @@ export const ForumCategory = () => {
 
           <div
             className="w-[99px] h-[99px] rounded-[100%] absolute left-[46px] bottom-[-50px]"
-            style={{ backgroundColor: category?.color, border: '5px solid #FFF' }}
+            style={{
+              backgroundColor: category?.color,
+              border: '5px solid #FFF',
+              backgroundImage: category?.image ? `url(${category?.image})` : 'none',
+              backgroundSize: 'cover',
+            }}
           />
         </motion.div>
         <div className="w-full mt-[9px] flex justify-between items-center pl-[161px]">
           <h4 className="text-[32px] font-Trap-700 text-[#000] leading-[110%] tracking-[-0.01em]">
             {category?.name}
           </h4>
-          <Link
-            href={`/forum/create-post?categoryId=${id as string}`}
-            className="flex items-center py-[10px] px-[30px] border border-[#3B7FE4] rounded-[100px] gap-[8px] cursor-pointer"
-          >
-            <FiPlus color="#3B7FE4" />
-            <span className="text-[14px] font-Trap-600 text-[#3B7FE4] leading-[140%] tracking-[0.01em]">
-              Ask a question
-            </span>
-          </Link>
         </div>
       </div>
       <div className="flex flex-col gap-[19px] lg:flex-row lg:gap-[45px]">

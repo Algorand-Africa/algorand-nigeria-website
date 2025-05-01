@@ -63,31 +63,41 @@ export const ForumLayout = ({ children, searchValue }: Props) => {
         </Link>
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-[14px]">
-            <NavLink href={'/'} text="Home" icon={<ForumNavIcons.Home />} isActive={true} />
+            <NavLink
+              href={'/forum'}
+              text="Home"
+              icon={<ForumNavIcons.Home />}
+              isActive={pathname === '/forum'}
+            />
             <NavLink
               href={'/forum/explore'}
               text="Explore"
               icon={<ForumNavIcons.Discover />}
-              isActive={false}
+              isActive={pathname === '/forum/explore'}
             />
-            <NavLink
+            {/* <NavLink
               href={'/forum/bookmarks'}
               text="Saved"
               icon={<ForumNavIcons.Saved />}
               isActive={false}
-            />
+            /> */}
           </div>
           <hr className="w-full border-t border-[#000] opacity-20" />
           <div className="flex flex-col gap-4">
             <h4 className="font-Trap-500 text-xs leading-[140%] text-[#7B7D83]">RESOURCES</h4>
             <div className="flex flex-col gap-[14px]">
-              <NavLink href={'/'} text="About" icon={<ForumNavIcons.About />} isActive={false} />
               <NavLink
-                href={'/explore'}
+                href={'https://algorand.co/'}
+                text="About"
+                icon={<ForumNavIcons.About />}
+                isActive={false}
+              />
+              {/* <NavLink
+                href={'https://algorand.co/'}
                 text="Rules"
                 icon={<ForumNavIcons.Rules />}
                 isActive={false}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -138,13 +148,15 @@ export const ForumLayout = ({ children, searchValue }: Props) => {
               </Link>
 
               {!!profile && (
-                <img
-                  className="w-10 h-10 rounded-full object-cover"
-                  src={
-                    profile?.image ||
-                    `https://ui-avatars.com/api/?name=${profile.fullName}&background=random&font-size=0.35&color=fff&rounded=true ⁠`
-                  }
-                />
+                <Link href={'/profile'}>
+                  <img
+                    className="w-10 h-10 rounded-full object-cover"
+                    src={
+                      profile?.image ||
+                      `https://ui-avatars.com/api/?name=${profile.fullName}&background=random&font-size=0.35&color=fff&rounded=true ⁠`
+                    }
+                  />
+                </Link>
               )}
             </div>
           </div>
@@ -175,6 +187,7 @@ export const ForumLayout = ({ children, searchValue }: Props) => {
 
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleClose = () => {
     setOpen(false);
@@ -219,22 +232,22 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                 href={'/forum'}
                 text="Home"
                 icon={<ForumNavIcons.Home />}
-                isActive={true}
+                isActive={pathname === '/forum'}
               />
               <NavLink
                 href={'/forum/explore'}
                 text="Explore"
                 icon={<ForumNavIcons.Discover />}
-                isActive={false}
+                isActive={pathname === '/forum/explore'}
                 onClick={handleClose}
               />
-              <NavLink
+              {/* <NavLink
                 href={'/forum/bookmarks'}
                 text="Saved"
                 icon={<ForumNavIcons.Saved />}
                 isActive={false}
                 onClick={handleClose}
-              />
+              /> */}
             </div>
             <hr className="w-full border-t border-[#000] opacity-20" />
             <div className="flex flex-col gap-4">
@@ -242,18 +255,18 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               <div className="flex flex-col gap-[14px]">
                 <NavLink
                   onClick={handleClose}
-                  href={'/'}
+                  href={'https://algorand.co/'}
                   text="About"
                   icon={<ForumNavIcons.About />}
                   isActive={false}
                 />
-                <NavLink
+                {/* <NavLink
                   onClick={handleClose}
                   href={'/explore'}
                   text="Rules"
                   icon={<ForumNavIcons.Rules />}
                   isActive={false}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -285,6 +298,7 @@ const NavLink = ({
       )}
       href={href}
       onClick={onClick}
+      target={href.includes('http') ? '_blank' : undefined}
     >
       {icon}
       <p className={classNames('text-black font-Trap-500 text-[14px] leading-[140%]')}>{text}</p>

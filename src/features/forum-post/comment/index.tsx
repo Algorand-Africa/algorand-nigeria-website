@@ -5,8 +5,12 @@ import { motion } from 'framer-motion';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { ReplyInput } from '@/components/reply-input';
-import { createSanitizedMarkup } from '@/utils';
+import { createSanitizedMarkup, parseNotificationTime } from '@/utils';
 import { useForumActions } from '@/actions/forum';
+import { useRecoilValue } from 'recoil';
+import { profileAtom } from '@/state/auth.atom';
+import { useRouter } from 'next/navigation';
+
 interface Props {
   data: IComment;
   refresh?: () => void;
@@ -16,12 +20,19 @@ interface Props {
 
 export const Comment = ({ data, refresh, parentCommentId, postId }: Props) => {
   const [showReplies, setShowReplies] = useState(true);
+  const { push } = useRouter();
   const [showEditor, setShowEditor] = useState(false);
   const [content, setContent] = useState('');
+  const profile = useRecoilValue(profileAtom);
   const [interacting, setInteracting] = useState<'upvote' | 'downvote' | 'comment'>();
   const { upvoteComment, downvoteComment, createComment } = useForumActions();
 
   const handleUpvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${postId}`);
+      return;
+    }
+
     setInteracting('upvote');
     const res = await upvoteComment(data.id);
 
@@ -33,6 +44,11 @@ export const Comment = ({ data, refresh, parentCommentId, postId }: Props) => {
   };
 
   const handleDownvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${postId}`);
+      return;
+    }
+
     setInteracting('downvote');
     const res = await downvoteComment(data.id);
 
@@ -44,6 +60,11 @@ export const Comment = ({ data, refresh, parentCommentId, postId }: Props) => {
   };
 
   const handleCreateComment = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${postId}`);
+      return;
+    }
+
     setInteracting('comment');
     const res = await createComment({
       message: content,
@@ -83,11 +104,7 @@ export const Comment = ({ data, refresh, parentCommentId, postId }: Props) => {
             <circle cx="1.5" cy="1.5" r="1.5" fill="#D9D9D9" />
           </svg>
           <p className="font-Trap-500 text-[8px] leading-[140%] text-[#7D7C7C]">
-            {new Date(data.createdAt).toLocaleString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: true,
-            })}
+            {parseNotificationTime(data.createdAt)}
           </p>
         </div>
       </div>
@@ -176,7 +193,13 @@ export const Comment = ({ data, refresh, parentCommentId, postId }: Props) => {
                 'flex items-center gap-[10px] py-1 rounded-[100px]',
                 'px-[9px]',
               )}
-              onClick={() => setShowEditor(true)}
+              onClick={() => {
+                if (profile) {
+                  setShowEditor(true);
+                } else {
+                  push(`/auth/log-in?redirect=/forum/post/${postId}`);
+                }
+              }}
             >
               <div>
                 <svg

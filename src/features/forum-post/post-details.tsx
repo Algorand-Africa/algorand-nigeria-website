@@ -8,14 +8,21 @@ import { useEffect, useState } from 'react';
 import { ReplyInput } from '@/components/reply-input';
 import { IForumPost, IComment } from '@/interface/forum.interface';
 import { useForumActions } from '@/actions/forum';
-import { createSanitizedMarkup } from '@/utils';
+import { createSanitizedMarkup, parseNotificationTime } from '@/utils';
 import { toast } from 'react-hot-toast';
+import { profileAtom } from '@/state/auth.atom';
+import { useRecoilValue } from 'recoil';
 
-export const PostDetails = () => {
-  const { back } = useRouter();
+interface Props {
+  onChangePost: (post: IForumPost) => void;
+}
+
+export const PostDetails = ({ onChangePost }: Props) => {
+  const { back, push } = useRouter();
   const { id } = useParams();
   const [showEditor, setShowEditor] = useState(false);
   const { getPostById, getCommentsByPostId } = useForumActions();
+  const profile = useRecoilValue(profileAtom);
   const [post, setPost] = useState<IForumPost | null>(null);
   const [content, setContent] = useState('');
   const { savePost, upvotePost, downvotePost, createComment } = useForumActions();
@@ -23,6 +30,11 @@ export const PostDetails = () => {
   const [comments, setComments] = useState<IComment[]>([]);
 
   const handleSavePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${id}`);
+      return;
+    }
+
     setInteracting('save');
     const res = await savePost(post?.id || '');
 
@@ -34,6 +46,11 @@ export const PostDetails = () => {
   };
 
   const handleUpvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${id}`);
+      return;
+    }
+
     setInteracting('upvote');
     const res = await upvotePost(post?.id || '');
 
@@ -45,6 +62,11 @@ export const PostDetails = () => {
   };
 
   const handleDownvotePost = async () => {
+    if (!profile) {
+      push(`/auth/log-in?redirect=/forum/post/${id}`);
+      return;
+    }
+
     setInteracting('downvote');
     const res = await downvotePost(post?.id || '');
 
@@ -94,6 +116,12 @@ export const PostDetails = () => {
     fetchPost();
     fetchComments();
   }, [id]);
+
+  useEffect(() => {
+    if (post) {
+      onChangePost(post);
+    }
+  }, [post]);
 
   return (
     <div className="w-full flex flex-col lg:border lg:border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
@@ -148,11 +176,7 @@ export const PostDetails = () => {
 
               {!loading && (
                 <p className="text-[8px] leading-[140%] text-[#7D7C7C] font-Trap-500 lg:text-xs">
-                  {new Date(post?.createdAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
+                  {parseNotificationTime(post?.createdAt)}
                 </p>
               )}
             </div>
@@ -264,7 +288,13 @@ export const PostDetails = () => {
               'flex items-center gap-[10px] bg-[#F2F2F2] py-1 rounded-[100px]',
               'px-[9px] cursor-pointer',
             )}
-            onClick={() => setShowEditor(!showEditor)}
+            onClick={() => {
+              if (profile) {
+                setShowEditor(!showEditor);
+              } else {
+                push(`/auth/log-in?redirect=/forum/post/${id}`);
+              }
+            }}
             disabled={!post}
           >
             <div>

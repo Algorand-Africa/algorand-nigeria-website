@@ -12,7 +12,7 @@ export interface IComment {
 }
 
 export interface IForumCategory {
-  createdAt: Date;
+  createdAt: string;
   id: string;
   name: string;
   description: string;

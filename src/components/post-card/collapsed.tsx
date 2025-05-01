@@ -12,7 +12,7 @@ interface PostCardCollapsedProps {
 export const PostCardCollapsed = ({ showCategory = true, data }: PostCardCollapsedProps) => {
   return (
     <Link
-      href={`/forum/post/${data.title.toLowerCase().replace(/ /g, '-')}`}
+      href={`/forum/post/${data.id}`}
       className="flex items-start gap-3 pb-2 lg:pb-4 border-b border-[#EAE5E5]"
     >
       <div className="flex flex-col gap-[5px] flex-1">
