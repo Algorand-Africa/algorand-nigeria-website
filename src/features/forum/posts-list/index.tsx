@@ -10,7 +10,11 @@ import { useSearchParams } from 'next/navigation';
 import { Paginated } from '@/interface/pagination.interface';
 import { EmptyState } from '@/components/empty-state';
 
-export const PostsList = () => {
+interface Props {
+  categoryId?: string;
+}
+
+export const PostsList = ({ categoryId: initialCategoryId }: Props) => {
   const { getAllForumCategories, getAllPostPreviews } = useForumActions();
   const [forumCategories, setForumCategories] = useState<IForumCategory[]>();
   const [selectedForumCategory, setSelectedForumCategory] = useState<IForumCategory>();
@@ -39,7 +43,7 @@ export const PostsList = () => {
       page,
       pageSize: 10,
       search: search || undefined,
-      categoryId,
+      categoryId: initialCategoryId || categoryId,
     });
 
     if (response) {
@@ -82,7 +86,7 @@ export const PostsList = () => {
               <option value="popular">Popularty</option>
             </select>
           </div> */}
-          {!!forumCategories && (
+          {!!forumCategories && !initialCategoryId && (
             <div className="flex items-center gap-2">
               <p className="text-[#6D6D6D] font-Trap-600 text-xs">Categories:</p>
               <select
