@@ -23,7 +23,7 @@ const links = [
   'About Us',
   'Contact Us',
   // 'Blog',
-  //  'Forum'
+  'Forum',
 ];
 
 export const Navbar = () => {

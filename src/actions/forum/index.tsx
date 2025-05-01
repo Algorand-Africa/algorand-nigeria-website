@@ -4,7 +4,12 @@ import { FetchPaginatedDataDto, Paginated } from '@/interface/pagination.interfa
 import { generateQueryFromObject } from '@/utils';
 import { useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { IForumCategory } from '@/interface/forum.interface';
+import {
+  IForumCategory,
+  IForumPostPreview,
+  ICreateForumPost,
+  ICreateForumComment,
+} from '@/interface/forum.interface';
 
 export const useForumActions = () => {
   const client = useClient();
@@ -22,7 +27,96 @@ export const useForumActions = () => {
     }
   }, []);
 
+  const getAllPostPreviews = useCallback(
+    async (dto: FetchPaginatedDataDto & { categoryId?: string }) => {
+      const queryParams = generateQueryFromObject(dto);
+      const url = `/forum/posts/previews?${queryParams}`;
+
+      const response = await client.get<Paginated<IForumPostPreview>>(url);
+
+      if (response.data) {
+        return response.data;
+      } else {
+        toast.error(String(response.error?.toString()));
+      }
+    },
+    [],
+  );
+
+  const getPostById = useCallback(async (id: string) => {
+    const response = await client.get(`/forum/posts/${id}`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const createPost = useCallback(async (dto: ICreateForumPost) => {
+    const response = await client.post(`/forum/posts`, dto);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const createComment = useCallback(async (dto: ICreateForumComment) => {
+    const response = await client.post(`/forum/posts/comments`, dto);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const savePost = useCallback(async (id: string) => {
+    const response = await client.post(`/forum/posts/save/${id}/post`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const upvotePost = useCallback(async (id: string) => {
+    const response = await client.post(`/forum/posts/upvote/${id}/post`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const downvotePost = useCallback(async (id: string) => {
+    const response = await client.post(`/forum/posts/downvote/${id}/post`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const upvoteComment = useCallback(async (id: string) => {
+    const response = await client.post(`/forum/posts/upvote/${id}/comment`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
+  const downvoteComment = useCallback(async (id: string) => {
+    const response = await client.post(`/forum/posts/downvote/${id}/comment`);
+
+    if (response.data) {
+      return response.data;
+    }
+  }, []);
+
   return {
     getAllForumCategories,
+    getAllPostPreviews,
+    getPostById,
+    createPost,
+    createComment,
+    savePost,
+    upvotePost,
+    downvotePost,
+    upvoteComment,
+    downvoteComment,
   };
 };
