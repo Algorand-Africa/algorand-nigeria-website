@@ -31,7 +31,7 @@ export const ForumLayout = ({ children }: Props) => {
           <div className="flex flex-col gap-[14px]">
             <NavLink href={'/'} text="Home" icon={<ForumNavIcons.Home />} isActive={true} />
             <NavLink
-              href={'/explore'}
+              href={'/forum/explore'}
               text="Explore"
               icon={<ForumNavIcons.Discover />}
               isActive={false}
@@ -62,6 +62,7 @@ export const ForumLayout = ({ children }: Props) => {
         <div
           className={classNames(
             'bg-[#FFF] flex flex-col h-full rounded-[10px] px-5 py-6 lg:px-6 lg:py-5',
+            'overflow-y-auto',
           )}
         >
           <div className="flex flex-row justify-between">
@@ -88,15 +89,17 @@ export const ForumLayout = ({ children }: Props) => {
             </div>
 
             <div className="flex flex-row items-center gap-4">
-              <button
+              <Link
+                href={'/forum/create-post'}
                 className={classNames(
                   'flex flex-row items-center gap-[11px] py-[10px] px-4 border rounded-[100px] border-[#3B7FE4]',
                   'text-sm text-[#3B7FE4] font-Trap-600',
+                  'hover:bg-[#3B7FE4] hover:text-white transition-all duration-300',
                 )}
               >
                 <FiPlus size={16} />
                 <span>Ask a question</span>
-              </button>
+              </Link>
 
               <img
                 className="w-10 h-10 rounded-full object-cover"
@@ -122,7 +125,7 @@ export const ForumLayout = ({ children }: Props) => {
           <div className="lg:hidden">
             {isOpen && <MobileMenu isOpen={isOpen} onClose={toggleMenu} />}
           </div>
-          <div className="flex flex-col mt-6">{children}</div>
+          <div className="flex flex-col mt-6 flex-1">{children}</div>
         </div>
       </div>
     </div>

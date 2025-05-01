@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import '../styles/global.scss';
+import 'react-quill/dist/quill.snow.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import localFont from 'next/font/local';
 import { Toaster } from 'react-hot-toast';

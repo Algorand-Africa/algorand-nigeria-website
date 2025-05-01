@@ -64,8 +64,6 @@
   font-style: normal;
 }
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -122,8 +120,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -131,4 +127,29 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-label {
+  font-family: var(--font-trap);
+}
+
+span.ql-picker-item {
+  font-family: var(--font-trap);
+}
+
+.ql-toolbar.ql-snow {
+  border-bottom: 1px solid #d5d5d5 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.ql-editor,
+.ql-editor.ql-blank {
+  font-family: var(--font-trap) !important;
+  border: none !important;
+}
+
+.ql-container.ql-snow {
+  border: none !important;
 }
