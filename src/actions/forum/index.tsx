@@ -15,7 +15,7 @@ export const useForumActions = () => {
   const client = useClient();
 
   const getAllForumCategories = useCallback(async (dto: FetchPaginatedDataDto) => {
-    const queryParams = generateQueryFromObject(dto);
+    const queryParams = generateQueryFromObject({ ...dto, pageSize: 100 });
     const url = `/forum/posts/categories?${queryParams}`;
 
     const response = await client.get<Paginated<IForumCategory>>(url);
@@ -24,6 +24,14 @@ export const useForumActions = () => {
       return response.data;
     } else {
       toast.error(String(response.error?.toString()));
+    }
+  }, []);
+
+  const getForumCategoryById = useCallback(async (id: string) => {
+    const response = await client.get<IForumCategory>(`/forum/posts/categories/${id}`);
+
+    if (response.data) {
+      return response.data;
     }
   }, []);
 
@@ -109,6 +117,7 @@ export const useForumActions = () => {
 
   return {
     getAllForumCategories,
+    getForumCategoryById,
     getAllPostPreviews,
     getPostById,
     createPost,

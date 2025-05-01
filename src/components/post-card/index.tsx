@@ -49,8 +49,6 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
     setLoading(undefined);
   };
 
-  console.log(data);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
