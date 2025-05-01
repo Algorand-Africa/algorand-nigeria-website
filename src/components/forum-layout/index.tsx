@@ -172,6 +172,8 @@ export const ForumLayout = ({ children, searchValue }: Props) => {
               type="text"
               placeholder="Search by keywords, tags or filters"
               className="outline-none bg-transparent flex-1 text-xs text-black"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
             />
           </div>
 
