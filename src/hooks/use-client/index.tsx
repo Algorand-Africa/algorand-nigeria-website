@@ -76,7 +76,8 @@ export const useClient = () => {
           };
         }
 
-        const responseData: R = data.message || ('total' in data ? data : data.data) || data;
+        const responseData: R =
+          ('total' in data || 'id' in data ? data : data.data) || data.message || data;
 
         return {
           data: responseData,

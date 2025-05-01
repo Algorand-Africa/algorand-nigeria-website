@@ -33,7 +33,7 @@ export const CategoryItem = ({ id, name, description, color, totalPosts }: Props
               {name}
             </h4>
             <p className="text-[#000] font-Trap-400 text-[10px] leading-[140%]">
-              {totalPosts} Post{totalPosts > 1 ? 's' : ''}
+              {totalPosts} Post{totalPosts > 1 || totalPosts === 0 ? 's' : ''}
             </p>
           </div>
         </div>

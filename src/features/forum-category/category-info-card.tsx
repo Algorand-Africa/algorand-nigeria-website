@@ -4,7 +4,7 @@ import { CiGlobe } from 'react-icons/ci';
 interface Props {
   name: string;
   description: string;
-  createdAt: Date;
+  createdAt: string;
   totalPosts: number;
 }
 
@@ -21,7 +21,7 @@ export const CategoryInfoCard = ({ name, description, createdAt, totalPosts }: P
         <BsCalendarDate color="#6D6D6D" />
         <p className="text-[#6D6D6D] text-[12px] font-Trap-400 leading-[140%] tracking-[0.01em]">
           Created{' '}
-          {createdAt.toLocaleDateString('en-US', {
+          {new Date(createdAt).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',

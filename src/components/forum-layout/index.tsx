@@ -9,17 +9,51 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RxCross1, RxHamburgerMenu } from 'react-icons/rx';
 import { FiPlus, FiSearch } from 'react-icons/fi';
+import { useAuthActions } from '@/actions/auth';
+import { profileAtom } from '@/state/auth.atom';
+import { useRecoilValue } from 'recoil';
+import { useDebounce } from '@/hooks';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface Props {
   children: React.ReactNode;
+  searchValue?: string;
 }
 
-export const ForumLayout = ({ children }: Props) => {
+export const ForumLayout = ({ children, searchValue }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { getProfile } = useAuthActions();
+  const pathname = usePathname();
+  const profile = useRecoilValue(profileAtom);
+  const [search, setSearch] = useState('');
+  const { debounce } = useDebounce();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleSearch = debounce((value: string) => {
+    if (pathname === '/forum') {
+      const pageUrl = new URL(window.location.href);
+      value ? pageUrl.searchParams.set('search', value) : pageUrl.searchParams.delete('search');
+      router.push(pageUrl.toString());
+    } else {
+      value ? router.push(`/forum?search=${value}`) : null;
+    }
+  }, 500);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  useEffect(() => {
+    handleSearch(search);
+  }, [search]);
+
+  useEffect(() => {
+    setSearch(searchValue || '');
+  }, [searchValue]);
 
   return (
     <div className="flex flex-row bg-green-200 h-screen">
@@ -29,31 +63,41 @@ export const ForumLayout = ({ children }: Props) => {
         </Link>
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-[14px]">
-            <NavLink href={'/'} text="Home" icon={<ForumNavIcons.Home />} isActive={true} />
+            <NavLink
+              href={'/forum'}
+              text="Home"
+              icon={<ForumNavIcons.Home />}
+              isActive={pathname === '/forum'}
+            />
             <NavLink
               href={'/forum/explore'}
               text="Explore"
               icon={<ForumNavIcons.Discover />}
-              isActive={false}
+              isActive={pathname === '/forum/explore'}
             />
-            <NavLink
-              href={'/bookmarks'}
+            {/* <NavLink
+              href={'/forum/bookmarks'}
               text="Saved"
               icon={<ForumNavIcons.Saved />}
               isActive={false}
-            />
+            /> */}
           </div>
           <hr className="w-full border-t border-[#000] opacity-20" />
           <div className="flex flex-col gap-4">
             <h4 className="font-Trap-500 text-xs leading-[140%] text-[#7B7D83]">RESOURCES</h4>
             <div className="flex flex-col gap-[14px]">
-              <NavLink href={'/'} text="About" icon={<ForumNavIcons.About />} isActive={false} />
               <NavLink
-                href={'/explore'}
+                href={'https://algorand.co/'}
+                text="About"
+                icon={<ForumNavIcons.About />}
+                isActive={false}
+              />
+              {/* <NavLink
+                href={'https://algorand.co/'}
                 text="Rules"
                 icon={<ForumNavIcons.Rules />}
                 isActive={false}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -85,12 +129,14 @@ export const ForumLayout = ({ children }: Props) => {
                 type="text"
                 placeholder="Search by keywords, tags or filters"
                 className="outline-none bg-transparent flex-1 text-xs text-black"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
               />
             </div>
 
             <div className="flex flex-row items-center gap-4">
               <Link
-                href={'/forum/create-post'}
+                href={profile ? '/forum/create-post' : '/auth/log-in?redirect=/forum/create-post'}
                 className={classNames(
                   'flex flex-row items-center gap-[11px] py-[10px] px-4 border rounded-[100px] border-[#3B7FE4]',
                   'text-sm text-[#3B7FE4] font-Trap-600',
@@ -101,10 +147,17 @@ export const ForumLayout = ({ children }: Props) => {
                 <span>Ask a question</span>
               </Link>
 
-              <img
-                className="w-10 h-10 rounded-full object-cover"
-                src="https://th.bing.com/th/id/OIP.dPJ-e4giUcSpbyARhLssJQHaJ4?rs=1&pid=ImgDetMain"
-              />
+              {!!profile && (
+                <Link href={'/profile'}>
+                  <img
+                    className="w-10 h-10 rounded-full object-cover"
+                    src={
+                      profile?.image ||
+                      `https://ui-avatars.com/api/?name=${profile.fullName}&background=random&font-size=0.35&color=fff&rounded=true ⁠`
+                    }
+                  />
+                </Link>
+              )}
             </div>
           </div>
 
@@ -134,6 +187,7 @@ export const ForumLayout = ({ children }: Props) => {
 
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleClose = () => {
     setOpen(false);
@@ -175,25 +229,25 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             <div className="flex flex-col gap-[14px]">
               <NavLink
                 onClick={handleClose}
-                href={'/'}
+                href={'/forum'}
                 text="Home"
                 icon={<ForumNavIcons.Home />}
-                isActive={true}
+                isActive={pathname === '/forum'}
               />
               <NavLink
-                href={'/explore'}
+                href={'/forum/explore'}
                 text="Explore"
                 icon={<ForumNavIcons.Discover />}
-                isActive={false}
+                isActive={pathname === '/forum/explore'}
                 onClick={handleClose}
               />
-              <NavLink
-                href={'/bookmarks'}
+              {/* <NavLink
+                href={'/forum/bookmarks'}
                 text="Saved"
                 icon={<ForumNavIcons.Saved />}
                 isActive={false}
                 onClick={handleClose}
-              />
+              /> */}
             </div>
             <hr className="w-full border-t border-[#000] opacity-20" />
             <div className="flex flex-col gap-4">
@@ -201,18 +255,18 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               <div className="flex flex-col gap-[14px]">
                 <NavLink
                   onClick={handleClose}
-                  href={'/'}
+                  href={'https://algorand.co/'}
                   text="About"
                   icon={<ForumNavIcons.About />}
                   isActive={false}
                 />
-                <NavLink
+                {/* <NavLink
                   onClick={handleClose}
                   href={'/explore'}
                   text="Rules"
                   icon={<ForumNavIcons.Rules />}
                   isActive={false}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -243,6 +297,8 @@ const NavLink = ({
         isActive ? 'bg-white' : 'bg-transparent',
       )}
       href={href}
+      onClick={onClick}
+      target={href.includes('http') ? '_blank' : undefined}
     >
       {icon}
       <p className={classNames('text-black font-Trap-500 text-[14px] leading-[140%]')}>{text}</p>
