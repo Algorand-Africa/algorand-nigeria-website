@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import ReactQuill from 'react-quill';
+import { Spinner } from '../spinner';
 
 interface Props {
   value: string;
@@ -8,9 +9,18 @@ interface Props {
   placeholder?: string;
   visible: boolean;
   onClose: () => void;
+  loading?: boolean;
 }
 
-export const ReplyInput = ({ value, onChange, onSubmit, placeholder, visible, onClose }: Props) => {
+export const ReplyInput = ({
+  value,
+  onChange,
+  onSubmit,
+  placeholder,
+  visible,
+  onClose,
+  loading,
+}: Props) => {
   return visible ? (
     <div
       style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)' }}
@@ -55,7 +65,7 @@ export const ReplyInput = ({ value, onChange, onSubmit, placeholder, visible, on
         disabled={value.length === 0}
         onClick={onSubmit}
       >
-        Post an answer
+        {loading ? <Spinner /> : 'Post an answer'}
       </button>
     </div>
   ) : null;

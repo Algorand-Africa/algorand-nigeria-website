@@ -9,6 +9,8 @@ import {
   IForumPostPreview,
   ICreateForumPost,
   ICreateForumComment,
+  IForumPost,
+  IComment,
 } from '@/interface/forum.interface';
 
 export const useForumActions = () => {
@@ -44,26 +46,32 @@ export const useForumActions = () => {
   );
 
   const getPostById = useCallback(async (id: string) => {
-    const response = await client.get(`/forum/posts/${id}`);
+    const response = await client.get<IForumPost>(`/forum/posts/${id}`);
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
   const createPost = useCallback(async (dto: ICreateForumPost) => {
-    const response = await client.post(`/forum/posts`, dto);
+    const response = await client.post<IForumPostPreview>(`/forum/posts`, dto);
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
   const createComment = useCallback(async (dto: ICreateForumComment) => {
-    const response = await client.post(`/forum/posts/comments`, dto);
+    const response = await client.post(`/forum/posts/comment`, dto);
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -72,6 +80,8 @@ export const useForumActions = () => {
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -80,6 +90,8 @@ export const useForumActions = () => {
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -88,6 +100,8 @@ export const useForumActions = () => {
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -96,6 +110,8 @@ export const useForumActions = () => {
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -104,6 +120,18 @@ export const useForumActions = () => {
 
     if (response.data) {
       return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
+    }
+  }, []);
+
+  const getCommentsByPostId = useCallback(async (id: string) => {
+    const response = await client.get<IComment[]>(`/forum/posts/${id}/comments`);
+
+    if (response.data) {
+      return response.data;
+    } else {
+      toast.error(String(response.error?.toString()));
     }
   }, []);
 
@@ -118,5 +146,6 @@ export const useForumActions = () => {
     downvotePost,
     upvoteComment,
     downvoteComment,
+    getCommentsByPostId,
   };
 };

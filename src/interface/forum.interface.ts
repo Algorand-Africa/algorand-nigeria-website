@@ -2,10 +2,13 @@ export interface IComment {
   id: string;
   createdAt: string;
   message: string;
-  createdBy: string;
-  likes: number;
-  downvotes: number;
-  replies: IComment[];
+  numberOfUpVotes: number;
+  posterUsername: string;
+  posterAvatar: string;
+  upVoted: boolean;
+  downVoted: boolean;
+  parentId: string;
+  comments: IComment[];
 }
 
 export interface IForumCategory {

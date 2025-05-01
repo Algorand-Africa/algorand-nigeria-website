@@ -9,9 +9,7 @@ export const ForumPost = () => {
       <div className="w-full lg:flex-1">
         <PostDetails />
       </div>
-      <div className="w-full lg:w-[369px] hidden lg:flex">
-        <ForumCategoryOverview />
-      </div>
+      <div className="w-full lg:w-[369px] hidden lg:flex">{/* <ForumCategoryOverview /> */}</div>
     </div>
   );
 };

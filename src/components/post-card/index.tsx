@@ -49,8 +49,6 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
     setLoading(undefined);
   };
 
-  console.log(data);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -153,7 +151,7 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
               'px-[5px]',
             )}
           >
-            <button onClick={handleUpvotePost} disabled={loading === 'upvote' || data.upVoted}>
+            <button onClick={handleUpvotePost} disabled={loading === 'upvote'}>
               <svg
                 width="14"
                 height="15"
@@ -175,10 +173,7 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
               {data.numberOfUpVotes}
             </p>
 
-            <button
-              onClick={handleDownvotePost}
-              disabled={loading === 'downvote' || data.downVoted}
-            >
+            <button onClick={handleDownvotePost} disabled={loading === 'downvote'}>
               <svg
                 width="14"
                 height="15"

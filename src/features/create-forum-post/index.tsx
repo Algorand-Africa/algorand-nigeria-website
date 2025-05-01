@@ -7,6 +7,10 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiDelete } from 'react-icons/fi';
+import { MdDelete } from 'react-icons/md';
+import { useForumActions } from '@/actions/forum';
+import { useRouter } from 'next/navigation';
+import { Spinner } from '@/components';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -15,8 +19,11 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 export const CreateForumPost = () => {
   const [selectedCategory, setSelectedCategory] = useState<IForumCategory | undefined>(undefined);
   const [selectedTab, setSelectedTab] = useState('Text');
+  const router = useRouter();
   const [title, setTitle] = useState('');
+  const { createPost } = useForumActions();
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState<File[]>([]);
 
   const tabs = ['Text', 'Image'];
@@ -39,6 +46,52 @@ export const CreateForumPost = () => {
 
     input.click();
   };
+
+  const onSubmit = async () => {
+    if (isLoading) return;
+
+    if (!selectedCategory) {
+      toast.error('Please select a category');
+      return;
+    }
+
+    setIsLoading(true);
+
+    const imagesBase64 = await Promise.all(
+      images.map((image) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result as string);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(image);
+        });
+      }),
+    );
+
+    const response = await createPost({
+      title,
+      message: content,
+      images: imagesBase64 as any,
+      categoryId: selectedCategory?.id,
+    });
+
+    if (response) {
+      toast.success('Post created successfully');
+      setTitle('');
+      setContent('');
+      setImages([]);
+      setSelectedCategory(undefined);
+
+      router.push(`/forum/post/${response.id}`);
+    }
+
+    setIsLoading(false);
+  };
+
+  const canSubmit = title.length > 0 && content.length > 0;
+
   return (
     <div className="flex flex-col gap-[19px] lg:flex-row lg:gap-[45px]">
       <div className="w-full lg:flex-1 flex flex-col">
@@ -192,15 +245,15 @@ export const CreateForumPost = () => {
             </div>
 
             {images.map((image) => (
-              <div className="relative" key={image.name}>
+              <div className="relative w-fit" key={image.name}>
                 <img src={URL.createObjectURL(image)} alt={image.name} />
                 <button
-                  className="absolute top-0 right-0"
+                  className="absolute top-5 right-5"
                   onClick={() => {
                     setImages(images.filter((i) => i !== image));
                   }}
                 >
-                  <FiDelete />
+                  <MdDelete size={20} color="red" />
                 </button>
               </div>
             ))}
@@ -213,9 +266,12 @@ export const CreateForumPost = () => {
             className={classNames(
               'bg-[#3B7FE4] text-white px-[30px] py-2.5 rounded-[100px] font-Trap-500 text-[14px] leading-[140%]',
               'w-fit self-end',
+              'disabled:opacity-50 disabled:cursor-not-allowed',
             )}
+            disabled={!canSubmit}
+            onClick={onSubmit}
           >
-            Submit Question
+            {isLoading ? <Spinner /> : 'Submit Question'}
           </button>
         </div>
       </div>

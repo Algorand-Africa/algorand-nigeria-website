@@ -1,31 +1,99 @@
 'use client';
 
-import {
-  mockCategories,
-  mockTitles,
-  mockImages,
-  mockColorSchemes,
-} from '@/components/post-card/mock';
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
-import { useRouter } from 'next/navigation';
-import { mockComments } from './comment/mock';
+import { useRouter, useParams } from 'next/navigation';
 import { Comment } from './comment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReplyInput } from '@/components/reply-input';
+import { IForumPost, IComment } from '@/interface/forum.interface';
+import { useForumActions } from '@/actions/forum';
+import { createSanitizedMarkup } from '@/utils';
+import { toast } from 'react-hot-toast';
 
 export const PostDetails = () => {
   const { back } = useRouter();
+  const { id } = useParams();
   const [showEditor, setShowEditor] = useState(false);
+  const { getPostById, getCommentsByPostId } = useForumActions();
+  const [post, setPost] = useState<IForumPost | null>(null);
   const [content, setContent] = useState('');
+  const { savePost, upvotePost, downvotePost, createComment } = useForumActions();
+  const [interacting, setInteracting] = useState<'save' | 'upvote' | 'downvote' | 'comment'>();
+  const [comments, setComments] = useState<IComment[]>([]);
 
-  const data = {
-    image: mockImages[Math.floor(Math.random() * mockImages.length)],
-    colorScheme: mockColorSchemes[Math.floor(Math.random() * mockColorSchemes.length)],
-    category: mockCategories[Math.floor(Math.random() * mockCategories.length)],
-    title: mockTitles[Math.floor(Math.random() * mockTitles.length)],
-    profileImage: mockImages[Math.floor(Math.random() * mockImages.length)],
+  const handleSavePost = async () => {
+    setInteracting('save');
+    const res = await savePost(post?.id || '');
+
+    if (res) {
+      fetchPost();
+    }
+
+    setInteracting(undefined);
   };
+
+  const handleUpvotePost = async () => {
+    setInteracting('upvote');
+    const res = await upvotePost(post?.id || '');
+
+    if (res) {
+      fetchPost();
+    }
+
+    setInteracting(undefined);
+  };
+
+  const handleDownvotePost = async () => {
+    setInteracting('downvote');
+    const res = await downvotePost(post?.id || '');
+
+    if (res) {
+      fetchPost();
+    }
+
+    setInteracting(undefined);
+  };
+
+  const fetchPost = async () => {
+    const response = await getPostById(id as string);
+
+    if (response) {
+      setPost(response);
+    }
+  };
+
+  const fetchComments = async () => {
+    const response = await getCommentsByPostId(id as string);
+
+    if (response) {
+      setComments(response);
+    }
+  };
+
+  const handleCreateComment = async () => {
+    setInteracting('comment');
+    const res = await createComment({
+      postId: post?.id || '',
+      message: content,
+    });
+
+    if (res) {
+      fetchComments();
+      setContent('');
+      setShowEditor(false);
+      fetchPost();
+    }
+
+    setInteracting(undefined);
+  };
+
+  const loading = !post;
+
+  useEffect(() => {
+    fetchPost();
+    fetchComments();
+  }, [id]);
 
   return (
     <div className="w-full flex flex-col lg:border lg:border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
@@ -47,16 +115,27 @@ export const PostDetails = () => {
         </button>
 
         <div className="flex items-center gap-2">
-          <img
-            src={data.profileImage}
-            alt={data.title}
-            className="w-[35px] h-[35px] lg:w-[45px] lg:h-[45px] object-cover rounded-full"
-          />
+          {loading ? (
+            <div className="w-[35px] h-[35px] lg:w-[45px] lg:h-[45px] object-cover rounded-full bg-gray-200 animate-pulse" />
+          ) : (
+            <img
+              src={
+                post?.posterAvatar ||
+                `https://ui-avatars.com/api/?name=${post.posterUsername}&background=random&font-size=0.35&color=fff&rounded=true ⁠`
+              }
+              alt={post?.posterUsername}
+              className="w-[35px] h-[35px] lg:w-[45px] lg:h-[45px] object-cover rounded-full"
+            />
+          )}
           <div className="flex flex-col">
             <div className="flex flex-row items-center gap-1">
-              <h4 className="text-sm font-Trap-700 text-black leading-[120%] lg:text-[18px]">
-                u/ShinyTroll10
-              </h4>
+              {loading ? (
+                <div className="w-[100px] h-[20px] bg-gray-200 animate-pulse rounded-full" />
+              ) : (
+                <h4 className="text-sm font-Trap-700 text-black leading-[120%] lg:text-[18px]">
+                  {post?.posterUsername}
+                </h4>
+              )}
               <svg
                 width="3"
                 height="3"
@@ -67,38 +146,63 @@ export const PostDetails = () => {
                 <circle cx="1.5" cy="1.5" r="1.5" fill="#D9D9D9" />
               </svg>
 
-              <p className="text-[8px] leading-[140%] text-[#7D7C7C] font-Trap-500 lg:text-xs">
-                4h ago
-              </p>
+              {!loading && (
+                <p className="text-[8px] leading-[140%] text-[#7D7C7C] font-Trap-500 lg:text-xs">
+                  {new Date(post?.createdAt).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </p>
+              )}
             </div>
-            <p
-              style={{
-                color: data.colorScheme.foreground,
-              }}
-              className="font-Trap-600 leading-[140%] text-[11px] lg:text-xs"
-            >
-              {data.category}
-            </p>
+            {!loading && (
+              <p
+                style={{
+                  color: post?.categoryTextColor,
+                }}
+                className="font-Trap-600 leading-[140%] text-[11px] lg:text-xs"
+              >
+                {post?.category}
+              </p>
+            )}
           </div>
         </div>
       </div>
 
       <div className="flex flex-col">
-        <h2 className="text-lg font-Trap-600 lg:text-[26px] text-[20px] text-[#001324] leading-[120%]">
-          {data.title}
-        </h2>
+        {loading ? (
+          <div className="w-[300px] h-[20px] bg-gray-200 animate-pulse rounded-full" />
+        ) : (
+          <h2 className="text-lg font-Trap-600 lg:text-[26px] text-[20px] text-[#001324] leading-[120%]">
+            {post?.title}
+          </h2>
+        )}
 
-        <img
-          src={data.image}
-          alt={data.title}
-          className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px]"
-        />
+        {loading ? (
+          <div className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px] bg-gray-200 animate-pulse" />
+        ) : (
+          <img
+            src={
+              post?.image ||
+              'https://res.cloudinary.com/dvujkjs1q/image/upload/v1743032377/nft-images/1743032404424-6743922643.jpg'
+            }
+            alt={post?.title}
+            className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px]"
+          />
+        )}
 
-        <p className="text-[14px] leading-[140%] text-[#4C5965] font-Trap-500 mt-[10px] lg:mt-[15px]">
-          Does it make sense to change software domain to become a blockchain core dev. How is the
-          job market for blockchain. Lot of interest but not sure if it makes sense career wise at
-          the moment. <br /> <br /> Already working as SDE in a big firm.
-        </p>
+        {loading ? (
+          <div className="flex flex-col gap-[2px]">
+            <div className="w-full h-[14px] bg-gray-200 animate-pulse rounded-lg mt-[10px] lg:mt-[15px]" />
+            <div className="w-full h-[14px] bg-gray-200 animate-pulse rounded-lg mt-[10px] lg:mt-[15px]" />
+          </div>
+        ) : (
+          <div
+            dangerouslySetInnerHTML={createSanitizedMarkup(post.message)}
+            className="text-[14px] leading-[140%] text-[#4C5965] font-Trap-500 mt-[10px] lg:mt-[15px]"
+          ></div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -115,7 +219,7 @@ export const PostDetails = () => {
               'px-[5px]',
             )}
           >
-            <button>
+            <button onClick={handleUpvotePost} disabled={interacting === 'upvote' || !post}>
               <svg
                 width="14"
                 height="15"
@@ -125,7 +229,7 @@ export const PostDetails = () => {
               >
                 <path
                   d="M7.00028 12.7499C6.03544 12.7499 5.25028 11.9647 5.25028 10.9999V8.22089C4.58353 8.81822 3.48569 8.79197 2.84636 8.15381C2.51829 7.82563 2.33398 7.38059 2.33398 6.91656C2.33398 6.45252 2.51829 6.00748 2.84636 5.67931L7.00028 1.52539L11.1542 5.67931C11.4823 6.00748 11.6666 6.45252 11.6666 6.91656C11.6666 7.38059 11.4823 7.82563 11.1542 8.15381C10.516 8.79256 9.41644 8.81881 8.75028 8.22089V10.9999C8.75028 11.9647 7.96511 12.7499 7.00028 12.7499ZM6.41694 5.40806V10.9999C6.42366 11.1501 6.48806 11.2919 6.59672 11.3958C6.70538 11.4997 6.84993 11.5577 7.00028 11.5577C7.15062 11.5577 7.29518 11.4997 7.40384 11.3958C7.5125 11.2919 7.57689 11.1501 7.58361 10.9999V5.40806L9.50453 7.32897C9.61557 7.43516 9.7633 7.49442 9.91694 7.49442C10.0706 7.49442 10.2183 7.43516 10.3294 7.32897C10.4387 7.21958 10.5002 7.07124 10.5002 6.91656C10.5002 6.76188 10.4387 6.61353 10.3294 6.50414L7.00028 3.17506L3.67119 6.50414C3.56184 6.61353 3.5004 6.76188 3.5004 6.91656C3.5004 7.07124 3.56184 7.21958 3.67119 7.32897C3.78224 7.43516 3.92997 7.49442 4.08361 7.49442C4.23726 7.49442 4.38498 7.43516 4.49603 7.32897L6.41694 5.40806Z"
-                  fill="#6D6D6D"
+                  fill={post?.upVoted ? '#000' : '#6D6D6D'}
                 />
               </svg>
             </button>
@@ -134,10 +238,10 @@ export const PostDetails = () => {
               style={{ transform: 'translateY(2px)' }}
               className="text-[12px] leading-[140%] text-[#6D6D6D] font-Trap-600"
             >
-              2
+              {post?.numberOfUpVotes || 0}
             </p>
 
-            <div>
+            <button onClick={handleDownvotePost} disabled={interacting === 'downvote' || !post}>
               <svg
                 width="14"
                 height="15"
@@ -147,10 +251,10 @@ export const PostDetails = () => {
               >
                 <path
                   d="M6.99972 2.25011C7.96456 2.25011 8.74972 3.03528 8.74972 4.00011L8.74972 6.77911C9.41647 6.18178 10.5143 6.20803 11.1536 6.84619C11.4817 7.17437 11.666 7.61941 11.666 8.08344C11.666 8.54748 11.4817 8.99252 11.1536 9.32069L6.99972 13.4746L2.84581 9.32069C2.51773 8.99252 2.33343 8.54748 2.33343 8.08344C2.33343 7.61941 2.51773 7.17437 2.84581 6.84619C3.48397 6.20744 4.58356 6.18119 5.24972 6.77911V4.00011C5.24972 3.03528 6.03489 2.25011 6.99972 2.25011ZM7.58306 9.59194V4.00011C7.57634 3.84991 7.51194 3.70809 7.40328 3.60419C7.29462 3.50028 7.15007 3.44229 6.99972 3.44229C6.84938 3.44229 6.70482 3.50028 6.59616 3.60419C6.4875 3.70809 6.42311 3.84991 6.41639 4.00011V9.59194L4.49547 7.67103C4.38443 7.56484 4.2367 7.50558 4.08306 7.50558C3.92941 7.50558 3.78169 7.56484 3.67064 7.67103C3.56128 7.78042 3.49985 7.92876 3.49985 8.08344C3.49985 8.23812 3.56128 8.38647 3.67064 8.49586L6.99972 11.8249L10.3288 8.49586C10.4382 8.38647 10.4996 8.23812 10.4996 8.08344C10.4996 7.92876 10.4382 7.78042 10.3288 7.67103C10.2178 7.56484 10.07 7.50558 9.91639 7.50558C9.76274 7.50558 9.61502 7.56484 9.50397 7.67103L7.58306 9.59194Z"
-                  fill="#6D6D6D"
+                  fill={post?.downVoted ? '#000' : '#6D6D6D'}
                 />
               </svg>
-            </div>
+            </button>
           </motion.div>
 
           {/* Comments */}
@@ -161,6 +265,7 @@ export const PostDetails = () => {
               'px-[9px] cursor-pointer',
             )}
             onClick={() => setShowEditor(!showEditor)}
+            disabled={!post}
           >
             <div>
               <svg
@@ -190,20 +295,24 @@ export const PostDetails = () => {
               style={{ transform: 'translateY(2px)' }}
               className="text-[12px] leading-[140%] text-[#6D6D6D] font-Trap-600"
             >
-              140
+              {post?.numberOfComments || 0}
             </p>
           </motion.button>
 
           {/* Share */}
-          <motion.div
+          <motion.button
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400 }}
             className={classNames(
               'flex items-center gap-[10px] bg-[#F2F2F2] py-1 rounded-[100px]',
               'px-[9px]',
             )}
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              toast.success('Link copied to clipboard');
+            }}
           >
-            <button>
+            <div>
               <svg
                 width="14"
                 height="15"
@@ -223,7 +332,7 @@ export const PostDetails = () => {
                   stroke-linejoin="round"
                 />
               </svg>
-            </button>
+            </div>
 
             <p
               style={{ transform: 'translateY(2px)' }}
@@ -231,16 +340,18 @@ export const PostDetails = () => {
             >
               Share
             </p>
-          </motion.div>
+          </motion.button>
 
           {/* Save */}
-          <motion.div
+          <motion.button
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400 }}
             className={classNames(
               'flex items-center gap-[10px] bg-[#F2F2F2] py-1 rounded-[100px]',
               'px-[9px]',
             )}
+            onClick={handleSavePost}
+            disabled={interacting === 'save' || !post}
           >
             <button>
               <svg
@@ -262,14 +373,19 @@ export const PostDetails = () => {
               style={{ transform: 'translateY(2px)' }}
               className="text-[12px] leading-[140%] text-[#6D6D6D] font-Trap-600"
             >
-              Save
+              {post?.saved ? 'Saved' : 'Save'}
             </p>
-          </motion.div>
+          </motion.button>
         </motion.div>
 
         <div className="flex flex-col mt-[10px] lg:mt-4">
-          {mockComments.map((comment) => (
-            <Comment key={comment.id} data={comment} />
+          {comments.map((comment) => (
+            <Comment
+              refresh={fetchComments}
+              key={comment.id}
+              data={comment}
+              postId={post?.id || ''}
+            />
           ))}
         </div>
       </div>
@@ -277,10 +393,11 @@ export const PostDetails = () => {
       <ReplyInput
         value={content}
         onChange={setContent}
-        onSubmit={() => {}}
-        placeholder="Replying to u/ShinyTroll10"
+        onSubmit={handleCreateComment}
+        placeholder={`Replying to ${post?.posterUsername}`}
         visible={showEditor}
         onClose={() => setShowEditor(false)}
+        loading={interacting === 'comment'}
       />
     </div>
   );
