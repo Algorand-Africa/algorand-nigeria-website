@@ -1,8 +1,8 @@
-import { ICategory } from '@/interface/forum.interface';
+import { IForumCategory } from '@/interface/forum.interface';
 import classNames from 'classnames';
 import { CategoryItem } from './category-item';
 
-const mockCategories: ICategory[] = Array.from({ length: 10 }, (_, index) => ({
+const mockCategories: IForumCategory[] = Array.from({ length: 10 }, (_, index) => ({
   id: index.toString(),
   name: `Category ${index + 1}`,
   description: `Stay ahead of the news cycle and join the discussion on breaking news. Lorem Ipsud whatever the fuck that means.`,

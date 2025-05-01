@@ -4,7 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 import { PostsList } from '../forum/posts-list';
 import { CategoryInfoCard } from './category-info-card';
 import { FaArrowLeftLong } from 'react-icons/fa6';
-import { ICategory } from '@/interface/forum.interface';
+import { IForumCategory as ICategory } from '@/interface/forum.interface';
 import { motion } from 'framer-motion';
 
 const mockCategory: ICategory = {

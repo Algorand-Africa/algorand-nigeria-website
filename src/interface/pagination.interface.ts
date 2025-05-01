@@ -13,10 +13,11 @@ export interface Pagination {
 }
 
 export interface FetchPaginatedDataDto {
-  order?: 'asc' | 'desc';
+  order?: 'ASC' | 'DESC';
   page?: number;
-  numOfItemsPerPage?: number;
-  searchTerm?: string;
+  pageSize?: number;
+  search?: string;
+  sort?: string;
 }
 
 export interface Paginated<T> {

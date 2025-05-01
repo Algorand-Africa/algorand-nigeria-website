@@ -8,7 +8,7 @@ export interface IComment {
   replies: IComment[];
 }
 
-export interface ICategory {
+export interface IForumCategory {
   createdAt: Date;
   id: string;
   name: string;
