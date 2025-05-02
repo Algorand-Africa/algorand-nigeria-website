@@ -12,11 +12,13 @@ import { authAtom, profileAtom } from '@/state';
 import { useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/navigation';
 
 export const useAuthActions = () => {
   const client = useClient();
   const setAuth = useSetRecoilState(authAtom);
   const setProfile = useSetRecoilState(profileAtom);
+  const { push } = useRouter();
 
   async function getFallBackToken(): Promise<Token | undefined> {
     try {
@@ -44,7 +46,7 @@ export const useAuthActions = () => {
 
     setAuth(null);
     setTimeout(() => {
-      window.location.reload();
+      push('/');
     }, 500);
   }, []);
 

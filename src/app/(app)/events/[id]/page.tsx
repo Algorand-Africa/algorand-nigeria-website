@@ -12,9 +12,15 @@ export async function generateMetadata(
   const id = (await params).id;
 
   // fetch post information
-  const post = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`).then((res) =>
-    res.json(),
-  );
+  const post = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+      return {
+        title: 'Event Not Found | Events | Algorand Nigeria',
+        description: 'The event you are looking for does not exist',
+      };
+    });
 
   return {
     title: `${post.title} | Events | Algorand Nigeria`,

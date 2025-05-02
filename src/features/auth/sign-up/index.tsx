@@ -216,11 +216,19 @@ export const SignUp = () => {
             <Checkbox checked={terms} onClick={() => setTerms(!terms)} />
             <p className="text-[#645D5D] text-sm text-center">
               I agree to the{' '}
-              <Link className="text-[#2D2DF1] font-[500]" href="#">
+              <Link
+                target="_blank"
+                className="text-[#2D2DF1] font-[500]"
+                href="https://algorand.co/algorand-foundation/disclaimer"
+              >
                 Terms
               </Link>{' '}
               and{' '}
-              <Link className="text-[#2D2DF1] font-[500]" href="#">
+              <Link
+                target="_blank"
+                className="text-[#2D2DF1] font-[500]"
+                href="https://algorand.co/algorand-foundation/privacy-policy"
+              >
                 Privacy Policy
               </Link>
             </p>
