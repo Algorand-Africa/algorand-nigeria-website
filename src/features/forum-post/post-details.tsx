@@ -113,8 +113,6 @@ export const PostDetails = ({ onChangePost }: Props) => {
   };
 
   const handlePayload = (payload: any) => {
-    console.log(payload);
-
     if (payload.postId === post?.id) {
       fetchComments();
     }
