@@ -10,11 +10,25 @@ import { parseNotificationTime } from '@/utils';
 import { useRecoilValue } from 'recoil';
 import { profileAtom } from '@/state/auth.atom';
 import { useRouter } from 'next/navigation';
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
 interface PostCardProps {
   data: IForumPostPreview;
   refresh?: () => void;
 }
+
+export const STATUS_COLORS = {
+  closed: {
+    bg: '#6B7280',
+    hoverBg: '#4B5563',
+    text: '#FFFFFF',
+  },
+  answered: {
+    bg: '#2AC441',
+    hoverBg: '#25B03A',
+    text: '#FFFFFF',
+  },
+};
 
 export const PostCard = ({ data, refresh }: PostCardProps) => {
   const { savePost, upvotePost, downvotePost } = useForumActions();
@@ -327,6 +341,29 @@ export const PostCard = ({ data, refresh }: PostCardProps) => {
               Save{data.saved ? 'd' : ''}
             </p>
           </motion.button>
+
+          {/* Status */}
+          {['answered', 'closed'].includes(data.status) && (
+            <motion.div
+              className={classNames(
+                'flex items-center gap-[10px] pt-[4px] px-[9px] rounded-[100px]',
+                'text-[12px] leading-[140%] font-Trap-600 tracking-[0.01em] capitalize',
+                'transition-all duration-200 ease-in-out',
+              )}
+              style={{
+                backgroundColor: STATUS_COLORS[data.status as keyof typeof STATUS_COLORS].bg,
+                color: STATUS_COLORS[data.status as keyof typeof STATUS_COLORS].text,
+              }}
+            >
+              <span>{data.status}</span>
+
+              <IoIosCheckmarkCircleOutline
+                color={STATUS_COLORS[data.status as keyof typeof STATUS_COLORS].text}
+                className="mb-1"
+                size={16}
+              />
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </motion.div>

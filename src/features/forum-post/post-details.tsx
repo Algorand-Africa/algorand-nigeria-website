@@ -13,6 +13,8 @@ import { toast } from 'react-hot-toast';
 import { SocketContext } from '@/constants/socket.constant';
 import { profileAtom } from '@/state/auth.atom';
 import { useRecoilValue } from 'recoil';
+import { STATUS_COLORS } from '@/components/post-card';
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
 interface Props {
   onChangePost: (post: IForumPost) => void;
@@ -114,6 +116,7 @@ export const PostDetails = ({ onChangePost }: Props) => {
 
   const handlePayload = (payload: any) => {
     if (payload.postId === post?.id) {
+      fetchPost();
       fetchComments();
     }
   };
@@ -130,6 +133,8 @@ export const PostDetails = ({ onChangePost }: Props) => {
   };
 
   const loading = !post;
+
+  const disabled = ['answered', 'closed'].includes(post?.status || '');
 
   useEffect(() => {
     fetchPost();
@@ -328,7 +333,7 @@ export const PostDetails = ({ onChangePost }: Props) => {
                 push(`/auth/log-in?redirect=/forum/post/${id}`);
               }
             }}
-            disabled={!post}
+            disabled={!post || disabled}
           >
             <div>
               <svg
@@ -439,6 +444,29 @@ export const PostDetails = ({ onChangePost }: Props) => {
               {post?.saved ? 'Saved' : 'Save'}
             </p>
           </motion.button>
+
+          {/* Status */}
+          {['answered', 'closed'].includes(post?.status || '') && (
+            <motion.div
+              className={classNames(
+                'flex items-center gap-[10px] pt-[4px] px-[9px] rounded-[100px]',
+                'text-[12px] leading-[140%] font-Trap-600 tracking-[0.01em] capitalize',
+                'transition-all duration-200 ease-in-out',
+              )}
+              style={{
+                backgroundColor: STATUS_COLORS[post?.status as keyof typeof STATUS_COLORS].bg,
+                color: STATUS_COLORS[post?.status as keyof typeof STATUS_COLORS].text,
+              }}
+            >
+              <span>{post?.status}</span>
+
+              <IoIosCheckmarkCircleOutline
+                color={STATUS_COLORS[post?.status as keyof typeof STATUS_COLORS].text}
+                className="mb-1"
+                size={16}
+              />
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="flex flex-col mt-[10px] lg:mt-4">
@@ -448,6 +476,7 @@ export const PostDetails = ({ onChangePost }: Props) => {
               key={comment.id}
               data={comment}
               postId={post?.id || ''}
+              disabled={disabled}
             />
           ))}
         </div>

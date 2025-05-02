@@ -8,6 +8,7 @@ export interface IComment {
   upVoted: boolean;
   downVoted: boolean;
   parentId: string;
+  deleted: boolean;
   comments: IComment[];
 }
 
