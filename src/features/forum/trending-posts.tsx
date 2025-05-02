@@ -13,7 +13,11 @@ export const TrendingPosts = () => {
 
   const fetchTrendingPosts = async () => {
     setLoading(true);
-    const response = await getAllPostPreviews({ page: 1, pageSize: 10 });
+    const response = await getAllPostPreviews({
+      page: 1,
+      pageSize: 10,
+      sortBy: 'numberOfComments',
+    });
     if (response) {
       setTrendingPosts(response.data);
     }

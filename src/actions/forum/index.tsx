@@ -38,7 +38,12 @@ export const useForumActions = () => {
   }, []);
 
   const getAllPostPreviews = useCallback(
-    async (dto: FetchPaginatedDataDto & { categoryId?: string }) => {
+    async (
+      dto: FetchPaginatedDataDto & {
+        categoryId?: string;
+        sortBy?: 'createdAt' | 'numberOfComments';
+      },
+    ) => {
       const queryParams = generateQueryFromObject(dto);
       const url = `/forum/posts/previews?${queryParams}`;
 

@@ -213,6 +213,7 @@ export const PostDetails = ({ onChangePost }: Props) => {
             }
             alt={post?.title}
             className="w-full h-auto aspect-[2/1] lg:aspect-[723/300] object-cover rounded-lg mt-[10px]"
+            style={{ objectFit: post?.image ? 'contain' : 'cover' }}
           />
         )}
 
