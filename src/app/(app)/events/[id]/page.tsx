@@ -23,8 +23,19 @@ export async function generateMetadata(
     });
 
   return {
-    title: `${post.title} | Events | Algorand Nigeria`,
-    description: post.description,
+    title: `${post?.title} | Events | Algorand Nigeria`,
+    description: post?.description,
+    openGraph: {
+      title: `${post?.title} | Events | Algorand Nigeria`,
+      description: post?.description,
+      images: [
+        {
+          url:
+            post?.image ||
+            'https://res.cloudinary.com/dvujkjs1q/image/upload/v1743032377/nft-images/1743032404424-6743922643.jpg',
+        },
+      ],
+    },
   };
 }
 

@@ -22,6 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | Forum | Algorand Nigeria`,
     description: post?.message.slice(0, 155),
+    openGraph: {
+      title: `${post.title} | Forum | Algorand Nigeria`,
+      description: post?.message.slice(0, 155),
+      images: [
+        {
+          url:
+            post?.image ||
+            'https://res.cloudinary.com/dvujkjs1q/image/upload/v1743032377/nft-images/1743032404424-6743922643.jpg',
+        },
+      ],
+    },
   };
 }
 
