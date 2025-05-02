@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import classNames from 'classnames';
 import { useRouter, useParams } from 'next/navigation';
 import { Comment } from './comment';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { ReplyInput } from '@/components/reply-input';
 import { IForumPost, IComment } from '@/interface/forum.interface';
 import { useForumActions } from '@/actions/forum';
 import { createSanitizedMarkup, parseNotificationTime } from '@/utils';
 import { toast } from 'react-hot-toast';
+import { SocketContext } from '@/constants/socket.constant';
 import { profileAtom } from '@/state/auth.atom';
 import { useRecoilValue } from 'recoil';
 
@@ -24,6 +25,7 @@ export const PostDetails = ({ onChangePost }: Props) => {
   const { getPostById, getCommentsByPostId } = useForumActions();
   const profile = useRecoilValue(profileAtom);
   const [post, setPost] = useState<IForumPost | null>(null);
+  const socket = useContext(SocketContext);
   const [content, setContent] = useState('');
   const { savePost, upvotePost, downvotePost, createComment } = useForumActions();
   const [interacting, setInteracting] = useState<'save' | 'upvote' | 'downvote' | 'comment'>();
@@ -110,6 +112,25 @@ export const PostDetails = ({ onChangePost }: Props) => {
     setInteracting(undefined);
   };
 
+  const handlePayload = (payload: any) => {
+    console.log(payload);
+
+    if (payload.postId === post?.id) {
+      fetchComments();
+    }
+  };
+
+  const listenForEvents = () => {
+    if (socket.hasListeners('comment-created')) {
+      return;
+    }
+
+    socket.on('comment-created', handlePayload);
+    socket.on('connect', () => {
+      console.log('connected to websocket');
+    });
+  };
+
   const loading = !post;
 
   useEffect(() => {
@@ -120,8 +141,21 @@ export const PostDetails = ({ onChangePost }: Props) => {
   useEffect(() => {
     if (post) {
       onChangePost(post);
+      listenForEvents();
     }
   }, [post]);
+
+  useEffect(() => {
+    if (!socket?.connected) {
+      socket.connect();
+    }
+  }, [socket?.connected]);
+
+  useEffect(() => {
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <div className="w-full flex flex-col lg:border lg:border-[#EEEEEE] lg:rounded-[10px] lg:px-6 lg:py-4 lg:gap-8 gap-4">
