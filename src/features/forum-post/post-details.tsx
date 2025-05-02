@@ -119,11 +119,11 @@ export const PostDetails = ({ onChangePost }: Props) => {
   };
 
   const listenForEvents = () => {
-    if (socket.hasListeners('comment-created')) {
+    if (socket.hasListeners('post-updated')) {
       return;
     }
 
-    socket.on('comment-created', handlePayload);
+    socket.on('post-updated', handlePayload);
     socket.on('connect', () => {
       console.log('connected to websocket');
     });
