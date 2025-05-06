@@ -165,7 +165,7 @@ export const EventDetails = ({ token, id }: EventDetailsProps) => {
             {event?.title}
           </h4>
 
-          {!!profile?.id && !!event && !event?.userStatus && (
+          {!!profile?.id && !!event && event?.userStatus === 'not_registered' && (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
