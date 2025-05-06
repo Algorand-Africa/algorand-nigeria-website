@@ -18,7 +18,7 @@ export type EventRegistrationStatus = 'registered' | 'attended';
 export type EventType = 'webinar' | 'conference' | 'hackathon' | 'other';
 export type EventStatus = 'upcoming' | 'past';
 export type EventDatePeriod = 'TODAY' | 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY' | 'ALL';
-export type UserEventStatus = 'registered' | 'attended' | 'collected_nft';
+export type UserEventStatus = 'registered' | 'attended' | 'collected_nft' | 'not_registered';
 
 export interface IEvent {
   id: string;
