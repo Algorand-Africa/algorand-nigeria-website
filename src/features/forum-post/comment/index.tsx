@@ -88,7 +88,8 @@ export const Comment = ({ data, refresh, disabled, postId }: Props) => {
           src={
             data.deleted
               ? 'https://res.cloudinary.com/dvujkjs1q/image/upload/v1743032377/nft-images/1743032404424-6743922643.jpg'
-              : data.posterAvatar
+              : data.posterAvatar ||
+                `https://ui-avatars.com/api/?name=${data.posterUsername}&background=random&font-size=0.35&color=fff&rounded=true ⁠`
           }
           alt={data.deleted ? 'Deleted user' : data.posterUsername}
           className="w-[25px] h-[25px] object-cover rounded-full"
