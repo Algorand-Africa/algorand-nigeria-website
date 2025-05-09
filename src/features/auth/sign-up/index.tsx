@@ -203,16 +203,8 @@ export const SignUp = () => {
         />
       </div>
       <div className="flex flex-col gap-[26px]">
-        <Button
-          loading={isLoading}
-          loaderText="Creating account..."
-          onClick={handleSubmit}
-          disabled={!isFormComplete() || !terms}
-        >
-          Sign Up
-        </Button>
         <div className="flex flex-col gap-[15px]">
-          <div className="flex flex-row gap-2 items-center justify-center">
+          <div className="flex flex-row gap-2 items-center justify-left">
             <Checkbox checked={terms} onClick={() => setTerms(!terms)} />
             <p className="text-[#645D5D] text-sm text-center">
               I agree to the{' '}
@@ -233,6 +225,14 @@ export const SignUp = () => {
               </Link>
             </p>
           </div>
+          <Button
+            loading={isLoading}
+            loaderText="Creating account..."
+            onClick={handleSubmit}
+            disabled={!isFormComplete() || !terms}
+          >
+            Sign Up
+          </Button>
           <p className="text-[#645D5D] text-sm text-center mt-[-8px]">
             Already have an account?{' '}
             <Link className="text-[#2D2DF1] font-semibold" href="/auth/log-in">
