@@ -5,6 +5,7 @@ import { PageMaxWidth } from '../page-max-width';
 import { AlgorandNigeriaWhiteIcon } from '@/assets/icons/algorand-nigeria-white.icon';
 import { AlgorandNigeriaIcon } from '@/assets/icons';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface Props {
   children: React.ReactNode;
@@ -43,7 +44,9 @@ export const AuthLayout = ({ children }: Props) => {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="flex flex-col gap-[68.74px] relative"
           >
-            <AlgorandNigeriaWhiteIcon />
+            <Link href="/">
+              <AlgorandNigeriaWhiteIcon />
+            </Link>
             <div className="flex flex-col gap-8">
               <motion.h1
                 initial={{ y: 20, opacity: 0 }}
