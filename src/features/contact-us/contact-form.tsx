@@ -10,6 +10,7 @@ import { useAuthActions } from '@/actions/auth';
 import { ICreateEnquiry } from '@/interface/auth.interface';
 import { OverlayLoader } from '@/components/overlay-loader';
 import toast from 'react-hot-toast';
+import { HubSpotForm } from './hub-spot-form';
 
 export const ContactForm: React.FC = () => {
   const auth = useRecoilValue(authAtom);
@@ -67,7 +68,7 @@ export const ContactForm: React.FC = () => {
           <p className={styles.cfheaderSubtitle}>
             For general inquiries or comments, please complete this form.
           </p>
-          <form className={styles.form} onSubmit={handleSubmit}>
+          {/* <form className={styles.form} onSubmit={handleSubmit}>
             {!auth && (
               <>
                 <div className={styles.grid}>
@@ -206,8 +207,10 @@ export const ContactForm: React.FC = () => {
             <button type="submit" className={styles.submitButton}>
               Send Message
             </button>
-          </form>
+          </form> */}
         </div>
+
+        <HubSpotForm />
       </section>
 
       <OverlayLoader loading={isLoading} />
